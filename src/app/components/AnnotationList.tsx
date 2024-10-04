@@ -26,10 +26,14 @@ const AnnotationList: React.FC<AnnotationListProps> = ({ annotations }) => {
 
   const removeTrailingEmptyLine = (content: string) => {
     const lines = content.split("\n");
-    while (lines.length > 0 && lines[lines.length - 1].trim() === "") {
-      lines.pop();
+    const trimmedLines = lines.map((line) => line.trim());
+    while (
+      trimmedLines.length > 0 &&
+      trimmedLines[trimmedLines.length - 1] === ""
+    ) {
+      trimmedLines.pop();
     }
-    return lines.join("\n");
+    return trimmedLines.join("\n");
   };
   const handleCellClick = (annotationId: string) => {
     if (annotationId === activeAnnotationId) {
