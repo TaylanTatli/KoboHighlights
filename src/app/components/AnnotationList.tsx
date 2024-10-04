@@ -16,7 +16,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({ annotations }) => {
     return lines.join("\n");
   };
   return (
-    <ScrollArea className="annotations px-4 py-0 w-full h-full">
+    <ScrollArea className="annotations p-0 w-full h-full">
       <Table className="text-base">
         <TableBody>
           {annotations.length > 0 ? (
@@ -30,7 +30,8 @@ const AnnotationList: React.FC<AnnotationListProps> = ({ annotations }) => {
           ) : (
             <TableRow>
               <TableCell className="text-muted-foreground py-3">
-                No annotations available
+                You haven&apos;t uploaded the KoboReader.sqlite file or chosen a
+                book title.
               </TableCell>
             </TableRow>
           )}

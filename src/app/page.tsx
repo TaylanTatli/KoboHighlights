@@ -24,13 +24,13 @@ export default function Home() {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <div className="flex flex-col mx-auto h-lvh w-lvw max-w-screen-lg overflow-hidden">
+    <div className="flex flex-col mx-auto h-lvh w-lvw max-w-screen-xl overflow-hidden">
       <Card
         className={`flex flex-col flex-grow overflow-auto bg-background ${
           isMobile ? "m-0 rounded-none" : "border m-8 rounded-md shadow-2xl"
         }`}
       >
-        <CardHeader className="border-b">
+        <CardHeader className="border-b bg-gray-50/10">
           <FileUpload
             onFileUpload={(event) =>
               handleFileUpload(event, setDb, setBookListData)
@@ -51,7 +51,7 @@ export default function Home() {
             <ResizablePanel>
               <div
                 className={`w-full h-full ${
-                  isMobile ? "max-w-full max-h-full" : "max-w-3xl max-h-3xl"
+                  isMobile ? "max-w-full max-h-full" : "max-w-5xl max-h-5xl"
                 } mx-auto`}
               >
                 <AnnotationList annotations={annotations} />
