@@ -17,7 +17,7 @@ const BookList: React.FC<BookListProps> = ({ books, onBookClick }) => {
   };
 
   return (
-    <ScrollArea className="books p-0 w-full h-full bg-gray-50/5">
+    <ScrollArea className="books p-0 w-full h-full bg-gray-600/5 dark:bg-gray-50/5">
       <Table className="text-base">
         <TableBody>
           {books.map((book) => (
