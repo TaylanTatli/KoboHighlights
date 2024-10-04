@@ -66,37 +66,41 @@ const AnnotationList: React.FC<AnnotationListProps> = ({ annotations }) => {
                     onClick={() => handleCellClick(annotation.id)}
                   >
                     {removeTrailingEmptyLine(annotation.content)}
-                    {activeAnnotationId === annotation.id && (
-                      <div className="mt-2">
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="outline"
-                                className="h-7 w-7"
-                                size="icon"
-                                onClick={(e) => {
-                                  e.stopPropagation(); // Butona tıklamayı hücre tıklamasından ayır
-                                  handleCopyClick(
-                                    annotation.id,
-                                    removeTrailingEmptyLine(annotation.content)
-                                  );
-                                }}
-                              >
-                                {copiedAnnotationId === annotation.id ? (
-                                  <ClipboardCheck className="h-4 w-4 stroke-green-500" />
-                                ) : (
-                                  <Clipboard className="h-4 w-4" />
-                                )}
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Copy to Clipboard</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      </div>
-                    )}
+                    <div
+                      className={`flex items-center transition-all duration-300 ease-in-out ${
+                        activeAnnotationId === annotation.id
+                          ? "mt-2 max-h-20 opacity-100"
+                          : "max-h-0 opacity-0"
+                      } overflow-hidden`}
+                    >
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              className="h-7 w-7"
+                              size="icon"
+                              onClick={(e) => {
+                                e.stopPropagation(); // Butona tıklamayı hücre tıklamasından ayır
+                                handleCopyClick(
+                                  annotation.id,
+                                  removeTrailingEmptyLine(annotation.content)
+                                );
+                              }}
+                            >
+                              {copiedAnnotationId === annotation.id ? (
+                                <ClipboardCheck className="h-4 w-4 stroke-green-500" />
+                              ) : (
+                                <Clipboard className="h-4 w-4" />
+                              )}
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Copy to Clipboard</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
                   </TableCell>
                 </TableRow>
               </React.Fragment>
