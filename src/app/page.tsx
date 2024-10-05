@@ -21,7 +21,13 @@ export default function Home() {
   const [bookListData, setBookListData] = useState<Book[]>([]);
   const [annotations, setAnnotations] = useState<Annotation[]>([]);
   const [db, setDb] = useState<Database | null>(null);
+  const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const handleBookSelection = (bookId: string) => {
+    setSelectedBookId(bookId);
+    handleBookClick(bookId, db, setAnnotations);
+  };
 
   return (
     <div className="flex flex-col mx-auto h-lvh w-lvw max-w-screen-xl overflow-hidden">
@@ -42,19 +48,28 @@ export default function Home() {
             <ResizablePanel minSize={20} defaultSize={20}>
               <BookList
                 books={bookListData}
-                onBookClick={(bookId) =>
-                  handleBookClick(bookId, db, setAnnotations)
-                }
+                onBookClick={handleBookSelection}
               />
             </ResizablePanel>
             <ResizableHandle withHandle />
-            <ResizablePanel>
+            <ResizablePanel defaultSize={80}>
               <div
                 className={`w-full h-full ${
                   isMobile ? "max-w-full max-h-full" : "max-w-5xl max-h-5xl"
                 } mx-auto`}
               >
-                <AnnotationList annotations={annotations} />
+                {selectedBookId ? (
+                  <AnnotationList
+                    annotations={annotations}
+                    selectedBookId={selectedBookId}
+                  />
+                ) : (
+                  <p className="text-muted-foreground p-3">
+                    You haven&apos;t uploaded the KoboReader.sqlite file or
+                    chosen a book title. Once the annotations are loaded, you
+                    can click them to see the action button.
+                  </p>
+                )}
               </div>
             </ResizablePanel>
           </ResizablePanelGroup>

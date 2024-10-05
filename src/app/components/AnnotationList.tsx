@@ -3,7 +3,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Annotation } from "@/types";
 import { Clipboard, ClipboardCheck } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Tooltip,
@@ -14,15 +14,24 @@ import {
 
 interface AnnotationListProps {
   annotations: Annotation[];
+  selectedBookId: string;
 }
 
-const AnnotationList: React.FC<AnnotationListProps> = ({ annotations }) => {
+const AnnotationList: React.FC<AnnotationListProps> = ({
+  annotations,
+  selectedBookId,
+}) => {
   const [activeAnnotationId, setActiveAnnotationId] = useState<string | null>(
     null
   );
   const [copiedAnnotationId, setCopiedAnnotationId] = useState<string | null>(
     null
   );
+
+  useEffect(() => {
+    setActiveAnnotationId(null);
+    setCopiedAnnotationId(null);
+  }, [selectedBookId]);
 
   const removeTrailingEmptyLine = (content: string) => {
     const lines = content.split("\n");
@@ -61,7 +70,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({ annotations }) => {
     <ScrollArea className="annotations p-0 w-full h-full">
       <Table className="text-base">
         <TableBody>
-          {annotations.length > 0 ? (
+          {annotations.length > 0 &&
             annotations.map((annotation) => (
               <React.Fragment key={annotation.id}>
                 <TableRow>
@@ -108,16 +117,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({ annotations }) => {
                   </TableCell>
                 </TableRow>
               </React.Fragment>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell className="text-muted-foreground py-3">
-                You haven&apos;t uploaded the KoboReader.sqlite file or chosen a
-                book title. Once the annotations are loaded, you can click them
-                to see the action button.
-              </TableCell>
-            </TableRow>
-          )}
+            ))}
         </TableBody>
       </Table>
     </ScrollArea>
