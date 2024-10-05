@@ -1,0 +1,11 @@
+{
+  "drop_here": "Drop the database here",
+  "drag_drop_select": "Drag & drop or click to select <Badge>KoboReader.sqlite</Badge> database.",
+  "search_books": "Search books...",
+  "not_uploaded_or_not_selected": "You haven't uploaded the KoboReader.sqlite file or chosen a book title. Once the annotations are loaded, you can click them to see the action button.",
+  "copy_to_clipboard": "Copy to clipboard",
+  "toggle_theme": "Toggle theme",
+  "theme_dark": "Dark",
+  "theme_light": "Light",
+  "theme_system": "System"
+}

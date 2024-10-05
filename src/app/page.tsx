@@ -16,6 +16,7 @@ import { useState } from "react";
 import { Database } from "sql.js";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
   const [bookListData, setBookListData] = useState<Book[]>([]);
@@ -28,6 +29,8 @@ export default function Home() {
     setSelectedBookId(bookId);
     handleBookClick(bookId, db, setAnnotations);
   };
+
+  const t = useTranslations();
 
   return (
     <div className="flex flex-col mx-auto h-lvh w-lvw max-w-screen-xl overflow-hidden">
@@ -65,9 +68,7 @@ export default function Home() {
                   />
                 ) : (
                   <p className="text-muted-foreground p-3">
-                    You haven&apos;t uploaded the KoboReader.sqlite file or
-                    chosen a book title. Once the annotations are loaded, you
-                    can click them to see the action button.
+                    {t("not_uploaded_or_not_selected")}
                   </p>
                 )}
               </div>

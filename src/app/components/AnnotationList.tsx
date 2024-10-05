@@ -11,6 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useTranslations } from "next-intl";
 
 interface AnnotationListProps {
   annotations: Annotation[];
@@ -66,6 +67,8 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
       });
   };
 
+  const t = useTranslations();
+
   return (
     <ScrollArea className="annotations p-0 w-full h-full">
       <Table className="text-base">
@@ -109,7 +112,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p>Copy to Clipboard</p>
+                            <p>{t("copy_to_clipboard")}</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>

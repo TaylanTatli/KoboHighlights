@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Upload } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -14,6 +15,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
       onFileUpload(acceptedFiles);
     },
   });
+  const t = useTranslations();
 
   return (
     <div
@@ -33,7 +35,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
               />
             </div>
             <p className="font-medium text-muted-foreground">
-              Drop the database here
+              {t("drop_here")}
             </p>
           </div>
         ) : (
@@ -45,8 +47,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
               />
             </div>
             <p className="font-medium text-muted-foreground">
-              Drag & drop or click to select <Badge>KoboReader.sqlite</Badge>{" "}
-              database.
+              {t.rich("drag_drop_select", {
+                Badge: (chunks) => <Badge>{chunks}</Badge>,
+              })}
             </p>
           </div>
         )}

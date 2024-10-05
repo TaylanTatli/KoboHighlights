@@ -1,3 +1,6 @@
+import createNextIntlPlugin from "next-intl/plugin";
+const withNextIntl = createNextIntlPlugin("./src/app/i18n/request.ts");
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -18,4 +21,4 @@ const nextConfig = {
   output: "standalone",
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

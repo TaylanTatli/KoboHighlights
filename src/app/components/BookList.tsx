@@ -3,6 +3,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Book } from "@/types";
+import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 
 interface BookListProps {
@@ -40,12 +41,14 @@ const BookList: React.FC<BookListProps> = ({ books, onBookClick }) => {
     book.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const t = useTranslations();
+
   return (
     <div className="relative w-full h-full bg-gray-600/5 dark:bg-gray-50/5">
       <div className="sticky top-0 z-10 p-2">
         <Input
           type="search"
-          placeholder="Search books..."
+          placeholder={t("search_books")}
           value={searchTerm}
           onChange={handleSearchChange}
           className="w-full p-2"
