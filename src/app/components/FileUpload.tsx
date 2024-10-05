@@ -1,40 +1,55 @@
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Upload } from "lucide-react";
 import React from "react";
+import { useDropzone } from "react-dropzone";
 
 interface FileUploadProps {
-  onFileUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFileUpload: (files: File[]) => void;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: { "application/x-sqlite3": [".sqlite"] },
+    onDrop: (acceptedFiles) => {
+      onFileUpload(acceptedFiles);
+    },
+  });
+
   return (
-    <div className="min-h-fit overflow-hidden">
-      <div className="block py-4 p-8 w-fit m-auto">
-        <Label htmlFor="file_input">
-          Upload <strong>KoboReader.sqlite</strong>
-        </Label>
-        <Input
-          id="file_input"
-          aria-describedby="file_input_help"
-          className="my-1"
-          type="file"
-          accept=".sqlite"
-          onChange={onFileUpload}
-        />
-        <p
-          className="block text-sm italic my-0 text-muted-foreground"
-          id="file_input_help"
-        >
-          You can find this file in the{" "}
-          <Badge
-            variant="outline"
-            className="border-muted-foreground px-1 mx-0.5 text-muted-foreground"
-          >
-            .kobo
-          </Badge>{" "}
-          folder, which is hidden by default.
-        </p>
+    <div
+      {...getRootProps()}
+      className={`group relative grid h-fill w-full p-6 cursor-pointer place-items-center text-center rounded-lg border-2 border-dashed border-muted-foreground/25 transition hover:bg-muted/50 dark:hover:bg-white/5 ${
+        isDragActive ? "bg-muted/50 dark:bg-white/5 border-primary" : ""
+      }`}
+    >
+      <input {...getInputProps()} />
+      <div className="flex flex-col items-center justify-center gap-2 text-muted-foreground">
+        {isDragActive ? (
+          <div className="flex flex-col items-center justify-center gap-4 sm:px-5">
+            <div className="rounded-full border border-dashed p-3 border-muted-foreground/25">
+              <Upload
+                className="size-5 text-muted-foreground"
+                aria-hidden="true"
+              />
+            </div>
+            <p className="font-medium text-muted-foreground">
+              Drop the database here
+            </p>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-4 sm:px-5">
+            <div className="rounded-full border border-dashed p-3 border-muted-foreground/25">
+              <Upload
+                className="size-5 text-muted-foreground"
+                aria-hidden="true"
+              />
+            </div>
+            <p className="font-medium text-muted-foreground">
+              Drag & drop or click to select <Badge>KoboReader.sqlite</Badge>{" "}
+              database.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

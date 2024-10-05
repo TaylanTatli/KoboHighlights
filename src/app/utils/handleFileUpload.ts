@@ -1,23 +1,23 @@
+import { Book } from "@/types";
 import { Dispatch, SetStateAction } from "react";
 import initSqlJs, { Database, SqlJsStatic, SqlValue } from "sql.js";
-import { Book } from "../types";
 
 export const handleFileUpload = async (
-  event: React.ChangeEvent<HTMLInputElement>,
+  files: File[],
   setDb: Dispatch<SetStateAction<Database | null>>,
   setBookListData: Dispatch<SetStateAction<Book[]>>
 ) => {
-  const files = event.target.files;
   if (files && files.length > 0) {
     const file = files[0];
     const fileReader = new FileReader();
-    fileReader.onload = async () => {
-      try {
-        const arrayBuffer = fileReader.result as ArrayBuffer;
+
+    fileReader.onload = async (event) => {
+      const arrayBuffer = event.target?.result;
+      if (arrayBuffer) {
         const SQL: SqlJsStatic = await initSqlJs({
           locateFile: () => "/sql-wasm.wasm",
         });
-        const dbInstance = new SQL.Database(new Uint8Array(arrayBuffer));
+        const dbInstance = new SQL.Database(new Uint8Array(arrayBuffer as ArrayBuffer));
         setDb(dbInstance);
 
         const bookListSQL = `
@@ -66,14 +66,12 @@ export const handleFileUpload = async (
             fileSize: row[11] as number,
             source: row[12] as string,
           })) || [];
-          setBookListData(
-            books.sort((a, b) =>
-              a.title.localeCompare(b.title, "tr", { sensitivity: "base" })
-            )
-          );
-        } catch (error) {
-          console.error("Error reading file:", error);
-        }
+        setBookListData(
+          books.sort((a, b) =>
+            a.title.localeCompare(b.title, "tr", { sensitivity: "base" })
+          )
+        );
+      }
     };
     fileReader.readAsArrayBuffer(file);
   }

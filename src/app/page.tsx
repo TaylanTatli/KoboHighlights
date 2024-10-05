@@ -36,7 +36,7 @@ export default function Home() {
           isMobile ? "m-0 rounded-none" : "border m-8 rounded-md shadow-md"
         }`}
       >
-        <CardHeader className="py-3 border-b bg-gray-600/15 dark:bg-gray-50/10">
+        <CardHeader className="p-3 border-b bg-gray-600/15 dark:bg-gray-50/10">
           <FileUpload
             onFileUpload={(event) =>
               handleFileUpload(event, setDb, setBookListData)
