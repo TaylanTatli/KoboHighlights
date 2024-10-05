@@ -1,22 +1,35 @@
 import { ModeToggle } from "@/components/DarkModeToggle";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Book } from "@/types";
+import { handleBookClick } from "@/utils/handleBookClick";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
+import { Database } from "sql.js";
 
 interface BookListProps {
   books: Book[];
+  db: Database | null;
   onBookClick: (bookId: string) => void;
 }
 
-const BookList: React.FC<BookListProps> = ({ books, onBookClick }) => {
+const BookList: React.FC<BookListProps> = ({ books, db, onBookClick }) => {
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [annotationCounts, setAnnotationCounts] = useState<{
+    [key: string]: number;
+  }>({});
 
-  const handleBookClick = (bookId: string) => {
+  const handleBookClickInternal = (bookId: string) => {
     setSelectedBookId(bookId);
     onBookClick(bookId);
   };
@@ -37,6 +50,24 @@ const BookList: React.FC<BookListProps> = ({ books, onBookClick }) => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  useEffect(() => {
+    if (db) {
+      books.forEach((book) => {
+        handleBookClick(
+          book.id,
+          db,
+          () => {},
+          (count) => {
+            setAnnotationCounts((prev) => ({
+              ...prev,
+              [book.id]: count as number,
+            }));
+          },
+        );
+      });
+    }
+  }, [db, books]);
 
   const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -66,9 +97,43 @@ const BookList: React.FC<BookListProps> = ({ books, onBookClick }) => {
                 className={`cursor-pointer ${
                   selectedBookId === book.id ? "bg-muted/50" : ""
                 }`}
-                onClick={() => handleBookClick(book.id)}
+                onClick={() => handleBookClickInternal(book.id)}
               >
-                <TableCell className="py-3">{book.title}</TableCell>
+                <TableCell className="py-3">
+                  <div className="flex flex-row items-center">
+                    <TooltipProvider delayDuration={200}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <div className="line-clamp-1 flex w-0 flex-grow flex-col items-start truncate">
+                            <span>{book.title}</span>
+                            <span className="text-sm text-muted-foreground">
+                              {book.author}
+                            </span>
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent sideOffset={8}>
+                          <p>
+                            {book.author} - {book.title}
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider delayDuration={200}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <div>
+                            <Badge className="h-7 w-10 justify-center px-1 py-0 text-xs">
+                              {annotationCounts[book.id] || 0}
+                            </Badge>
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent sideOffset={8}>
+                          <p>{annotationCounts[book.id] || 0} adet alıntı</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

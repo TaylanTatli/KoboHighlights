@@ -23,10 +23,10 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
   selectedBookId,
 }) => {
   const [activeAnnotationId, setActiveAnnotationId] = useState<string | null>(
-    null
+    null,
   );
   const [copiedAnnotationId, setCopiedAnnotationId] = useState<string | null>(
-    null
+    null,
   );
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
   const t = useTranslations();
 
   return (
-    <ScrollArea className="annotations p-0 w-full h-full">
+    <ScrollArea className="annotations h-full w-full p-0">
       <Table className="text-base">
         <TableBody>
           {annotations.length > 0 &&
@@ -78,7 +78,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
               <React.Fragment key={annotation.id}>
                 <TableRow>
                   <TableCell
-                    className="whitespace-pre-line py-3 cursor-pointer relative"
+                    className="relative cursor-pointer whitespace-pre-line py-3"
                     onClick={() => handleCellClick(annotation.id)}
                   >
                     {removeTrailingEmptyLine(annotation.content)}
@@ -89,7 +89,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
                           : "max-h-0 opacity-0"
                       } overflow-hidden`}
                     >
-                      <TooltipProvider>
+                      <TooltipProvider delayDuration={200}>
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button
@@ -100,7 +100,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
                                 e.stopPropagation();
                                 handleCopyClick(
                                   annotation.id,
-                                  removeTrailingEmptyLine(annotation.content)
+                                  removeTrailingEmptyLine(annotation.content),
                                 );
                               }}
                             >
@@ -111,7 +111,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
                               )}
                             </Button>
                           </TooltipTrigger>
-                          <TooltipContent>
+                          <TooltipContent sideOffset={8}>
                             <p>{t("copy_to_clipboard")}</p>
                           </TooltipContent>
                         </Tooltip>

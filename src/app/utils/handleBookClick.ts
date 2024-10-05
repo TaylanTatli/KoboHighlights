@@ -5,7 +5,8 @@ import { Database, SqlValue } from "sql.js";
 export const handleBookClick = (
   bookId: string,
   db: Database | null,
-  setAnnotations: Dispatch<SetStateAction<Annotation[]>>
+  setAnnotations: Dispatch<SetStateAction<Annotation[]>>,
+  setAnnotationCount?: Dispatch<SetStateAction<number>>
 ) => {
   if (!db) return;
 
@@ -24,5 +25,8 @@ export const handleBookClick = (
         id: row[0] as string,
         content: row[1] as string,
       })) || [];
-    setAnnotations(annotations);
+  setAnnotations(annotations);
+  if (setAnnotationCount) {
+    setAnnotationCount(annotations.length);
+  }
 };

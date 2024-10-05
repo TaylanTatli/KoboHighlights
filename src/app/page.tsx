@@ -3,6 +3,7 @@
 import AnnotationList from "@/components/AnnotationList";
 import BookList from "@/components/BookList";
 import FileUpload from "@/components/FileUpload";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -12,11 +13,9 @@ import { Annotation, Book } from "@/types";
 import { handleBookClick } from "@/utils/handleBookClick";
 import { handleFileUpload } from "@/utils/handleFileUpload";
 import { useMediaQuery } from "@/utils/useMediaQuery";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Database } from "sql.js";
-
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useTranslations } from "next-intl";
 
 export default function Home() {
   const [bookListData, setBookListData] = useState<Book[]>([]);
@@ -54,6 +53,7 @@ export default function Home() {
             >
               <BookList
                 books={bookListData}
+                db={db}
                 onBookClick={handleBookSelection}
               />
             </ResizablePanel>
