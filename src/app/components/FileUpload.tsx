@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { useMediaQuery } from "@/utils/useMediaQuery";
 import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
@@ -16,19 +17,32 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
     },
   });
   const t = useTranslations();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <div
       {...getRootProps()}
-      className={`group relative grid h-fill w-full p-6 cursor-pointer place-items-center text-center rounded-lg border-2 border-dashed border-muted-foreground/25 transition hover:bg-muted/50 dark:hover:bg-white/5 ${
-        isDragActive ? "bg-muted/50 dark:bg-white/5 border-primary" : ""
-      }`}
+      className={`h-fill group relative grid w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 text-center transition hover:bg-muted/50 dark:hover:bg-white/5 ${
+        isDragActive ? "border-primary bg-muted/50 dark:bg-white/5" : ""
+      } ${isMobile ? "p-2" : "p-6"}`}
     >
       <input {...getInputProps()} />
       <div className="flex flex-col items-center justify-center gap-2 text-muted-foreground">
-        {isDragActive ? (
+        {isMobile ? (
+          <div className="flex flex-row items-center gap-2 px-5">
+            <div className="p-0">
+              <Upload
+                className="size-5 text-muted-foreground"
+                aria-hidden="true"
+              />
+            </div>
+            <p className="font-medium text-muted-foreground">
+              {t("drop_here_mobile")}
+            </p>
+          </div>
+        ) : isDragActive ? (
           <div className="flex flex-col items-center justify-center gap-4 sm:px-5">
-            <div className="rounded-full border border-dashed p-3 border-muted-foreground/25">
+            <div className="rounded-full border border-dashed border-muted-foreground/25 p-3">
               <Upload
                 className="size-5 text-muted-foreground"
                 aria-hidden="true"
@@ -40,7 +54,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center gap-4 sm:px-5">
-            <div className="rounded-full border border-dashed p-3 border-muted-foreground/25">
+            <div className="rounded-full border border-dashed border-muted-foreground/25 p-3">
               <Upload
                 className="size-5 text-muted-foreground"
                 aria-hidden="true"

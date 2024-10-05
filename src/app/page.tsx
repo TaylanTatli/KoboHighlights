@@ -33,41 +33,40 @@ export default function Home() {
   const t = useTranslations();
 
   return (
-    <div className="flex flex-col mx-auto h-lvh w-lvw max-w-screen-xl overflow-hidden">
+    <div className="mx-auto flex h-lvh w-lvw flex-col overflow-hidden">
       <Card
-        className={`flex flex-col flex-grow overflow-auto bg-background ${
-          isMobile ? "m-0 rounded-none" : "border m-8 rounded-md shadow-md"
+        className={`flex flex-grow flex-col overflow-auto bg-background ${
+          isMobile ? "m-0 rounded-none" : "m-2 rounded-md border drop-shadow-md"
         }`}
       >
-        <CardHeader className="p-3 border-b bg-gray-600/15 dark:bg-gray-50/10">
+        <CardHeader className="border-b bg-card p-2">
           <FileUpload
             onFileUpload={(event) =>
               handleFileUpload(event, setDb, setBookListData)
             }
           />
         </CardHeader>
-        <CardContent className="p-0 flex-grow overflow-auto">
+        <CardContent className="flex-grow overflow-auto p-0">
           <ResizablePanelGroup direction={isMobile ? "vertical" : "horizontal"}>
-            <ResizablePanel minSize={20} defaultSize={20}>
+            <ResizablePanel
+              minSize={isMobile ? 35 : 20}
+              defaultSize={isMobile ? 35 : 20}
+            >
               <BookList
                 books={bookListData}
                 onBookClick={handleBookSelection}
               />
             </ResizablePanel>
             <ResizableHandle withHandle />
-            <ResizablePanel defaultSize={80}>
-              <div
-                className={`w-full h-full ${
-                  isMobile ? "max-w-full max-h-full" : "max-w-5xl max-h-5xl"
-                } mx-auto`}
-              >
+            <ResizablePanel defaultSize={isMobile ? 65 : 80}>
+              <div className="h-full max-h-full w-full max-w-full">
                 {selectedBookId ? (
                   <AnnotationList
                     annotations={annotations}
                     selectedBookId={selectedBookId}
                   />
                 ) : (
-                  <p className="text-muted-foreground p-3">
+                  <p className="p-3 text-muted-foreground">
                     {t("not_uploaded_or_not_selected")}
                   </p>
                 )}

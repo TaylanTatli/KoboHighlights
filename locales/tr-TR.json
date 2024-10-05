@@ -1,5 +1,6 @@
 {
   "drop_here": "Veritabanını buraya bırakın",
+  "drop_here_mobile": "Dosyayı eklemek için tıklayın",
   "drag_drop_select": "<Badge>KoboReader.sqlite</Badge> veritabını yüklemek için sürükleyin ya da tıklayın.",
   "search_books": "Kitapları ara...",
   "not_uploaded_or_not_selected": "KoboReader.sqlite dosyasını yüklemediniz veya bir kitap başlığı seçmediniz. Alıntılar yüklendikten sonra, eylem düğmesini görmek için alıntılara tıklayabilirsiniz.",
