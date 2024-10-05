@@ -7,7 +7,6 @@ const nextConfig = {
         crypto: false,
       };
     }
-
     config.experiments = {
       asyncWebAssembly: true,
       syncWebAssembly: true,
@@ -16,6 +15,7 @@ const nextConfig = {
 
     return config;
   },
+  output: "standalone",
 };
 
 export default nextConfig;
