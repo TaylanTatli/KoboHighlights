@@ -36,7 +36,7 @@ export default function Home() {
     <div className="mx-auto flex h-lvh w-lvw flex-col overflow-hidden">
       <Card
         className={`flex flex-grow flex-col overflow-auto bg-background ${
-          isMobile ? "m-0 rounded-none" : "m-2 rounded-md border drop-shadow-md"
+          isMobile ? "m-0 rounded-none" : "m-2 rounded-lg border drop-shadow-md"
         }`}
       >
         <CardHeader className="border-b bg-card p-2">
