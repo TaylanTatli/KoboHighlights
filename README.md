@@ -1,6 +1,6 @@
 # KoboHighlights
 
-KoboHighlights is a project that allows users to extract and display highlights from their Kobo e-reader's KoboReader.sqlite file.
+KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file.
 
 ## Table of Contents
 
@@ -9,7 +9,10 @@ KoboHighlights is a project that allows users to extract and display highlights 
   - [Description](#description)
   - [Features](#features)
   - [Installation](#installation)
+    - [Requirements](#requirements)
+    - [Steps](#steps)
   - [Usage](#usage)
+  - [Docker Usage](#docker-usage)
   - [Future Plans](#future-plans)
   - [Contributing](#contributing)
   - [License](#license)
@@ -20,45 +23,72 @@ This project enables users to upload their KoboReader.sqlite file and view a lis
 
 ## Features
 
-- Upload KoboReader.sqlite file
-- Display list of books with highlights
-- View highlights for each book
+- Extract highlights from KoboReader.sqlite file
+- Multi-language support (English and Turkish)
+- Dark mode support
+- Resizable panels
+- Responsive UI
 
 ## Installation
 
-To install and run this project locally, follow these steps:
+To run the project locally, follow these steps:
+
+### Requirements
+
+- Node.js (>=14.x)
+- pnpm (>=6.x)
+
+### Steps
 
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/TaylanTatli/KoboHighlights.git
-    cd KoboHighlights
+    git clone https://github.com/TaylanTatli/kobohighlight.git
+    cd kobohighlight
     ```
 
 2. Install dependencies:
 
     ```sh
-    npm install
+    pnpm install
     ```
 
 3. Start the development server:
 
     ```sh
-    npm run dev
+    pnpm run dev
     ```
+
+4. Open your browser and navigate to `http://localhost:3000`.
 
 ## Usage
 
-1. Open the application in your browser.
-2. Upload your KoboReader.sqlite file.
-3. Browse the list of books with highlights.
-4. Click on a book to view its highlights.
+1. Upload your `KoboReader.sqlite` file.
+2. View and manage your highlights.
+
+## Docker Usage
+
+To run the project using Docker, follow these steps:
+
+1. Build the Docker image:
+
+    ```sh
+    docker build -t kobohighlight .
+    ```
+
+2. Start the Docker container:
+
+    ```sh
+    docker run -p 3000:3000 kobohighlight
+    ```
+
+3. Open your browser and navigate to `http://localhost:3000`.
 
 ## Future Plans
 
-- Docker support for easy deployment and usage
 - Enhanced UI/UX
-- Additional features like searching and filtering highlights
+- Export annotations
+- Send to services via services APIs
 
 ## Contributing
 
