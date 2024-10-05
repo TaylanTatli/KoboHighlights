@@ -26,7 +26,13 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
           className="block text-sm italic my-0 text-muted-foreground"
           id="file_input_help"
         >
-          You can find this file in the <Badge variant="outline">.kobo</Badge>{" "}
+          You can find this file in the{" "}
+          <Badge
+            variant="outline"
+            className="border-muted-foreground px-1 mx-0.5 text-muted-foreground"
+          >
+            .kobo
+          </Badge>{" "}
           folder, which is hidden by default.
         </p>
       </div>
