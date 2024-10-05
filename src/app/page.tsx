@@ -16,6 +16,7 @@ import { useMediaQuery } from "@/utils/useMediaQuery";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Database } from "sql.js";
+import { Toaster } from "./components/ui/toaster";
 
 export default function Home() {
   const [bookListData, setBookListData] = useState<Book[]>([]);
@@ -75,6 +76,7 @@ export default function Home() {
           </ResizablePanelGroup>
         </CardContent>
       </Card>
+      <Toaster />
     </div>
   );
 }

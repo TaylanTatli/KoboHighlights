@@ -5,6 +5,7 @@
   "search_books": "Kitapları ara...",
   "not_uploaded_or_not_selected": "KoboReader.sqlite dosyasını yüklemediniz veya bir kitap başlığı seçmediniz. Alıntılar yüklendikten sonra, eylem düğmesini görmek için alıntılara tıklayabilirsiniz.",
   "copy_to_clipboard": "Panoya kopyala",
+  "copied": "Kopyalandı!",
   "toggle_theme": "Temayı değiştir",
   "theme_dark": "Karanlık",
   "theme_light": "Aydınlık",

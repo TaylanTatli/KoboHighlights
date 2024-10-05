@@ -11,7 +11,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useToast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
+
 interface AnnotationListProps {
   annotations: Annotation[];
   selectedBookId: string;
@@ -27,6 +29,8 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
   const [copiedAnnotationId, setCopiedAnnotationId] = useState<string | null>(
     null,
   );
+
+  const { toast } = useToast();
 
   useEffect(() => {
     setActiveAnnotationId(null);
@@ -59,6 +63,10 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
       .writeText(content)
       .then(() => {
         setCopiedAnnotationId(annotationId);
+        toast({
+          title: t("copied"),
+          description: `${content.split("\n")[0]}...`,
+        });
         setTimeout(() => setCopiedAnnotationId(null), 2000);
       })
       .catch((err) => {
