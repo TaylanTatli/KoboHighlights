@@ -5,7 +5,7 @@ import { getLocale, getMessages } from "next-intl/server";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "KoboHighlight",
+  title: "KoboHighlights",
   description: "Extract and display highlights from KoboReader.sqlite file",
 };
 

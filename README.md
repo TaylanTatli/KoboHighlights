@@ -43,8 +43,8 @@ To run the project locally, follow these steps:
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/TaylanTatli/kobohighlight.git
-    cd kobohighlight
+    git clone https://github.com/TaylanTatli/kobohighlights.git
+    cd kobohighlights
     ```
 
 2. Install dependencies:
@@ -73,13 +73,13 @@ To run the project using Docker, follow these steps:
 1. Build the Docker image:
 
     ```sh
-    docker build -t kobohighlight .
+    docker build -t kobohighlights .
     ```
 
 2. Start the Docker container:
 
     ```sh
-    docker run -p 3000:3000 kobohighlight
+    docker run -p 3000:3000 kobohighlights
     ```
 
 3. Open your browser and navigate to `http://localhost:3000`.
