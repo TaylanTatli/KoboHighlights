@@ -104,9 +104,11 @@ const BookList: React.FC<BookListProps> = ({ books, db, onBookClick }) => {
                     <TooltipProvider delayDuration={200}>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <div className="line-clamp-1 flex w-0 flex-grow flex-col items-start truncate">
-                            <span>{book.title}</span>
-                            <span className="text-sm text-muted-foreground">
+                          <div className="line-clamp-1 flex w-0 flex-grow flex-col items-start">
+                            <span className="line-clamp-1 inline-block max-w-full truncate">
+                              {book.title}
+                            </span>
+                            <span className="line-clamp-1 inline-block max-w-full truncate text-sm text-muted-foreground">
                               {book.author}
                             </span>
                           </div>
@@ -122,7 +124,7 @@ const BookList: React.FC<BookListProps> = ({ books, db, onBookClick }) => {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <div>
-                            <Badge className="h-7 w-10 justify-center px-1 py-0 text-xs">
+                            <Badge className="h-4 w-8 justify-center p-1 text-xs">
                               {annotationCounts[book.id] || 0}
                             </Badge>
                           </div>
