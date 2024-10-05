@@ -12,7 +12,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useTranslations } from "next-intl";
-
 interface AnnotationListProps {
   annotations: Annotation[];
   selectedBookId: string;
@@ -74,11 +73,14 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
       <Table className="text-base">
         <TableBody>
           {annotations.length > 0 &&
-            annotations.map((annotation) => (
+            annotations.map((annotation, index) => (
               <React.Fragment key={annotation.id}>
                 <TableRow>
+                  <TableCell className="w-0 text-center text-sm text-muted-foreground">
+                    {index + 1}
+                  </TableCell>
                   <TableCell
-                    className="relative cursor-pointer whitespace-pre-line py-3"
+                    className="relative cursor-pointer whitespace-pre-line border-l py-3"
                     onClick={() => handleCellClick(annotation.id)}
                   >
                     {removeTrailingEmptyLine(annotation.content)}
