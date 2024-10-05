@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Annotation } from "@/types";
-import { Clipboard, ClipboardCheck } from "lucide-react";
+import { CircleCheckBig, Clipboard, ClipboardCheck } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 import {
@@ -64,7 +64,12 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
       .then(() => {
         setCopiedAnnotationId(annotationId);
         toast({
-          title: t("copied"),
+          title: (
+            <div className="flex items-center">
+              <CircleCheckBig className="mr-2 h-4 w-4 text-green-500" />
+              {t("copied")}
+            </div>
+          ),
           description: `${content.split("\n")[0]}...`,
         });
         setTimeout(() => setCopiedAnnotationId(null), 2000);
