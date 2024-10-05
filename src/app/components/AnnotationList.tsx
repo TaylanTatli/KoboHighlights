@@ -47,10 +47,10 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
   const handleCellClick = (annotationId: string) => {
     if (annotationId === activeAnnotationId) {
       setActiveAnnotationId(null);
-      setCopiedAnnotationId(null); // Buton gizlendiğinde copiedAnnotationId'yi de sıfırla
+      setCopiedAnnotationId(null);
     } else {
       setActiveAnnotationId(annotationId);
-      setCopiedAnnotationId(null); // Yeni hücre seçildiğinde copiedAnnotationId'yi sıfırla
+      setCopiedAnnotationId(null);
     }
   };
 
@@ -59,7 +59,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
       .writeText(content)
       .then(() => {
         setCopiedAnnotationId(annotationId);
-        setTimeout(() => setCopiedAnnotationId(null), 2000); // 2 saniye sonra durumu sıfırla
+        setTimeout(() => setCopiedAnnotationId(null), 2000);
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);
@@ -94,7 +94,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
                               className="h-7 w-7"
                               size="icon"
                               onClick={(e) => {
-                                e.stopPropagation(); // Butona tıklamayı hücre tıklamasından ayır
+                                e.stopPropagation();
                                 handleCopyClick(
                                   annotation.id,
                                   removeTrailingEmptyLine(annotation.content)
