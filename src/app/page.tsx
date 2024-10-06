@@ -30,6 +30,8 @@ export default function Home() {
     handleBookClick(bookId, db, setAnnotations);
   };
 
+  const selectedBook = bookListData.find((book) => book.id === selectedBookId);
+
   const t = useTranslations();
 
   return (
@@ -65,6 +67,8 @@ export default function Home() {
                   <AnnotationList
                     annotations={annotations}
                     selectedBookId={selectedBookId}
+                    author={selectedBook?.author || ""}
+                    bookTitle={selectedBook?.title || ""}
                   />
                 ) : (
                   <p className="p-3 text-muted-foreground">
