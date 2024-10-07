@@ -87,8 +87,10 @@ export const useAnnotationUtils = (
     } else if (format === "html") {
       fileContent = `<html><body><h1>${author} - ${bookTitle}</h1>${cleanedAnnotations
         .map(
-          (content) =>
-            `<div style='margin-bottom: 20px;'>${content.replace(/\n/g, "<br>")}</div>`,
+          (content, index) =>
+            `<div style='margin-bottom: 20px;'>${content.replace(/\n/g, "<br>")}</div>${
+              index < cleanedAnnotations.length - 1 ? "<hr>" : ""
+            }`,
         )
         .join("")}</body></html>`;
       fileType = "text/html";
