@@ -12,6 +12,7 @@ import { useAnnotationUtils } from "@/utils/useAnnotationUtils";
 import { Clipboard, ClipboardCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
+import AnnotationListToolbar from "./AnnotationListToolbar";
 import { Separator } from "./ui/separator";
 
 const AnnotationList: React.FC<AnnotationListProps> = ({
@@ -26,34 +27,17 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
     removeTrailingEmptyLine,
     handleCellClick,
     handleCopyClick,
-    downloadAnnotations,
   } = useAnnotationUtils(selectedBookId);
 
   const t = useTranslations();
 
   return (
     <>
-      <div className="sticky top-0 z-10 flex flex-row gap-x-2 p-2">
-        <div className="flex justify-end">
-          <Button
-            variant="outline"
-            onClick={() =>
-              downloadAnnotations(annotations, "txt", author, bookTitle)
-            }
-          >
-            TXT olarak indir
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() =>
-              downloadAnnotations(annotations, "html", author, bookTitle)
-            }
-            className="ml-2"
-          >
-            HTML olarak indir
-          </Button>
-        </div>
-      </div>
+      <AnnotationListToolbar
+        annotations={annotations}
+        author={author}
+        bookTitle={bookTitle}
+      />
       <Separator />
       <ScrollArea className="annotations h-full w-full p-0">
         <Table className="text-base">

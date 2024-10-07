@@ -13,5 +13,11 @@
   "confirm_upload_title": "Emin misiniz?",
   "confirm_upload_description": "Zaten bir veritabanı yüklü. Üzerine yazmak istiyor musunuz?",
   "cancel": "İptal",
-  "confirm": "Onayla"
+  "confirm": "Onayla",
+  "download": "İndir",
+  "as_txt": "Metin olarak (.txt)",
+  "as_md": "Markdown olarak (.md)",
+  "as_pdf": "PDF olarak (.pdf)",
+  "as_html": "HTML olarak (.html)",
+  "Annotation": "Alıntı"
 }

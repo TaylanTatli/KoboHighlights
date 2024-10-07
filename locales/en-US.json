@@ -13,5 +13,11 @@
   "confirm_upload_title": "Are you sure?",
   "confirm_upload_description": "A database is already loaded. Do you want to overwrite it?",
   "cancel": "Cancel",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "download": "Download",
+  "as_txt": "as Text (.txt)",
+  "as_md": "as Markdown (.md)",
+  "as_pdf": "as PDF (.pdf)",
+  "as_html": "as HTML (.html)",
+  "Annotation": "Annotation"
 }

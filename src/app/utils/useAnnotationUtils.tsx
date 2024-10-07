@@ -1,5 +1,5 @@
 import { useToast } from "@/hooks/use-toast";
-import { Annotation, UseAnnotationUtilsProps } from "@/types";
+import { UseAnnotationUtilsProps } from "@/types";
 import { CircleCheckBig } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -65,11 +65,11 @@ export const useAnnotationUtils = (
       });
   };
 
-  const downloadAnnotations = (
-    annotations: Annotation[],
-    format: "txt" | "html",
-    author: string,
-    bookTitle: string,
+  const downloadAnnotations: UseAnnotationUtilsProps["downloadAnnotations"] = (
+    annotations,
+    format,
+    author,
+    bookTitle,
   ): void => {
     const cleanedAnnotations = annotations.map((annotation) =>
       removeTrailingEmptyLine(annotation.content),
@@ -77,6 +77,7 @@ export const useAnnotationUtils = (
 
     let fileContent = "";
     let fileType = "";
+    const fileName = `annotations.${format}`;
 
     const header = `${author} - ${bookTitle}\n\n`;
 
@@ -91,13 +92,21 @@ export const useAnnotationUtils = (
         )
         .join("")}</body></html>`;
       fileType = "text/html";
+    } else if (format === "md") {
+      fileContent = `# ${author} - ${bookTitle}\n\n${cleanedAnnotations
+        .map(
+          (content, index) =>
+            `## ${t("Annotation")} ${index + 1}\n\n${content}`,
+        )
+        .join("\n\n---\n\n")}`;
+      fileType = "text/markdown";
     }
 
     const blob = new Blob([fileContent], { type: fileType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `annotations.${format}`;
+    a.download = fileName;
     a.click();
     URL.revokeObjectURL(url);
   };

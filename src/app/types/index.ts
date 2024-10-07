@@ -42,7 +42,7 @@ export interface UseAnnotationUtilsProps {
   handleCopyClick: (annotationId: string, content: string) => void;
   downloadAnnotations: (
     annotations: Annotation[],
-    format: "txt" | "html",
+    format: "txt" | "html" | "md",
     author: string,
     bookTitle: string,
   ) => void;
@@ -57,4 +57,10 @@ export interface ConfirmationDialogProps {
 export interface FileUploadProps {
   onFileUpload: (files: File[]) => void;
   isDatabaseLoaded: boolean;
+}
+
+export interface DownloadButtonsProps {
+  annotations: Annotation[];
+  author: string;
+  bookTitle: string;
 }
