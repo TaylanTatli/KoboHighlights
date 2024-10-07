@@ -9,5 +9,9 @@
   "toggle_theme": "Temayı değiştir",
   "theme_dark": "Karanlık",
   "theme_light": "Aydınlık",
-  "theme_system": "Sistem"
+  "theme_system": "Sistem",
+  "confirm_upload_title": "Emin misiniz?",
+  "confirm_upload_description": "Zaten bir veritabanı yüklü. Üzerine yazmak istiyor musunuz?",
+  "cancel": "İptal",
+  "confirm": "Onayla"
 }

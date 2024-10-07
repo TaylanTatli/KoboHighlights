@@ -46,6 +46,7 @@ export default function Home() {
             onFileUpload={(event) =>
               handleFileUpload(event, setDb, setBookListData)
             }
+            isDatabaseLoaded={!!db}
           />
         </CardHeader>
         <CardContent className="flex-grow overflow-auto p-0">

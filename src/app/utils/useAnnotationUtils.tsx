@@ -1,10 +1,12 @@
 import { useToast } from "@/hooks/use-toast";
-import { Annotation } from "@/types";
+import { Annotation, UseAnnotationUtilsProps } from "@/types";
 import { CircleCheckBig } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
-export const useAnnotationUtils = (selectedBookId: string) => {
+export const useAnnotationUtils = (
+  selectedBookId: string,
+): UseAnnotationUtilsProps => {
   const [activeAnnotationId, setActiveAnnotationId] = useState<string | null>(
     null,
   );
@@ -20,7 +22,7 @@ export const useAnnotationUtils = (selectedBookId: string) => {
     setCopiedAnnotationId(null);
   }, [selectedBookId]);
 
-  const removeTrailingEmptyLine = (content: string) => {
+  const removeTrailingEmptyLine = (content: string): string => {
     const lines = content.split("\n");
     const trimmedLines = lines.map((line) => line.trim());
     while (
@@ -32,7 +34,7 @@ export const useAnnotationUtils = (selectedBookId: string) => {
     return trimmedLines.join("\n");
   };
 
-  const handleCellClick = (annotationId: string) => {
+  const handleCellClick = (annotationId: string): void => {
     if (annotationId === activeAnnotationId) {
       setActiveAnnotationId(null);
       setCopiedAnnotationId(null);
@@ -42,7 +44,7 @@ export const useAnnotationUtils = (selectedBookId: string) => {
     }
   };
 
-  const handleCopyClick = (annotationId: string, content: string) => {
+  const handleCopyClick = (annotationId: string, content: string): void => {
     navigator.clipboard
       .writeText(content)
       .then(() => {
@@ -68,7 +70,7 @@ export const useAnnotationUtils = (selectedBookId: string) => {
     format: "txt" | "html",
     author: string,
     bookTitle: string,
-  ) => {
+  ): void => {
     const cleanedAnnotations = annotations.map((annotation) =>
       removeTrailingEmptyLine(annotation.content),
     );
@@ -103,8 +105,6 @@ export const useAnnotationUtils = (selectedBookId: string) => {
   return {
     activeAnnotationId,
     copiedAnnotationId,
-    setActiveAnnotationId,
-    setCopiedAnnotationId,
     removeTrailingEmptyLine,
     handleCellClick,
     handleCopyClick,

@@ -7,19 +7,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Annotation } from "@/types";
+import { AnnotationListProps } from "@/types";
 import { useAnnotationUtils } from "@/utils/useAnnotationUtils";
 import { Clipboard, ClipboardCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { Separator } from "./ui/separator";
-
-interface AnnotationListProps {
-  annotations: Annotation[];
-  selectedBookId: string;
-  author: string;
-  bookTitle: string;
-}
 
 const AnnotationList: React.FC<AnnotationListProps> = ({
   annotations,

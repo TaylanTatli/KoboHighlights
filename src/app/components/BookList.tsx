@@ -10,17 +10,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Book } from "@/types";
+import { BookListProps } from "@/types";
 import { handleBookClick } from "@/utils/handleBookClick";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
-import { Database } from "sql.js";
-
-interface BookListProps {
-  books: Book[];
-  db: Database | null;
-  onBookClick: (bookId: string) => void;
-}
 
 const BookList: React.FC<BookListProps> = ({ books, db, onBookClick }) => {
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
