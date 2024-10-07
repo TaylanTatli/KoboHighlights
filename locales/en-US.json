@@ -13,6 +13,7 @@
   "confirm_upload_title": "Are you sure?",
   "confirm_upload_description": "A database is already loaded. Do you want to overwrite it?",
   "cancel": "Cancel",
+  "submit": "Submit",
   "confirm": "Confirm",
   "download": "Download",
   "as_txt": "as Text (.txt)",
@@ -20,5 +21,8 @@
   "as_pdf": "as PDF (.pdf)",
   "as_html": "as HTML (.html)",
   "Annotation": "Annotation",
-  "annotation": "annotation"
+  "annotation": "annotation",
+  "send_to_notion": "Send to Notion",
+  "send_to_notion_dialog_title": "Send Annotations to Notion",
+  "send_to_notion_dialog_description": "Please enter your Notion Page ID and API Key."
 }

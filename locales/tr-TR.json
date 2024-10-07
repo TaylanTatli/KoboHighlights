@@ -13,6 +13,7 @@
   "confirm_upload_title": "Emin misiniz?",
   "confirm_upload_description": "Zaten bir veritabanı yüklü. Üzerine yazmak istiyor musunuz?",
   "cancel": "İptal",
+  "submit": "Gönder",
   "confirm": "Onayla",
   "download": "İndir",
   "as_txt": "Metin olarak (.txt)",
@@ -20,5 +21,8 @@
   "as_pdf": "PDF olarak (.pdf)",
   "as_html": "HTML olarak (.html)",
   "Annotation": "Alıntı",
-  "annotation": "alıntı"
+  "annotation": "alıntı",
+  "send_to_notion": "Notion'a Gönder",
+  "send_to_notion_dialog_title": "Alıntıları Notion'a Gönder",
+  "send_to_notion_dialog_description": "Lütfen Notion Page ID ve API Key bilgilerini girin."
 }
