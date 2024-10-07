@@ -60,9 +60,9 @@ export interface FileUploadProps {
 }
 
 export interface handleFileUploadParams {
-  files: File[],
-  setDb: Dispatch<SetStateAction<Database | null>>,
-  setBookListData: Dispatch<SetStateAction<Book[]>>
+  files: File[];
+  setDb: Dispatch<SetStateAction<Database | null>>;
+  setBookListData: Dispatch<SetStateAction<Book[]>>;
 }
 
 export interface DownloadButtonsProps {
