@@ -1,5 +1,6 @@
 import { useToast } from "@/hooks/use-toast";
 import { UseAnnotationUtilsProps } from "@/types";
+import { removeTrailingEmptyLine } from "@/utils/stringUtils";
 import { CircleCheckBig } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -21,18 +22,6 @@ export const useAnnotationUtils = (
     setActiveAnnotationId(null);
     setCopiedAnnotationId(null);
   }, [selectedBookId]);
-
-  const removeTrailingEmptyLine = (content: string): string => {
-    const lines = content.split("\n");
-    const trimmedLines = lines.map((line) => line.trim());
-    while (
-      trimmedLines.length > 0 &&
-      trimmedLines[trimmedLines.length - 1] === ""
-    ) {
-      trimmedLines.pop();
-    }
-    return trimmedLines.join("\n");
-  };
 
   const handleCellClick = (annotationId: string): void => {
     if (annotationId === activeAnnotationId) {
@@ -116,7 +105,6 @@ export const useAnnotationUtils = (
   return {
     activeAnnotationId,
     copiedAnnotationId,
-    removeTrailingEmptyLine,
     handleCellClick,
     handleCopyClick,
     downloadAnnotations,

@@ -10,61 +10,20 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import useBookList from "@/hooks/useBookList";
 import { BookListProps } from "@/types";
-import { handleBookClick } from "@/utils/handleBookClick";
 import { useTranslations } from "next-intl";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const BookList: React.FC<BookListProps> = ({ books, db, onBookClick }) => {
-  const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [annotationCounts, setAnnotationCounts] = useState<{
-    [key: string]: number;
-  }>({});
-
-  const handleBookClickInternal = (bookId: string) => {
-    setSelectedBookId(bookId);
-    onBookClick(bookId);
-  };
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      setSearchTerm("");
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (db) {
-      books.forEach((book) => {
-        handleBookClick(
-          book.id,
-          db,
-          () => {},
-          (count) => {
-            setAnnotationCounts((prev) => ({
-              ...prev,
-              [book.id]: count as number,
-            }));
-          },
-        );
-      });
-    }
-  }, [db, books]);
-
-  const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const {
+    selectedBookId,
+    searchTerm,
+    annotationCounts,
+    handleBookClickInternal,
+    handleSearchChange,
+    filteredBooks,
+  } = useBookList({ books, db, onBookClick });
 
   const t = useTranslations();
 
@@ -123,7 +82,9 @@ const BookList: React.FC<BookListProps> = ({ books, db, onBookClick }) => {
                           </div>
                         </TooltipTrigger>
                         <TooltipContent sideOffset={8}>
-                          <p>{annotationCounts[book.id] || 0} adet alıntı</p>
+                          <p>
+                            {annotationCounts[book.id] || 0} {t("annotation")}
+                          </p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>

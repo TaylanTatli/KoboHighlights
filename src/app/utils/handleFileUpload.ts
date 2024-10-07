@@ -1,12 +1,11 @@
-import { Book } from "@/types";
-import { Dispatch, SetStateAction } from "react";
-import initSqlJs, { Database, SqlJsStatic, SqlValue } from "sql.js";
+import { handleFileUploadParams } from "@/types";
+import initSqlJs, { SqlJsStatic, SqlValue } from "sql.js";
 
-export const handleFileUpload = async (
-  files: File[],
-  setDb: Dispatch<SetStateAction<Database | null>>,
-  setBookListData: Dispatch<SetStateAction<Book[]>>
-) => {
+export const handleFileUpload = async ({
+  files,
+  setDb,
+  setBookListData
+}: handleFileUploadParams) => {
   if (files && files.length > 0) {
     const file = files[0];
     const fileReader = new FileReader();

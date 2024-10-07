@@ -9,6 +9,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { Toaster } from "@/components/ui/toaster";
 import { Annotation, Book } from "@/types";
 import { handleBookClick } from "@/utils/handleBookClick";
 import { handleFileUpload } from "@/utils/handleFileUpload";
@@ -16,7 +17,6 @@ import { useMediaQuery } from "@/utils/useMediaQuery";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Database } from "sql.js";
-import { Toaster } from "./components/ui/toaster";
 
 export default function Home() {
   const [bookListData, setBookListData] = useState<Book[]>([]);
@@ -27,7 +27,7 @@ export default function Home() {
 
   const handleBookSelection = (bookId: string) => {
     setSelectedBookId(bookId);
-    handleBookClick(bookId, db, setAnnotations);
+    handleBookClick({ bookId, db, setAnnotations });
   };
 
   const selectedBook = bookListData.find((book) => book.id === selectedBookId);
@@ -44,7 +44,11 @@ export default function Home() {
         <CardHeader className="border-b bg-card p-2">
           <FileUpload
             onFileUpload={(event) =>
-              handleFileUpload(event, setDb, setBookListData)
+              handleFileUpload({
+                files: event,
+                setDb,
+                setBookListData,
+              })
             }
             isDatabaseLoaded={!!db}
           />

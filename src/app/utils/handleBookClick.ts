@@ -1,13 +1,12 @@
-import { Annotation } from "@/types";
-import { Dispatch, SetStateAction } from "react";
-import { Database, SqlValue } from "sql.js";
+import { HandleBookClickParams } from "@/types";
+import { SqlValue } from "sql.js";
 
-export const handleBookClick = (
-  bookId: string,
-  db: Database | null,
-  setAnnotations: Dispatch<SetStateAction<Annotation[]>>,
-  setAnnotationCount?: Dispatch<SetStateAction<number>>
-) => {
+export const handleBookClick = ({
+  bookId,
+  db,
+  setAnnotations,
+  setAnnotationCount,
+}: HandleBookClickParams) => {
   if (!db) return;
 
   const selectedBookAnnotationsSQL = `

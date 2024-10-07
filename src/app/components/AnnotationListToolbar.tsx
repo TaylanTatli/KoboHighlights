@@ -5,8 +5,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAnnotationUtils } from "@/hooks/useAnnotationUtils";
 import { DownloadButtonsProps } from "@/types";
-import { useAnnotationUtils } from "@/utils/useAnnotationUtils";
 import { FileDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";

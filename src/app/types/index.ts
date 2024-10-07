@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { Database } from "sql.js";
 
 export interface Book {
@@ -37,7 +38,6 @@ export interface AnnotationListProps {
 export interface UseAnnotationUtilsProps {
   activeAnnotationId: string | null;
   copiedAnnotationId: string | null;
-  removeTrailingEmptyLine: (content: string) => string;
   handleCellClick: (annotationId: string) => void;
   handleCopyClick: (annotationId: string, content: string) => void;
   downloadAnnotations: (
@@ -59,8 +59,21 @@ export interface FileUploadProps {
   isDatabaseLoaded: boolean;
 }
 
+export interface handleFileUploadParams {
+  files: File[],
+  setDb: Dispatch<SetStateAction<Database | null>>,
+  setBookListData: Dispatch<SetStateAction<Book[]>>
+}
+
 export interface DownloadButtonsProps {
   annotations: Annotation[];
   author: string;
   bookTitle: string;
+}
+
+export interface HandleBookClickParams {
+  bookId: string;
+  db: Database | null;
+  setAnnotations: Dispatch<SetStateAction<Annotation[]>>;
+  setAnnotationCount?: Dispatch<SetStateAction<number>>;
 }

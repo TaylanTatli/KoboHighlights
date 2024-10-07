@@ -19,5 +19,6 @@
   "as_md": "as Markdown (.md)",
   "as_pdf": "as PDF (.pdf)",
   "as_html": "as HTML (.html)",
-  "Annotation": "Annotation"
+  "Annotation": "Annotation",
+  "annotation": "annotation"
 }

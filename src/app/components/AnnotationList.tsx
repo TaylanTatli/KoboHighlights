@@ -1,5 +1,7 @@
+import AnnotationListToolbar from "@/components/AnnotationListToolbar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import {
   Tooltip,
@@ -7,13 +9,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useAnnotationUtils } from "@/hooks/useAnnotationUtils";
 import { AnnotationListProps } from "@/types";
-import { useAnnotationUtils } from "@/utils/useAnnotationUtils";
+import { removeTrailingEmptyLine } from "@/utils/stringUtils";
 import { Clipboard, ClipboardCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
-import AnnotationListToolbar from "./AnnotationListToolbar";
-import { Separator } from "./ui/separator";
 
 const AnnotationList: React.FC<AnnotationListProps> = ({
   annotations,
@@ -24,7 +25,6 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
   const {
     activeAnnotationId,
     copiedAnnotationId,
-    removeTrailingEmptyLine,
     handleCellClick,
     handleCopyClick,
   } = useAnnotationUtils(selectedBookId);

@@ -1,10 +1,6 @@
 import { getLocaleFromString } from '@/utils/locales';
 import { cookies, headers } from 'next/headers';
 
-/**
- * Get current locale from cookie or browser
- * @returns {string} current locale
- */
 export const getCurrentLocale = () => {
   const cookieStore = cookies();
   const cookieLocale = cookieStore.get('kobohighlights-locale');
