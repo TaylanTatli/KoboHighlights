@@ -48,7 +48,8 @@ const useBookList = ({ books, db, onBookClick }: BookListProps) => {
   }, [db, books]);
 
   const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(searchTerm.toLowerCase()),
+    book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    book.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return {
