@@ -77,7 +77,7 @@ export const useAnnotationUtils = (
 
     let fileContent = "";
     let fileType = "";
-    const fileName = `annotations.${format}`;
+    const fileName = `${author} - ${bookTitle}.${format}`;
 
     const header = `${author} - ${bookTitle}\n\n`;
 
