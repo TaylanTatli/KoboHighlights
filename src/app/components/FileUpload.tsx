@@ -1,11 +1,11 @@
 import ConfirmationDialog from "@/components/ConfirmationDialog";
 import { Badge } from "@/components/ui/badge";
+import { FileUploadProps } from "@/types";
 import { useMediaQuery } from "@/utils/useMediaQuery";
 import { Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { FileUploadProps } from "types";
 
 const FileUpload: React.FC<FileUploadProps> = ({
   onFileUpload,
