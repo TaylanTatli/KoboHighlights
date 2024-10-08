@@ -6,6 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useToast } from "@/hooks/use-toast";
 import { useAnnotationUtils } from "@/hooks/useAnnotationUtils";
 import { DownloadButtonsProps } from "@/types";
 import { sendAnnotationsToNotion } from "@/utils/notionUtils";
@@ -18,19 +19,46 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({
   author,
   bookTitle,
 }) => {
+  const { toast } = useToast();
+  const t = useTranslations();
   const { downloadAnnotations } = useAnnotationUtils("");
 
-  const handleNotionSubmit = (notionPageId: string, notionApiKey: string) => {
-    sendAnnotationsToNotion(
-      annotations,
-      author,
-      bookTitle,
-      notionPageId,
-      notionApiKey,
-    );
+  const handleNotionSubmit = async (
+    notionPageId: string,
+    notionApiKey: string,
+    onSuccess: () => void,
+    onError: () => void,
+  ) => {
+    try {
+      await sendAnnotationsToNotion(
+        annotations,
+        author,
+        bookTitle,
+        notionPageId,
+        notionApiKey,
+        () => {
+          toast({
+            title: "Success",
+            description: "Annotations sent to Notion successfully.",
+          });
+          onSuccess();
+        },
+        () => {
+          toast({
+            title: "Error",
+            description: "Error sending annotations to Notion.",
+          });
+          onError();
+        },
+      );
+    } catch {
+      toast({
+        title: "Error",
+        description: "Error sending annotations to Notion.",
+      });
+      onError();
+    }
   };
-
-  const t = useTranslations();
 
   return (
     <div className="sticky top-0 z-10 flex flex-row justify-end gap-x-2 bg-gray-600/5 p-2 dark:bg-gray-50/5">

@@ -6,6 +6,8 @@ export const sendAnnotationsToNotion = async (
   bookTitle: string,
   notionPageId: string,
   notionApiKey: string,
+  onSuccess: () => void,
+  onError: () => void,
 ) => {
   try {
     const response = await fetch("/api/proxy", {
@@ -51,12 +53,16 @@ export const sendAnnotationsToNotion = async (
     });
 
     if (!response.ok) {
-      throw new Error(`Error: ${response.statusText}`);
+      const errorText = await response.text();
+      throw new Error(`Error: ${response.statusText} - ${errorText}`);
     }
 
     const data = await response.json();
+
+    onSuccess();
     console.log("Annotations sent to Notion successfully:", data);
   } catch (error) {
+    onError();
     console.error("Error sending annotations to Notion:", error);
   }
 };
