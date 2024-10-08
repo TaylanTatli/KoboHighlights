@@ -56,11 +56,7 @@ export const sendAnnotationsToNotion = async (
       const errorText = await response.text();
       throw new Error(`Error: ${response.statusText} - ${errorText}`);
     }
-
-    const data = await response.json();
-
     onSuccess();
-    console.log("Annotations sent to Notion successfully:", data);
   } catch (error) {
     onError();
     console.error("Error sending annotations to Notion:", error);

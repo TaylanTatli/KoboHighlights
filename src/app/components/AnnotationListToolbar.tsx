@@ -38,23 +38,23 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({
         notionApiKey,
         () => {
           toast({
-            title: "Success",
-            description: "Annotations sent to Notion successfully.",
+            title: t("success"),
+            description: t("success_message_notion"),
           });
           onSuccess();
         },
         () => {
           toast({
-            title: "Error",
-            description: "Error sending annotations to Notion.",
+            title: t("error"),
+            description: t("error_message_notion"),
           });
           onError();
         },
       );
     } catch {
       toast({
-        title: "Error",
-        description: "Error sending annotations to Notion.",
+        title: t("error"),
+        description: t("error_message_notion"),
       });
       onError();
     }

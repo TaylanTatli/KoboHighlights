@@ -50,7 +50,6 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
     );
     return null;
   }
-  console.log(isOpen);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
