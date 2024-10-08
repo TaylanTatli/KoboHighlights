@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { SendHorizontal } from "lucide-react";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface NotionDialogProps {
   onSubmit: (
@@ -30,12 +30,27 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
   const [notionApiKey, setNotionApiKey] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    const storedNotionPageId = localStorage.getItem("notionPageId");
+    const storedNotionApiKey = localStorage.getItem("notionApiKey");
+
+    if (storedNotionPageId) {
+      setNotionPageId(storedNotionPageId);
+    }
+
+    if (storedNotionApiKey) {
+      setNotionApiKey(storedNotionApiKey);
+    }
+  }, []);
+
   const handleSubmit = async () => {
+    localStorage.setItem("notionPageId", notionPageId);
+    localStorage.setItem("notionApiKey", notionApiKey);
     await onSubmit(
       notionPageId,
       notionApiKey,
-      () => setIsOpen(false), // Başarılı olduğunda dialog'u kapat
-      () => setIsOpen(true), // Başarısız olduğunda dialog açık kalacak
+      () => setIsOpen(false),
+      () => setIsOpen(true),
     );
   };
   const envNotionPageId = process.env.NEXT_PUBLIC_NOTION_PAGE_ID;
