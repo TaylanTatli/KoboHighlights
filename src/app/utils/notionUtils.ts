@@ -10,7 +10,7 @@ export const sendAnnotationsToNotion = async (
   onError: () => void,
 ) => {
   try {
-    const response = await fetch("/api/proxy", {
+    const response = await fetch("/api/proxy/notion", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
