@@ -19,11 +19,14 @@ KoboHighlights is a web application designed to extract and display highlights f
 
 ## Description
 
-This project enables users to upload their KoboReader.sqlite file and view a list of books with highlights and the highlights themselves.
+This project enables users to upload their KoboReader.sqlite file and view a list of books with annotations and the annotations themselves. Users can also send these annotations to Notion.
 
 ## Features
 
 - Extract highlights from KoboReader.sqlite file
+- View list of books and their annotations
+- Send annotations to Notion
+- Save annotations to local storage for offline access
 - Multi-language support (English and Turkish)
 - Dark mode support
 - Resizable panels
@@ -36,7 +39,7 @@ To run the project locally, follow these steps:
 ### Requirements
 
 - Node.js (>=14.x)
-- pnpm (>=6.x)
+- pnpm package manager
 
 ### Steps
 
@@ -53,18 +56,27 @@ To run the project locally, follow these steps:
     pnpm install
     ```
 
-3. Start the development server:
+3. (Optional) Create a `.env` file in the root directory and add your environment variables:
+
+    ```sh
+    NEXT_PUBLIC_NOTION_PAGE_ID=your_notion_page_id
+    NEXT_PUBLIC_NOTION_API_KEY=your_notion_api_key
+    ```
+
+    This is only necessary if you want to predefine your page ID and API key. If you don't create this file, you will need to enter your page ID and API key when you send annotations to Notion. These values will be saved to local storage for next time.
+
+4. Start the development server:
 
     ```sh
     pnpm run dev
     ```
 
-4. Open your browser and navigate to `http://localhost:3000`.
-
 ## Usage
 
-1. Upload your `KoboReader.sqlite` file.
-2. View and manage your highlights.
+1. Open your browser and navigate to `http://localhost:3000`.
+2. Upload your `KoboReader.sqlite` file.
+3. View the list of books and their highlights.
+4. Optionally, send highlights to Notion by entering your Notion Page ID and API Key, or download them to your PC.
 
 ## Docker Usage
 
@@ -86,13 +98,12 @@ To run the project using Docker, follow these steps:
 
 ## Future Plans
 
-- Enhanced UI/UX
-- Export annotations
-- Send to services via services APIs
+- Improve the user interface and user experience
+- Add more export options (e.g., PDF)
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and submit a pull request for any changes.
+Contributions are welcome! Please open an issue or submit a pull request.
 
 ## License
 
