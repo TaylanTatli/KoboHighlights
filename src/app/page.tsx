@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/resizable";
 import { Toaster } from "@/components/ui/toaster";
 import { Annotation, Book } from "@/types";
-import { handleBookClick } from "@/utils/handleBookClick";
 import { handleFileUpload } from "@/utils/handleFileUpload";
 import { useMediaQuery } from "@/utils/useMediaQuery";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Database } from "sql.js";
+import { handleBookClick } from "./utils/handleBookClick";
 
 export default function Home() {
   const [bookListData, setBookListData] = useState<Book[]>([]);
@@ -26,13 +26,19 @@ export default function Home() {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const handleBookSelection = (bookId: string) => {
+    handleBookClick({
+      bookId,
+      bookListData,
+      setAnnotations,
+    });
     setSelectedBookId(bookId);
-    handleBookClick({ bookId, db, setAnnotations });
   };
 
   const selectedBook = bookListData.find((book) => book.id === selectedBookId);
 
   const t = useTranslations();
+
+  console.log(bookListData);
 
   return (
     <div className="mx-auto flex h-lvh w-lvw flex-col overflow-hidden">
@@ -61,7 +67,6 @@ export default function Home() {
             >
               <BookList
                 books={bookListData}
-                db={db}
                 onBookClick={handleBookSelection}
               />
             </ResizablePanel>

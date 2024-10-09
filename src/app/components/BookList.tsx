@@ -15,15 +15,14 @@ import { BookListProps } from "@/types";
 import { useTranslations } from "next-intl";
 import React from "react";
 
-const BookList: React.FC<BookListProps> = ({ books, db, onBookClick }) => {
+const BookList: React.FC<BookListProps> = ({ books, onBookClick }) => {
   const {
     selectedBookId,
     searchTerm,
-    annotationCounts,
     handleBookClickInternal,
     handleSearchChange,
     filteredBooks,
-  } = useBookList({ books, db, onBookClick });
+  } = useBookList({ books, onBookClick });
 
   const t = useTranslations();
 
@@ -77,13 +76,13 @@ const BookList: React.FC<BookListProps> = ({ books, db, onBookClick }) => {
                         <TooltipTrigger asChild>
                           <div>
                             <Badge className="h-4 w-8 justify-center p-1 text-xs">
-                              {annotationCounts[book.id] || 0}
+                              {book.annotations.length || 0}
                             </Badge>
                           </div>
                         </TooltipTrigger>
                         <TooltipContent sideOffset={8}>
                           <p>
-                            {annotationCounts[book.id] || 0} {t("annotation")}
+                            {book.annotations.length || 0} {t("annotation")}
                           </p>
                         </TooltipContent>
                       </Tooltip>

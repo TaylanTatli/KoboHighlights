@@ -15,11 +15,11 @@ export interface Book {
   lastRead: string;
   fileSize: number;
   source: string;
+  annotations: Annotation[];
 }
 
 export interface BookListProps {
   books: Book[];
-  db: Database | null;
   onBookClick: (bookId: string) => void;
 }
 
@@ -73,7 +73,6 @@ export interface DownloadButtonsProps {
 
 export interface HandleBookClickParams {
   bookId: string;
-  db: Database | null;
   setAnnotations: Dispatch<SetStateAction<Annotation[]>>;
-  setAnnotationCount?: Dispatch<SetStateAction<number>>;
+  bookListData: Book[];
 }

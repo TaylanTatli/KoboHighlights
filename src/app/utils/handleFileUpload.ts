@@ -1,10 +1,20 @@
 import { handleFileUploadParams } from "@/types";
 import initSqlJs, { SqlJsStatic, SqlValue } from "sql.js";
 
+export const annotationsListSQL = (contentID: string) => `
+  SELECT
+    '#' || row_number() OVER (PARTITION BY B.Title ORDER BY T.ContentID, T.ChapterProgress) AS row_number,
+    TRIM(REPLACE(REPLACE(T.Text, CHAR(10), ''), CHAR(9), '')) AS text
+  FROM content AS B
+  JOIN bookmark AS T ON B.ContentID = T.VolumeID
+  WHERE T.Text != '' AND T.Hidden = 'false' AND B.ContentID = '${contentID}'
+  ORDER BY T.ContentID, T.ChapterProgress;
+`;
+
 export const handleFileUpload = async ({
   files,
   setDb,
-  setBookListData
+  setBookListData,
 }: handleFileUploadParams) => {
   if (files && files.length > 0) {
     const file = files[0];
@@ -16,7 +26,9 @@ export const handleFileUpload = async ({
         const SQL: SqlJsStatic = await initSqlJs({
           locateFile: () => "/sql-wasm.wasm",
         });
-        const dbInstance = new SQL.Database(new Uint8Array(arrayBuffer as ArrayBuffer));
+        const dbInstance = new SQL.Database(
+          new Uint8Array(arrayBuffer as ArrayBuffer),
+        );
         setDb(dbInstance);
 
         const bookListSQL = `
@@ -48,27 +60,44 @@ export const handleFileUpload = async ({
               AND bookmark.Hidden = 'false'
             )
             ORDER BY Source desc, Title`;
+        console.log("bookListSQL:" + bookListSQL);
         const booksRes = dbInstance.exec(bookListSQL);
+        console.log("bookRes:" + booksRes);
         const books =
-          booksRes[0]?.values.map((row: SqlValue[]) => ({
-            id: row[0] as string,
-            title: row[1] as string,
-            author: row[2] as string,
-            publisher: row[3] as string,
-            isbn: row[4] as number,
-            releaseDate: row[5] as string,
-            series: row[6] as string,
-            seriesNumber: row[7] as number,
-            rating: row[8] as number,
-            readPercent: row[9] as number,
-            lastRead: row[10] as string,
-            fileSize: row[11] as number,
-            source: row[12] as string,
-          })) || [];
+          (await Promise.all(
+            booksRes[0]?.values.map(async (row: SqlValue[]) => {
+              const contentID = row[0] as string;
+              const annotationsRes = dbInstance.exec(
+                annotationsListSQL(contentID),
+              );
+              const annotations =
+                annotationsRes[0]?.values.map((annotationRow: SqlValue[]) => ({
+                  id: annotationRow[0] as string,
+                  content: annotationRow[1] as string,
+                })) || [];
+              return {
+                id: contentID,
+                title: row[1] as string,
+                author: row[2] as string,
+                publisher: row[3] as string,
+                isbn: row[4] as number,
+                releaseDate: row[5] as string,
+                series: row[6] as string,
+                seriesNumber: row[7] as number,
+                rating: row[8] as number,
+                readPercent: row[9] as number,
+                lastRead: row[10] as string,
+                fileSize: row[11] as number,
+                source: row[12] as string,
+                annotations: annotations,
+              };
+            }),
+          )) || [];
+        console.log("books:", JSON.stringify(books, null, 2));
         setBookListData(
           books.sort((a, b) =>
-            a.title.localeCompare(b.title, "tr", { sensitivity: "base" })
-          )
+            a.title.localeCompare(b.title, "tr", { sensitivity: "base" }),
+          ),
         );
       }
     };
