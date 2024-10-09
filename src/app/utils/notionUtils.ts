@@ -1,6 +1,6 @@
-import { Annotation } from "@/types";
+import { Annotation, Book } from "@/types";
 
-export const sendAnnotationsToNotion = async (
+export const sendBookToNotion = async (
   annotations: Annotation[],
   author: string,
   bookTitle: string,
@@ -60,5 +60,35 @@ export const sendAnnotationsToNotion = async (
   } catch (error) {
     onError();
     console.error("Error sending annotations to Notion:", error);
+  }
+};
+
+export const sendAllBooksToNotion = async (
+  books: Book[],
+  notionPageId: string,
+  notionApiKey: string,
+  onSuccess: () => void,
+  onError: () => void,
+) => {
+  try {
+    for (const book of books) {
+      await sendBookToNotion(
+        book.annotations,
+        book.author,
+        book.title,
+        notionPageId,
+        notionApiKey,
+        () => {
+          console.log(`Successfully sent annotations for book: ${book.title}`);
+        },
+        () => {
+          console.error(`Error sending annotations for book: ${book.title}`);
+        },
+      );
+    }
+    onSuccess();
+  } catch (error) {
+    onError();
+    console.error("Error sending all books to Notion:", error);
   }
 };

@@ -75,6 +75,7 @@ export default function Home() {
               <div className="h-full max-h-full w-full max-w-full">
                 {selectedBookId ? (
                   <AnnotationList
+                    bookListData={bookListData}
                     annotations={annotations}
                     selectedBookId={selectedBookId}
                     author={selectedBook?.author || ""}

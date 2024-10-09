@@ -8,16 +8,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
 import { useAnnotationUtils } from "@/hooks/useAnnotationUtils";
-import { DownloadButtonsProps } from "@/types";
-import { sendAnnotationsToNotion } from "@/utils/notionUtils";
+import { AnnotationListToolbarProps } from "@/types";
+import { sendAllBooksToNotion, sendBookToNotion } from "@/utils/notionUtils";
 import { FileDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
-const DownloadButtons: React.FC<DownloadButtonsProps> = ({
+const AnnotationListToolbar: React.FC<AnnotationListToolbarProps> = ({
   annotations,
   author,
   bookTitle,
+  selectedBookId,
+  bookListData,
 }) => {
   const { toast } = useToast();
   const t = useTranslations();
@@ -26,37 +28,45 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({
   const handleNotionSubmit = async (
     notionPageId: string,
     notionApiKey: string,
+    sendAll: boolean,
     onSuccess: () => void,
     onError: () => void,
   ) => {
-    try {
-      await sendAnnotationsToNotion(
-        annotations,
-        author,
-        bookTitle,
+    if (sendAll) {
+      await sendAllBooksToNotion(
+        bookListData,
         notionPageId,
         notionApiKey,
-        () => {
-          toast({
-            title: t("success"),
-            description: t("success_message_notion"),
-          });
-          onSuccess();
-        },
-        () => {
-          toast({
-            title: t("error"),
-            description: t("error_message_notion"),
-          });
-          onError();
-        },
+        onSuccess,
+        onError,
       );
-    } catch {
-      toast({
-        title: t("error"),
-        description: t("error_message_notion"),
-      });
-      onError();
+    } else {
+      const selectedBook = bookListData.find(
+        (book) => book.id === selectedBookId,
+      );
+      if (selectedBook) {
+        await sendBookToNotion(
+          selectedBook.annotations,
+          selectedBook.author,
+          selectedBook.title,
+          notionPageId,
+          notionApiKey,
+          () => {
+            toast({
+              title: t("success"),
+              description: t("success_message_notion"),
+            });
+            onSuccess();
+          },
+          () => {
+            toast({
+              title: t("error"),
+              description: t("error_message_notion"),
+            });
+            onError();
+          },
+        );
+      }
     }
   };
 
@@ -100,4 +110,4 @@ const DownloadButtons: React.FC<DownloadButtonsProps> = ({
   );
 };
 
-export default DownloadButtons;
+export default AnnotationListToolbar;

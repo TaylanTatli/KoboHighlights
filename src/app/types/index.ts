@@ -33,6 +33,7 @@ export interface AnnotationListProps {
   selectedBookId: string;
   author: string;
   bookTitle: string;
+  bookListData: Book[];
 }
 
 export interface UseAnnotationUtilsProps {
@@ -65,10 +66,12 @@ export interface handleFileUploadParams {
   setBookListData: Dispatch<SetStateAction<Book[]>>;
 }
 
-export interface DownloadButtonsProps {
+export interface AnnotationListToolbarProps {
   annotations: Annotation[];
   author: string;
   bookTitle: string;
+  bookListData: Book[];
+  selectedBookId: string;
 }
 
 export interface HandleBookClickParams {

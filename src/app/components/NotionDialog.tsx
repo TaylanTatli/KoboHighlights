@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogClose,
@@ -18,6 +19,7 @@ interface NotionDialogProps {
   onSubmit: (
     notionPageId: string,
     notionApiKey: string,
+    sendAll: boolean,
     onSuccess: () => void,
     onError: () => void,
   ) => Promise<void>;
@@ -29,6 +31,7 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
   const [notionPageId, setNotionPageId] = useState("");
   const [notionApiKey, setNotionApiKey] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [sendAll, setSendAll] = useState(false);
 
   useEffect(() => {
     const storedNotionPageId = localStorage.getItem("notionPageId");
@@ -49,6 +52,7 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
     await onSubmit(
       notionPageId,
       notionApiKey,
+      sendAll,
       () => setIsOpen(false),
       () => setIsOpen(true),
     );
@@ -60,6 +64,7 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
     onSubmit(
       envNotionPageId,
       envNotionApiKey,
+      sendAll,
       () => setIsOpen(false),
       () => setIsOpen(true),
     );
@@ -94,6 +99,16 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
             onChange={(e) => setNotionApiKey(e.target.value)}
             className="w-full p-2"
           />
+          <div className="flex items-center">
+            <Checkbox
+              checked={sendAll}
+              onCheckedChange={(checked) => setSendAll(checked === true)}
+              id="sendAllCheckbox"
+            />
+            <label htmlFor="sendAllCheckbox" className="ml-2">
+              {t("send_all_to_notion")}
+            </label>
+          </div>
         </div>
         <DialogFooter>
           <DialogClose asChild>

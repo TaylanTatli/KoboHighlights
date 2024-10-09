@@ -19,6 +19,7 @@
   "error_message_notion": "An error occurred while sending annotations to Notion. Please check your Page ID and API Key.",
   "not_uploaded_or_not_selected": "You haven't uploaded the KoboReader.sqlite file or chosen a book title. Once the annotations are loaded, you can click them to see the action button.",
   "search_books": "Search books...",
+  "send_all_to_notion": "Send Annotations of All Books?",
   "send_to_notion": "Send to Notion",
   "send_to_notion_dialog_description": "Please enter your Notion Page ID and API Key.",
   "send_to_notion_dialog_title": "Send Annotations to Notion",

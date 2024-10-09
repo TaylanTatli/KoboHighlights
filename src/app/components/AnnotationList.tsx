@@ -21,6 +21,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
   selectedBookId,
   author,
   bookTitle,
+  bookListData,
 }) => {
   const {
     activeAnnotationId,
@@ -34,9 +35,11 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
   return (
     <>
       <AnnotationListToolbar
+        bookListData={bookListData}
         annotations={annotations}
         author={author}
         bookTitle={bookTitle}
+        selectedBookId={selectedBookId}
       />
       <Separator />
       <ScrollArea className="annotations h-full w-full p-0">

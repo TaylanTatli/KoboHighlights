@@ -19,6 +19,7 @@
   "error_message_notion": "Alıntılar Notion'a gönderilirken bir hata oluştu. Lütfen Page ID ve API Key değerlerinin doğru olduğunu kontrol edin.",
   "not_uploaded_or_not_selected": "KoboReader.sqlite dosyasını yüklemediniz veya bir kitap başlığı seçmediniz. Alıntılar yüklendikten sonra, eylem düğmesini görmek için alıntılara tıklayabilirsiniz.",
   "search_books": "Kitapları ara...",
+  "send_all_to_notion": "Tüm Kitapların Alıntılarını Gönder?",
   "send_to_notion": "Notion'a Gönder",
   "send_to_notion_dialog_description": "Lütfen Notion Page ID ve API Key bilgilerini girin.",
   "send_to_notion_dialog_title": "Alıntıları Notion'a Gönder",
