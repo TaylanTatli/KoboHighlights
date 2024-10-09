@@ -1,10 +1,11 @@
 import { handleFileUploadParams } from "@/types";
+import { saveBookListDataToLocalStorage } from "@/utils/localStorageUtils";
 import initSqlJs, { SqlJsStatic, SqlValue } from "sql.js";
 
 export const annotationsListSQL = (contentID: string) => `
   SELECT
     '#' || row_number() OVER (PARTITION BY B.Title ORDER BY T.ContentID, T.ChapterProgress) AS row_number,
-    TRIM(REPLACE(REPLACE(T.Text, CHAR(10), ''), CHAR(9), '')) AS text
+    T.Text AS text
   FROM content AS B
   JOIN bookmark AS T ON B.ContentID = T.VolumeID
   WHERE T.Text != '' AND T.Hidden = 'false' AND B.ContentID = '${contentID}'
@@ -93,12 +94,11 @@ export const handleFileUpload = async ({
               };
             }),
           )) || [];
-        console.log("books:", JSON.stringify(books, null, 2));
-        setBookListData(
-          books.sort((a, b) =>
-            a.title.localeCompare(b.title, "tr", { sensitivity: "base" }),
-          ),
+        const sortedBooks = books.sort((a, b) =>
+          a.title.localeCompare(b.title, "tr", { sensitivity: "base" }),
         );
+        setBookListData(sortedBooks);
+        saveBookListDataToLocalStorage(sortedBooks);
       }
     };
     fileReader.readAsArrayBuffer(file);

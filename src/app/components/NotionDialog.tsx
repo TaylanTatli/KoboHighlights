@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { SendHorizontal } from "lucide-react";
+import { Loader2, SendHorizontal } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 
@@ -32,6 +32,7 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
   const [notionApiKey, setNotionApiKey] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [sendAll, setSendAll] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const storedNotionPageId = localStorage.getItem("notionPageId");
@@ -47,14 +48,21 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
   }, []);
 
   const handleSubmit = async () => {
+    setLoading(true);
     localStorage.setItem("notionPageId", notionPageId);
     localStorage.setItem("notionApiKey", notionApiKey);
     await onSubmit(
       notionPageId,
       notionApiKey,
       sendAll,
-      () => setIsOpen(false),
-      () => setIsOpen(true),
+      () => {
+        setLoading(false);
+        setIsOpen(false);
+      },
+      () => {
+        setLoading(false);
+        setIsOpen(true);
+      },
     );
   };
   const envNotionPageId = process.env.NEXT_PUBLIC_NOTION_PAGE_ID;
@@ -65,8 +73,14 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
       envNotionPageId,
       envNotionApiKey,
       sendAll,
-      () => setIsOpen(false),
-      () => setIsOpen(true),
+      () => {
+        setLoading(false);
+        setIsOpen(false);
+      },
+      () => {
+        setLoading(false);
+        setIsOpen(true);
+      },
     );
     return null;
   }
@@ -114,7 +128,16 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
           <DialogClose asChild>
             <Button variant="outline">{t("cancel")}</Button>
           </DialogClose>
-          <Button onClick={handleSubmit}>{t("submit")}</Button>
+          <Button onClick={handleSubmit} disabled={loading}>
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                {t("please_wait")}
+              </>
+            ) : (
+              t("submit")
+            )}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

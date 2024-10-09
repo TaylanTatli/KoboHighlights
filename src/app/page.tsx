@@ -12,11 +12,12 @@ import {
 import { Toaster } from "@/components/ui/toaster";
 import { Annotation, Book } from "@/types";
 import { handleFileUpload } from "@/utils/handleFileUpload";
+import { getBookListDataFromLocalStorage } from "@/utils/localStorageUtils";
 import { useMediaQuery } from "@/utils/useMediaQuery";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Database } from "sql.js";
-import { handleBookClick } from "./utils/handleBookClick";
+import LocalStorageDialog from "./components/LocalStorageDialog";
 
 export default function Home() {
   const [bookListData, setBookListData] = useState<Book[]>([]);
@@ -24,14 +25,22 @@ export default function Home() {
   const [db, setDb] = useState<Database | null>(null);
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const [isLocalStorageData, setIsLocalStorageData] = useState(false);
+
+  useEffect(() => {
+    const localStorageData = getBookListDataFromLocalStorage();
+    if (localStorageData) {
+      setBookListData(localStorageData);
+      setIsLocalStorageData(true);
+    }
+  }, []);
 
   const handleBookSelection = (bookId: string) => {
-    handleBookClick({
-      bookId,
-      bookListData,
-      setAnnotations,
-    });
-    setSelectedBookId(bookId);
+    const selectedBook = bookListData.find((book) => book.id === bookId);
+    if (selectedBook) {
+      setSelectedBookId(bookId);
+      setAnnotations(selectedBook.annotations);
+    }
   };
 
   const selectedBook = bookListData.find((book) => book.id === selectedBookId);
@@ -92,6 +101,12 @@ export default function Home() {
         </CardContent>
       </Card>
       <Toaster />
+
+      <LocalStorageDialog
+        open={isLocalStorageData}
+        onOpenChange={setIsLocalStorageData}
+        onConfirm={() => setIsLocalStorageData(false)}
+      />
     </div>
   );
 }

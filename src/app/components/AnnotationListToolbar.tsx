@@ -37,8 +37,20 @@ const AnnotationListToolbar: React.FC<AnnotationListToolbarProps> = ({
         bookListData,
         notionPageId,
         notionApiKey,
-        onSuccess,
-        onError,
+        () => {
+          toast({
+            title: t("success"),
+            description: t("success_message_notion_all"),
+          });
+          onSuccess();
+        },
+        () => {
+          toast({
+            title: t("error"),
+            description: t("error_message_notion"),
+          });
+          onError();
+        },
       );
     } else {
       const selectedBook = bookListData.find(
