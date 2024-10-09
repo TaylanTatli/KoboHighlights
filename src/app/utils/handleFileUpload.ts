@@ -61,9 +61,8 @@ export const handleFileUpload = async ({
               AND bookmark.Hidden = 'false'
             )
             ORDER BY Source desc, Title`;
-        console.log("bookListSQL:" + bookListSQL);
+
         const booksRes = dbInstance.exec(bookListSQL);
-        console.log("bookRes:" + booksRes);
         const books =
           (await Promise.all(
             booksRes[0]?.values.map(async (row: SqlValue[]) => {

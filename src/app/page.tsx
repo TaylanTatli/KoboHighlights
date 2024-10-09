@@ -47,8 +47,6 @@ export default function Home() {
 
   const t = useTranslations();
 
-  console.log(bookListData);
-
   return (
     <div className="mx-auto flex h-lvh w-lvw flex-col overflow-hidden">
       <Card
