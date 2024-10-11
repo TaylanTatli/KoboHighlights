@@ -45,7 +45,7 @@ export const useHighlightUtils = (
               {t("copied")}
             </div>
           ),
-          description: `${content.split("\n")[0]}...`,
+          description: `${content.split("\n")[0].slice(0, 140)}...`,
         });
         setTimeout(() => setCopiedHighlightId(null), 2000);
       })
