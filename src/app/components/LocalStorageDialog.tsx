@@ -8,11 +8,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { ConfirmationDialogProps } from "@/types";
+import { LocalStorageConfirmationDialogProps } from "@/types";
 import { useTranslations } from "next-intl";
 import React from "react";
 
-const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
+const ConfirmationDialog: React.FC<LocalStorageConfirmationDialogProps> = ({
   open,
   onOpenChange,
   onConfirm,
