@@ -19,14 +19,14 @@ KoboHighlights is a web application designed to extract and display highlights f
 
 ## Description
 
-This project enables users to upload their KoboReader.sqlite file and view a list of books with annotations and the annotations themselves. Users can also send these annotations to Notion.
+This project enables users to upload their KoboReader.sqlite file and view a list of books with highlights and the highlights themselves. Users can also send these highlights to Notion.
 
 ## Features
 
 - Extract highlights from KoboReader.sqlite file
-- View list of books and their annotations
-- Send annotations to Notion
-- Save annotations to local storage for offline access
+- View list of books and their highlights
+- Send highlights to Notion
+- Save highlights to local storage for offline access
 - Multi-language support (English and Turkish)
 - Dark mode support
 - Resizable panels
@@ -63,7 +63,7 @@ To run the project locally, follow these steps:
     NEXT_PUBLIC_NOTION_API_KEY=your_notion_api_key
     ```
 
-    This is only necessary if you want to predefine your page ID and API key. If you don't create this file, you will need to enter your page ID and API key when you send annotations to Notion. These values will be saved to local storage for next time.
+    This is only necessary if you want to predefine your page ID and API key. If you don't create this file, you will need to enter your page ID and API key when you send highlights to Notion. These values will be saved to local storage for next time.
 
 4. Start the development server:
 

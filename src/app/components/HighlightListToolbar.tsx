@@ -7,15 +7,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-import { useAnnotationUtils } from "@/hooks/useAnnotationUtils";
-import { AnnotationListToolbarProps } from "@/types";
+import { useHighlightUtils } from "@/hooks/useHighlightUtils";
+import { HighlightListToolbarProps } from "@/types";
 import { sendAllBooksToNotion, sendBookToNotion } from "@/utils/notionUtils";
 import { FileDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
-const AnnotationListToolbar: React.FC<AnnotationListToolbarProps> = ({
-  annotations,
+const HighlightListToolbar: React.FC<HighlightListToolbarProps> = ({
+  highlights,
   author,
   bookTitle,
   selectedBookId,
@@ -23,7 +23,7 @@ const AnnotationListToolbar: React.FC<AnnotationListToolbarProps> = ({
 }) => {
   const { toast } = useToast();
   const t = useTranslations();
-  const { downloadAnnotations } = useAnnotationUtils("");
+  const { downloadHighlights } = useHighlightUtils("");
 
   const handleNotionSubmit = async (
     notionPageId: string,
@@ -58,7 +58,7 @@ const AnnotationListToolbar: React.FC<AnnotationListToolbarProps> = ({
       );
       if (selectedBook) {
         await sendBookToNotion(
-          selectedBook.annotations,
+          selectedBook.highlights,
           selectedBook.author,
           selectedBook.title,
           notionPageId,
@@ -95,21 +95,21 @@ const AnnotationListToolbar: React.FC<AnnotationListToolbarProps> = ({
           <DropdownMenuContent align="start">
             <DropdownMenuItem
               onClick={() =>
-                downloadAnnotations(annotations, "md", author, bookTitle)
+                downloadHighlights(highlights, "md", author, bookTitle)
               }
             >
               {t("as_md")}
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
-                downloadAnnotations(annotations, "txt", author, bookTitle)
+                downloadHighlights(highlights, "txt", author, bookTitle)
               }
             >
               {t("as_txt")}
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
-                downloadAnnotations(annotations, "html", author, bookTitle)
+                downloadHighlights(highlights, "html", author, bookTitle)
               }
             >
               {t("as_html")}
@@ -122,4 +122,4 @@ const AnnotationListToolbar: React.FC<AnnotationListToolbarProps> = ({
   );
 };
 
-export default AnnotationListToolbar;
+export default HighlightListToolbar;

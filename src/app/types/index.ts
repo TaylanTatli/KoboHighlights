@@ -15,7 +15,7 @@ export interface Book {
   lastRead: string;
   fileSize: number;
   source: string;
-  annotations: Annotation[];
+  highlights: Highlight[];
 }
 
 export interface BookListProps {
@@ -23,26 +23,26 @@ export interface BookListProps {
   onBookClick: (bookId: string) => void;
 }
 
-export interface Annotation {
+export interface Highlight {
   id: string;
   content: string;
 }
 
-export interface AnnotationListProps {
-  annotations: Annotation[];
+export interface HighlightListProps {
+  highlights: Highlight[];
   selectedBookId: string;
   author: string;
   bookTitle: string;
   bookListData: Book[];
 }
 
-export interface UseAnnotationUtilsProps {
-  activeAnnotationId: string | null;
-  copiedAnnotationId: string | null;
-  handleCellClick: (annotationId: string) => void;
-  handleCopyClick: (annotationId: string, content: string) => void;
-  downloadAnnotations: (
-    annotations: Annotation[],
+export interface UseHighlightUtilsProps {
+  activeHighlightId: string | null;
+  copiedHighlightId: string | null;
+  handleCellClick: (highlightId: string) => void;
+  handleCopyClick: (highlightId: string, content: string) => void;
+  downloadHighlights: (
+    highlights: Highlight[],
     format: "txt" | "html" | "md",
     author: string,
     bookTitle: string,
@@ -66,8 +66,8 @@ export interface handleFileUploadParams {
   setBookListData: Dispatch<SetStateAction<Book[]>>;
 }
 
-export interface AnnotationListToolbarProps {
-  annotations: Annotation[];
+export interface HighlightListToolbarProps {
+  highlights: Highlight[];
   author: string;
   bookTitle: string;
   bookListData: Book[];
@@ -76,6 +76,6 @@ export interface AnnotationListToolbarProps {
 
 export interface HandleBookClickParams {
   bookId: string;
-  setAnnotations: Dispatch<SetStateAction<Annotation[]>>;
+  setHighlights: Dispatch<SetStateAction<Highlight[]>>;
   bookListData: Book[];
 }

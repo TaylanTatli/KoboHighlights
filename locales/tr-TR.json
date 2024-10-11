@@ -1,6 +1,6 @@
 {
-  "annotation": "alıntı",
-  "Annotation": "Alıntı",
+  "highlight": "alıntı",
+  "Highlight": "Alıntı",
   "as_html": "HTML olarak (.html)",
   "as_md": "Markdown olarak (.md)",
   "as_pdf": "PDF olarak (.pdf)",
@@ -34,5 +34,5 @@
   "theme_light": "Aydınlık",
   "theme_system": "Sistem",
   "toggle_theme": "Temayı değiştir",
-  "share_the_annotation": "Alıntıyı paylaş"
+  "share_the_highlight": "Alıntıyı paylaş"
 }

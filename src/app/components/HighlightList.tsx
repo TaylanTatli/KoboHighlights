@@ -1,4 +1,4 @@
-import AnnotationListToolbar from "@/components/AnnotationListToolbar";
+import HighlightListToolbar from "@/components/HighlightListToolbar";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
@@ -9,59 +9,59 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useAnnotationUtils } from "@/hooks/useAnnotationUtils";
-import { isMobile } from "react-device-detect";
-import { AnnotationListProps } from "@/types";
+import useDeviceDetection from "@/hooks/useDeviceDetection";
+import { useHighlightUtils } from "@/hooks/useHighlightUtils";
+import { HighlightListProps } from "@/types";
 import { removeTrailingEmptyLine } from "@/utils/stringUtils";
 import { Clipboard, ClipboardCheck, Share2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { isIOS, isAndroid } from "react-device-detect";
 import React from "react";
 
-const AnnotationList: React.FC<AnnotationListProps> = ({
-  annotations,
+const HighlightList: React.FC<HighlightListProps> = ({
+  highlights,
   selectedBookId,
   author,
   bookTitle,
   bookListData,
 }) => {
   const {
-    activeAnnotationId,
-    copiedAnnotationId,
+    activeHighlightId,
+    copiedHighlightId,
     handleCellClick,
     handleCopyClick,
-  } = useAnnotationUtils(selectedBookId);
+  } = useHighlightUtils(selectedBookId);
 
   const t = useTranslations();
+  const { isMobile } = useDeviceDetection();
 
   return (
     <>
-      <AnnotationListToolbar
+      <HighlightListToolbar
         bookListData={bookListData}
-        annotations={annotations}
+        highlights={highlights}
         author={author}
         bookTitle={bookTitle}
         selectedBookId={selectedBookId}
       />
       <Separator />
-      <ScrollArea className="annotations h-full w-full p-0">
+      <ScrollArea className="highlights h-full w-full p-0">
         <Table className="text-base">
           <TableBody>
-            {annotations.length > 0 &&
-              annotations.map((annotation, index) => (
-                <React.Fragment key={annotation.id}>
+            {highlights.length > 0 &&
+              highlights.map((highlight, index) => (
+                <React.Fragment key={highlight.id}>
                   <TableRow>
                     <TableCell className="w-0 text-center text-sm text-muted-foreground">
                       {index + 1}
                     </TableCell>
                     <TableCell
                       className="relative cursor-pointer whitespace-pre-line border-l py-3"
-                      onClick={() => handleCellClick(annotation.id)}
+                      onClick={() => handleCellClick(highlight.id)}
                     >
-                      {removeTrailingEmptyLine(annotation.content)}
+                      {removeTrailingEmptyLine(highlight.content)}
                       <div
-                        className={`flex items-center transition-all duration-300 ease-in-out ${
-                          activeAnnotationId === annotation.id
+                        className={`flex items-center gap-2 transition-all duration-300 ease-in-out ${
+                          activeHighlightId === highlight.id
                             ? "mt-2 max-h-20 opacity-100"
                             : "max-h-0 opacity-0"
                         } overflow-hidden`}
@@ -71,17 +71,17 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
                             <TooltipTrigger asChild>
                               <Button
                                 variant="outline"
-                                className="h-7 w-7"
+                                className="h-8 w-8"
                                 size="icon"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   handleCopyClick(
-                                    annotation.id,
-                                    removeTrailingEmptyLine(annotation.content),
+                                    highlight.id,
+                                    removeTrailingEmptyLine(highlight.content),
                                   );
                                 }}
                               >
-                                {copiedAnnotationId === annotation.id ? (
+                                {copiedHighlightId === highlight.id ? (
                                   <ClipboardCheck className="h-4 w-4 stroke-green-500" />
                                 ) : (
                                   <Clipboard className="h-4 w-4" />
@@ -93,14 +93,12 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
                             </TooltipContent>
                           </Tooltip>
 
-
-
-                          {(isIOS || isAndroid) && (
+                          {isMobile && (
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <Button
                                   variant="outline"
-                                  className="h-7 w-7"
+                                  className="h-8 w-8"
                                   size="icon"
                                   onClick={async (e) => {
                                     e.stopPropagation();
@@ -109,8 +107,8 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
                                         await navigator.share({
                                           title: bookTitle,
                                           text: removeTrailingEmptyLine(
-                                            annotation.content,
-                                          )
+                                            highlight.content,
+                                          ),
                                         });
                                       } catch (error) {
                                         console.error("Error sharing:", error);
@@ -126,7 +124,7 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
                                 </Button>
                               </TooltipTrigger>
                               <TooltipContent sideOffset={8}>
-                                <p>{t("share_the_annotation")}</p>
+                                <p>{t("share_the_highlight")}</p>
                               </TooltipContent>
                             </Tooltip>
                           )}
@@ -143,4 +141,4 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
   );
 };
 
-export default AnnotationList;
+export default HighlightList;

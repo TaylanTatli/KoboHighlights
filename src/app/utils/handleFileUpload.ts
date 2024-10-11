@@ -2,7 +2,7 @@ import { handleFileUploadParams } from "@/types";
 import { saveBookListDataToLocalStorage } from "@/utils/localStorageUtils";
 import initSqlJs, { SqlJsStatic, SqlValue } from "sql.js";
 
-export const annotationsListSQL = (contentID: string) => `
+export const highlightsListSQL = (contentID: string) => `
   SELECT
     '#' || row_number() OVER (PARTITION BY B.Title ORDER BY T.ContentID, T.ChapterProgress) AS row_number,
     T.Text AS text
@@ -67,13 +67,13 @@ export const handleFileUpload = async ({
           (await Promise.all(
             booksRes[0]?.values.map(async (row: SqlValue[]) => {
               const contentID = row[0] as string;
-              const annotationsRes = dbInstance.exec(
-                annotationsListSQL(contentID),
+              const highlightsRes = dbInstance.exec(
+                highlightsListSQL(contentID),
               );
-              const annotations =
-                annotationsRes[0]?.values.map((annotationRow: SqlValue[]) => ({
-                  id: annotationRow[0] as string,
-                  content: annotationRow[1] as string,
+              const highlights =
+                highlightsRes[0]?.values.map((highlightRow: SqlValue[]) => ({
+                  id: highlightRow[0] as string,
+                  content: highlightRow[1] as string,
                 })) || [];
               return {
                 id: contentID,
@@ -89,7 +89,7 @@ export const handleFileUpload = async ({
                 lastRead: row[10] as string,
                 fileSize: row[11] as number,
                 source: row[12] as string,
-                annotations: annotations,
+                highlights: highlights,
               };
             }),
           )) || [];

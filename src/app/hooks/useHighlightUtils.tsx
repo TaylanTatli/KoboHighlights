@@ -1,17 +1,17 @@
 import { useToast } from "@/hooks/use-toast";
-import { UseAnnotationUtilsProps } from "@/types";
+import { UseHighlightUtilsProps } from "@/types";
 import { removeTrailingEmptyLine } from "@/utils/stringUtils";
 import { CircleCheckBig } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
-export const useAnnotationUtils = (
+export const useHighlightUtils = (
   selectedBookId: string,
-): UseAnnotationUtilsProps => {
-  const [activeAnnotationId, setActiveAnnotationId] = useState<string | null>(
+): UseHighlightUtilsProps => {
+  const [activeHighlightId, setActiveHighlightId] = useState<string | null>(
     null,
   );
-  const [copiedAnnotationId, setCopiedAnnotationId] = useState<string | null>(
+  const [copiedHighlightId, setCopiedHighlightId] = useState<string | null>(
     null,
   );
 
@@ -19,25 +19,25 @@ export const useAnnotationUtils = (
   const t = useTranslations();
 
   useEffect(() => {
-    setActiveAnnotationId(null);
-    setCopiedAnnotationId(null);
+    setActiveHighlightId(null);
+    setCopiedHighlightId(null);
   }, [selectedBookId]);
 
-  const handleCellClick = (annotationId: string): void => {
-    if (annotationId === activeAnnotationId) {
-      setActiveAnnotationId(null);
-      setCopiedAnnotationId(null);
+  const handleCellClick = (highlightId: string): void => {
+    if (highlightId === activeHighlightId) {
+      setActiveHighlightId(null);
+      setCopiedHighlightId(null);
     } else {
-      setActiveAnnotationId(annotationId);
-      setCopiedAnnotationId(null);
+      setActiveHighlightId(highlightId);
+      setCopiedHighlightId(null);
     }
   };
 
-  const handleCopyClick = (annotationId: string, content: string): void => {
+  const handleCopyClick = (highlightId: string, content: string): void => {
     navigator.clipboard
       .writeText(content)
       .then(() => {
-        setCopiedAnnotationId(annotationId);
+        setCopiedHighlightId(highlightId);
         toast({
           title: (
             <div className="flex items-center">
@@ -47,21 +47,21 @@ export const useAnnotationUtils = (
           ),
           description: `${content.split("\n")[0]}...`,
         });
-        setTimeout(() => setCopiedAnnotationId(null), 2000);
+        setTimeout(() => setCopiedHighlightId(null), 2000);
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);
       });
   };
 
-  const downloadAnnotations: UseAnnotationUtilsProps["downloadAnnotations"] = (
-    annotations,
+  const downloadHighlights: UseHighlightUtilsProps["downloadHighlights"] = (
+    highlights,
     format,
     author,
     bookTitle,
   ): void => {
-    const cleanedAnnotations = annotations.map((annotation) =>
-      removeTrailingEmptyLine(annotation.content),
+    const cleanedHighlights = highlights.map((highlight) =>
+      removeTrailingEmptyLine(highlight.content),
     );
 
     let fileContent = "";
@@ -71,23 +71,22 @@ export const useAnnotationUtils = (
     const header = `${author} - ${bookTitle}\n\n`;
 
     if (format === "txt") {
-      fileContent = header + cleanedAnnotations.join("\n\n---\n\n");
+      fileContent = header + cleanedHighlights.join("\n\n---\n\n");
       fileType = "text/plain";
     } else if (format === "html") {
-      fileContent = `<html><body><h1>${author} - ${bookTitle}</h1>${cleanedAnnotations
+      fileContent = `<html><body><h1>${author} - ${bookTitle}</h1>${cleanedHighlights
         .map(
           (content, index) =>
             `<div style='margin-bottom: 20px;'>${content.replace(/\n/g, "<br>")}</div>${
-              index < cleanedAnnotations.length - 1 ? "<hr>" : ""
+              index < cleanedHighlights.length - 1 ? "<hr>" : ""
             }`,
         )
         .join("")}</body></html>`;
       fileType = "text/html";
     } else if (format === "md") {
-      fileContent = `# ${author} - ${bookTitle}\n\n${cleanedAnnotations
+      fileContent = `# ${author} - ${bookTitle}\n\n${cleanedHighlights
         .map(
-          (content, index) =>
-            `## ${t("Annotation")} ${index + 1}\n\n${content}`,
+          (content, index) => `## ${t("Highlight")} ${index + 1}\n\n${content}`,
         )
         .join("\n\n---\n\n")}`;
       fileType = "text/markdown";
@@ -103,10 +102,10 @@ export const useAnnotationUtils = (
   };
 
   return {
-    activeAnnotationId,
-    copiedAnnotationId,
+    activeHighlightId,
+    copiedHighlightId,
     handleCellClick,
     handleCopyClick,
-    downloadAnnotations,
+    downloadHighlights,
   };
 };

@@ -76,13 +76,13 @@ const BookList: React.FC<BookListProps> = ({ books, onBookClick }) => {
                         <TooltipTrigger asChild>
                           <div>
                             <Badge className="h-4 w-8 justify-center p-1 text-xs">
-                              {book.annotations.length || 0}
+                              {book.highlights.length || 0}
                             </Badge>
                           </div>
                         </TooltipTrigger>
                         <TooltipContent sideOffset={8}>
                           <p>
-                            {book.annotations.length || 0} {t("annotation")}
+                            {book.highlights.length || 0} {t("highlight")}
                           </p>
                         </TooltipContent>
                       </Tooltip>

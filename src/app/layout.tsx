@@ -6,7 +6,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "KoboHighlights",
-  description: "Extract and display highlights from KoboReader.sqlite file",
+  description:
+    "KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default async function RootLayout({

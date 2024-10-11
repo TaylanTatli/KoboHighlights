@@ -1,8 +1,9 @@
 "use client";
 
-import AnnotationList from "@/components/AnnotationList";
 import BookList from "@/components/BookList";
 import FileUpload from "@/components/FileUpload";
+import HighlightList from "@/components/HighlightList";
+import LocalStorageDialog from "@/components/LocalStorageDialog";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   ResizableHandle,
@@ -10,18 +11,17 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { Toaster } from "@/components/ui/toaster";
-import { Annotation, Book } from "@/types";
+import { Book, Highlight } from "@/types";
 import { handleFileUpload } from "@/utils/handleFileUpload";
 import { getBookListDataFromLocalStorage } from "@/utils/localStorageUtils";
 import { useMediaQuery } from "@/utils/useMediaQuery";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Database } from "sql.js";
-import LocalStorageDialog from "./components/LocalStorageDialog";
 
 export default function Home() {
   const [bookListData, setBookListData] = useState<Book[]>([]);
-  const [annotations, setAnnotations] = useState<Annotation[]>([]);
+  const [highlights, setHighlights] = useState<Highlight[]>([]);
   const [db, setDb] = useState<Database | null>(null);
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -32,6 +32,7 @@ export default function Home() {
     if (localStorageData) {
       setBookListData(localStorageData);
       setIsLocalStorageData(true);
+      console.log(localStorageData);
     }
   }, []);
 
@@ -39,7 +40,7 @@ export default function Home() {
     const selectedBook = bookListData.find((book) => book.id === bookId);
     if (selectedBook) {
       setSelectedBookId(bookId);
-      setAnnotations(selectedBook.annotations);
+      setHighlights(selectedBook.highlights);
     }
   };
 
@@ -81,9 +82,9 @@ export default function Home() {
             <ResizablePanel defaultSize={isMobile ? 65 : 80}>
               <div className="h-full max-h-full w-full max-w-full">
                 {selectedBookId ? (
-                  <AnnotationList
+                  <HighlightList
                     bookListData={bookListData}
-                    annotations={annotations}
+                    highlights={highlights}
                     selectedBookId={selectedBookId}
                     author={selectedBook?.author || ""}
                     bookTitle={selectedBook?.title || ""}

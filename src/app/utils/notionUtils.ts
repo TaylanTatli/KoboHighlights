@@ -1,7 +1,7 @@
-import { Annotation, Book } from "@/types";
+import { Book, Highlight } from "@/types";
 
 export const sendBookToNotion = async (
-  annotations: Annotation[],
+  highlights: Highlight[],
   author: string,
   bookTitle: string,
   notionPageId: string,
@@ -30,8 +30,8 @@ export const sendBookToNotion = async (
               ],
             },
           },
-          children: annotations.flatMap((annotation) => {
-            const chunks = annotation.content.match(/.{1,2000}/g) || [];
+          children: highlights.flatMap((highlight) => {
+            const chunks = highlight.content.match(/.{1,2000}/g) || [];
             return chunks.map((chunk) => ({
               object: "block",
               type: "paragraph",
@@ -59,7 +59,7 @@ export const sendBookToNotion = async (
     onSuccess();
   } catch (error) {
     onError();
-    console.error("Error sending annotations to Notion:", error);
+    console.error("Error sending highlights to Notion:", error);
   }
 };
 
@@ -73,16 +73,16 @@ export const sendAllBooksToNotion = async (
   try {
     for (const book of books) {
       await sendBookToNotion(
-        book.annotations,
+        book.highlights,
         book.author,
         book.title,
         notionPageId,
         notionApiKey,
         () => {
-          console.log(`Successfully sent annotations for book: ${book.title}`);
+          console.log(`Successfully sent highlights for book: ${book.title}`);
         },
         () => {
-          console.error(`Error sending annotations for book: ${book.title}`);
+          console.error(`Error sending highlights for book: ${book.title}`);
         },
       );
     }
