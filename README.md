@@ -1,21 +1,20 @@
-# KoboHighlights
+# ![KoboHighlights Logo](./.github/assets/logo.svg)
 
 KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file.
 
 ## Table of Contents
 
-- [KoboHighlights](#kobohighlights)
-  - [Table of Contents](#table-of-contents)
-  - [Description](#description)
-  - [Features](#features)
-  - [Installation](#installation)
-    - [Requirements](#requirements)
-    - [Steps](#steps)
-  - [Usage](#usage)
-  - [Docker Usage](#docker-usage)
-  - [Future Plans](#future-plans)
-  - [Contributing](#contributing)
-  - [License](#license)
+- [Table of Contents](#table-of-contents)
+- [Description](#description)
+- [Features](#features)
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Steps](#steps)
+- [Usage](#usage)
+- [Docker Usage](#docker-usage)
+- [Future Plans](#future-plans)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Description
 
