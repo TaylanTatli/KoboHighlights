@@ -32,7 +32,6 @@ export default function Home() {
     if (localStorageData) {
       setBookListData(localStorageData);
       setIsLocalStorageData(true);
-      console.log(localStorageData);
     }
   }, []);
 
