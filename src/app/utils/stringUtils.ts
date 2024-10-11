@@ -1,11 +1,13 @@
 export const removeTrailingEmptyLine = (content: string): string => {
   const lines = content.split("\n");
-  const trimmedLines = lines.map((line) => line.trim());
-  while (
-    trimmedLines.length > 0 &&
-    trimmedLines[trimmedLines.length - 1] === ""
-  ) {
-    trimmedLines.pop();
+
+  while (lines.length > 0 && lines[0].trim() === "") {
+    lines.shift();
   }
-  return trimmedLines.join("\n");
+
+  while (lines.length > 0 && lines[lines.length - 1].trim() === "") {
+    lines.pop();
+  }
+
+  return lines.join("\n");
 };
