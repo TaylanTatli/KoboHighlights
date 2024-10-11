@@ -10,10 +10,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useAnnotationUtils } from "@/hooks/useAnnotationUtils";
+import { isMobile } from "react-device-detect";
 import { AnnotationListProps } from "@/types";
 import { removeTrailingEmptyLine } from "@/utils/stringUtils";
-import { Clipboard, ClipboardCheck } from "lucide-react";
+import { Clipboard, ClipboardCheck, Share2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { isIOS, isAndroid } from "react-device-detect";
 import React from "react";
 
 const AnnotationList: React.FC<AnnotationListProps> = ({
@@ -90,6 +92,44 @@ const AnnotationList: React.FC<AnnotationListProps> = ({
                               <p>{t("copy_to_clipboard")}</p>
                             </TooltipContent>
                           </Tooltip>
+
+
+
+                          {(isIOS || isAndroid) && (
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  variant="outline"
+                                  className="h-7 w-7"
+                                  size="icon"
+                                  onClick={async (e) => {
+                                    e.stopPropagation();
+                                    if (navigator.share) {
+                                      try {
+                                        await navigator.share({
+                                          title: bookTitle,
+                                          text: removeTrailingEmptyLine(
+                                            annotation.content,
+                                          )
+                                        });
+                                      } catch (error) {
+                                        console.error("Error sharing:", error);
+                                      }
+                                    } else {
+                                      alert(
+                                        "Web Share API not supported in your browser",
+                                      );
+                                    }
+                                  }}
+                                >
+                                  <Share2 className="h-4 w-4" />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent sideOffset={8}>
+                                <p>{t("share_the_annotation")}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          )}
                         </TooltipProvider>
                       </div>
                     </TableCell>

@@ -33,5 +33,6 @@
   "theme_dark": "Karanlık",
   "theme_light": "Aydınlık",
   "theme_system": "Sistem",
-  "toggle_theme": "Temayı değiştir"
+  "toggle_theme": "Temayı değiştir",
+  "share_the_annotation": "Alıntıyı paylaş"
 }
