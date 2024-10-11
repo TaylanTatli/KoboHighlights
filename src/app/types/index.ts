@@ -53,6 +53,7 @@ export interface ConfirmationDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onConfirm: () => void;
+  setBookListData: Dispatch<SetStateAction<Book[]>>;
 }
 
 export interface FileUploadProps {

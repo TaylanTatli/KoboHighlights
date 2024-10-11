@@ -1,11 +1,10 @@
 {
-  "highlight": "highlight",
-  "Highlight": "Highlight",
   "as_html": "as HTML (.html)",
   "as_md": "as Markdown (.md)",
   "as_pdf": "as PDF (.pdf)",
   "as_txt": "as Text (.txt)",
   "cancel": "Cancel",
+  "clear": "Clear",
   "confirm": "Confirm",
   "confirm_upload_description": "A database is already loaded. Do you want to overwrite it?",
   "confirm_upload_title": "Are you sure?",
@@ -17,6 +16,8 @@
   "drop_here_mobile": "Click to add file",
   "error": "Error!",
   "error_message_notion": "An error occurred while sending highlights to Notion. Please check your Page ID and API Key.",
+  "highlight": "highlight",
+  "Highlight": "Highlight",
   "localstorage_dialog_description": "These highlights are loaded from your browser's <strong>local storage</strong>. They may be <strong>cleared</strong> by your browser. Use your <strong>KoboReader.sqlite</strong> file to see the most current highlights.",
   "localstorage_dialog_title": "Loaded from Local Storage",
   "not_uploaded_or_not_selected": "You haven't uploaded the KoboReader.sqlite file or chosen a book title. Once the highlights are loaded, you can click them to see the action button.",
@@ -26,6 +27,7 @@
   "send_to_notion": "Send to Notion",
   "send_to_notion_dialog_description": "Please enter your Notion Page ID and API Key.",
   "send_to_notion_dialog_title": "Send Highlights to Notion",
+  "share_the_highlight": "Share the highlight",
   "submit": "Submit",
   "success": "Success!",
   "success_message_notion": "Highlights have been sent to Notion successfully.",
@@ -33,6 +35,5 @@
   "theme_dark": "Dark",
   "theme_light": "Light",
   "theme_system": "System",
-  "toggle_theme": "Toggle theme",
-  "share_the_highlight": "Share the highlight"
+  "toggle_theme": "Toggle theme"
 }

@@ -16,8 +16,15 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   open,
   onOpenChange,
   onConfirm,
+  setBookListData,
 }) => {
   const t = useTranslations();
+
+  const handleClear = () => {
+    localStorage.removeItem("bookListData");
+    setBookListData([]);
+    onOpenChange(false);
+  };
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
@@ -30,13 +37,13 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
             })}
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => onOpenChange(false)}>
-            {t("cancel")}
-          </AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>
-            {t("confirm")}
+        <AlertDialogFooter className="flex-col sm:justify-between">
+          <AlertDialogAction onClick={handleClear}>
+            {t("clear")}
           </AlertDialogAction>
+          <AlertDialogCancel onClick={onConfirm}>
+            {t("confirm")}
+          </AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

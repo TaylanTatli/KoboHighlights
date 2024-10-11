@@ -1,11 +1,10 @@
 {
-  "highlight": "alıntı",
-  "Highlight": "Alıntı",
   "as_html": "HTML olarak (.html)",
   "as_md": "Markdown olarak (.md)",
   "as_pdf": "PDF olarak (.pdf)",
   "as_txt": "Metin olarak (.txt)",
   "cancel": "İptal",
+  "clear": "Temizle",
   "confirm": "Onayla",
   "confirm_upload_description": "Zaten bir veritabanı yüklü. Üzerine yazmak istiyor musunuz?",
   "confirm_upload_title": "Emin misiniz?",
@@ -17,6 +16,8 @@
   "drop_here_mobile": "Dosyayı eklemek için tıklayın",
   "error": "Hata!",
   "error_message_notion": "Alıntılar Notion'a gönderilirken bir hata oluştu. Lütfen Page ID ve API Key değerlerinin doğru olduğunu kontrol edin.",
+  "highlight": "alıntı",
+  "Highlight": "Alıntı",
   "localstorage_dialog_description": "Bu alıntılar tarayıcınızın <strong>yerel depolamasından</strong> yüklendi. Tarayıcınız tarafından <strong>temizlenebilirler</strong>. Güncel alıntıları görmek için <strong>KoboReader.sqlite</strong> dosyanızı kullanın.",
   "localstorage_dialog_title": "Yerel Depolamadan Yüklendi",
   "not_uploaded_or_not_selected": "KoboReader.sqlite dosyasını yüklemediniz veya bir kitap başlığı seçmediniz. Alıntılar yüklendikten sonra, eylem düğmesini görmek için alıntılara tıklayabilirsiniz.",
@@ -26,6 +27,7 @@
   "send_to_notion": "Notion'a Gönder",
   "send_to_notion_dialog_description": "Lütfen Notion Page ID ve API Key bilgilerini girin.",
   "send_to_notion_dialog_title": "Alıntıları Notion'a Gönder",
+  "share_the_highlight": "Alıntıyı paylaş",
   "submit": "Gönder",
   "success": "Başarılı!",
   "success_message_notion": "Alıntılar Notion'a başarılı bir şekilde gönderildi.",
@@ -33,6 +35,5 @@
   "theme_dark": "Karanlık",
   "theme_light": "Aydınlık",
   "theme_system": "Sistem",
-  "toggle_theme": "Temayı değiştir",
-  "share_the_highlight": "Alıntıyı paylaş"
+  "toggle_theme": "Temayı değiştir"
 }

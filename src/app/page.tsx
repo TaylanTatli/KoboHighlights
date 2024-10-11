@@ -104,6 +104,7 @@ export default function Home() {
         open={isLocalStorageData}
         onOpenChange={setIsLocalStorageData}
         onConfirm={() => setIsLocalStorageData(false)}
+        setBookListData={setBookListData}
       />
     </div>
   );
