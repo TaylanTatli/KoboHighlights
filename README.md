@@ -1,6 +1,6 @@
 # ![KoboHighlights Logo](./.github/assets/logo.svg#gh-light-mode-only) ![KoboHighlights Logo](./.github/assets/logo-dark.svg#gh-dark-mode-only)
 
-KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file.
+KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file and send them to Notion.
 
 ## Table of Contents
 
@@ -12,6 +12,7 @@ KoboHighlights is a web application designed to extract and display highlights f
   - [Steps](#steps)
 - [Usage](#usage)
 - [Docker Usage](#docker-usage)
+- [Deploy on Vercel / Netlify](#deploy-on-vercel--netlify)
 - [Future Plans](#future-plans)
 - [Contributing](#contributing)
 - [License](#license)
@@ -23,12 +24,11 @@ This project enables users to upload their KoboReader.sqlite file and view a lis
 ## Features
 
 - Extract highlights from KoboReader.sqlite file
-- View list of books and their highlights
+- Display highlights in a user-friendly interface
 - Send highlights to Notion
 - Save highlights to local storage for offline access
 - Multi-language support (English and Turkish)
-- Dark mode support
-- Resizable panels
+- Docker support for easy deployment
 - Responsive UI
 
 ## Installation
@@ -39,6 +39,7 @@ To run the project locally, follow these steps:
 
 - Node.js (>=14.x)
 - pnpm package manager
+- Docker (optional)
 
 ### Steps
 
@@ -94,6 +95,19 @@ To run the project using Docker, follow these steps:
     ```
 
 3. Open your browser and navigate to `http://localhost:3000`.
+
+## Deploy on Vercel / Netlify
+
+You can deploy this project to Vercel or Netlify by clicking the buttons below:
+
+<p style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+  <a href="https://vercel.com/import/project?template=https://github.com/yourusername/kobohighlights">
+    <img src="https://vercel.com/button" alt="Deploy with Vercel" height="30">
+  </a>
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/yourusername/kobohighlights">
+    <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy with Netlify" height="30">
+  </a>
+</p>
 
 ## Future Plans
 
