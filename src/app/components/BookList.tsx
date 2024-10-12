@@ -27,7 +27,7 @@ const BookList: React.FC<BookListProps> = ({ books, onBookClick }) => {
   const t = useTranslations();
 
   return (
-    <div className="relative h-full w-full bg-gray-600/5 dark:bg-gray-50/5">
+    <div className="relative flex h-full w-full flex-col bg-gray-600/5 dark:bg-gray-50/5">
       <div className="sticky top-0 z-10 flex flex-row gap-x-2 p-2">
         <ModeToggle />
         <Input

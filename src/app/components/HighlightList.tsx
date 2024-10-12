@@ -35,7 +35,7 @@ const HighlightList: React.FC<HighlightListProps> = ({
   const { isMobile } = useDeviceDetection();
 
   return (
-    <>
+    <div className="flex h-full w-full flex-col">
       <HighlightListToolbar
         bookListData={bookListData}
         highlights={highlights}
@@ -137,7 +137,7 @@ const HighlightList: React.FC<HighlightListProps> = ({
           </TableBody>
         </Table>
       </ScrollArea>
-    </>
+    </div>
   );
 };
 
