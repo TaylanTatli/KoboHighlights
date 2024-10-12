@@ -27,7 +27,7 @@ const isValidBook = (book: Book): book is Book => {
     typeof book.id === "string" &&
     typeof book.title === "string" &&
     typeof book.author === "string" &&
-    Array.isArray(book.highlights) && // highlights alanının varlığını ve bir array olduğunu kontrol ediyoruz
+    Array.isArray(book.highlights) &&
     book.highlights.every(isValidHighlight)
   );
 };
