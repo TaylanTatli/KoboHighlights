@@ -15,6 +15,7 @@ KoboHighlights is a web application designed to extract and display highlights f
 - [:cloud: Deploy on Vercel / Netlify](#cloud-deploy-on-vercel--netlify)
 - [:crystal\_ball: Future Plans](#crystal_ball-future-plans)
 - [:handshake: Contributing](#handshake-contributing)
+- [:coffee: Supporting The Project](#coffee-supporting-the-project)
 - [:scroll: License](#scroll-license)
 
 ## :book: Description
@@ -111,6 +112,10 @@ You can deploy this project to Vercel or Netlify by clicking the buttons below:
 ## :handshake: Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.
+
+## :coffee: Supporting The Project
+
+If you like the project and want to support me, You can <a href="https://www.buymeacoffee.com/taylantatli" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 30px;width: auto;vertical-align: middle;" ></a>
 
 ## :scroll: License
 
