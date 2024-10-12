@@ -1,4 +1,4 @@
-# ![KoboHighlights Logo](./.github/assets/logo.svg#gh-dark-mode-only) ![KoboHighlights Logo](./.github/assets/logo-dark.svg#gh-light-mode-only)
+# ![KoboHighlights Logo](./.github/assets/logo.svg#gh-light-mode-only) ![KoboHighlights Logo](./.github/assets/logo-dark.svg#gh-dark-mode-only)
 
 KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file.
 
