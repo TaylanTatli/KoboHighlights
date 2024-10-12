@@ -100,8 +100,8 @@ To run the project using Docker, follow these steps:
 
 You can deploy this project to Vercel or Netlify by clicking the buttons below:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/yourusername/kobohighlights)
-[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yourusername/kobohighlights)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/TaylanTatli/KoboHighlights)
+[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/TaylanTatli/KoboHighlights)
 
 ## Future Plans
 
