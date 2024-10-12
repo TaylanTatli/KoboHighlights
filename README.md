@@ -2,26 +2,26 @@
 
 KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file and send them to Notion.
 
-## Table of Contents
+## :books: Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [Description](#description)
-- [Features](#features)
-- [Installation](#installation)
-  - [Requirements](#requirements)
-  - [Steps](#steps)
-- [Usage](#usage)
-- [Docker Usage](#docker-usage)
-- [Deploy on Vercel / Netlify](#deploy-on-vercel--netlify)
-- [Future Plans](#future-plans)
-- [Contributing](#contributing)
-- [License](#license)
+- [:books: Table of Contents](#books-table-of-contents)
+- [:book: Description](#book-description)
+- [:sparkles: Features](#sparkles-features)
+- [:gear: Installation](#gear-installation)
+  - [:clipboard: Requirements](#clipboard-requirements)
+  - [:hammer\_and\_wrench: Steps](#hammer_and_wrench-steps)
+- [:rocket: Usage](#rocket-usage)
+- [:whale: Docker Usage](#whale-docker-usage)
+- [:cloud: Deploy on Vercel / Netlify](#cloud-deploy-on-vercel--netlify)
+- [:crystal\_ball: Future Plans](#crystal_ball-future-plans)
+- [:handshake: Contributing](#handshake-contributing)
+- [:scroll: License](#scroll-license)
 
-## Description
+## :book: Description
 
 This project enables users to upload their KoboReader.sqlite file and view a list of books with highlights and the highlights themselves. Users can also send these highlights to Notion.
 
-## Features
+## :sparkles: Features
 
 - Extract highlights from KoboReader.sqlite file
 - Display highlights in a user-friendly interface
@@ -31,17 +31,17 @@ This project enables users to upload their KoboReader.sqlite file and view a lis
 - Docker support for easy deployment
 - Responsive UI
 
-## Installation
+## :gear: Installation
 
 To run the project locally, follow these steps:
 
-### Requirements
+### :clipboard: Requirements
 
 - Node.js (>=14.x)
 - pnpm package manager
 - Docker (optional)
 
-### Steps
+### :hammer_and_wrench: Steps
 
 1. Clone the repository:
 
@@ -71,14 +71,14 @@ To run the project locally, follow these steps:
     pnpm run dev
     ```
 
-## Usage
+## :rocket: Usage
 
 1. Open your browser and navigate to `http://localhost:3000`.
 2. Upload your `KoboReader.sqlite` file.
 3. View the list of books and their highlights.
 4. Optionally, send highlights to Notion by entering your Notion Page ID and API Key, or download them to your PC.
 
-## Docker Usage
+## :whale: Docker Usage
 
 To run the project using Docker, follow these steps:
 
@@ -96,22 +96,22 @@ To run the project using Docker, follow these steps:
 
 3. Open your browser and navigate to `http://localhost:3000`.
 
-## Deploy on Vercel / Netlify
+## :cloud: Deploy on Vercel / Netlify
 
 You can deploy this project to Vercel or Netlify by clicking the buttons below:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/TaylanTatli/KoboHighlights)
 [![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/TaylanTatli/KoboHighlights)
 
-## Future Plans
+## :crystal_ball: Future Plans
 
 - Improve the user interface and user experience
 - Add more export options (e.g., PDF)
 
-## Contributing
+## :handshake: Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.
 
-## License
+## :scroll: License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
