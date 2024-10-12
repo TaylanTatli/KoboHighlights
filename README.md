@@ -2,6 +2,8 @@
 
 KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file and send them to Notion.
 
+![KoboHighlights Preview](./.github/assets/preview.png)
+
 ## :books: Table of Contents
 
 - [:books: Table of Contents](#books-table-of-contents)
