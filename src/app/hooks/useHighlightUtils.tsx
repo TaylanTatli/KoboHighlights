@@ -74,7 +74,7 @@ export const useHighlightUtils = (
       fileContent = header + cleanedHighlights.join("\n\n---\n\n");
       fileType = "text/plain";
     } else if (format === "html") {
-      fileContent = `<html><body><h1>${author} - ${bookTitle}</h1>${cleanedHighlights
+      fileContent = `<html><body><h1>${header}</h1>${cleanedHighlights
         .map(
           (content, index) =>
             `<div style='margin-bottom: 20px;'>${content.replace(/\n/g, "<br>")}</div>${
@@ -84,7 +84,7 @@ export const useHighlightUtils = (
         .join("")}</body></html>`;
       fileType = "text/html";
     } else if (format === "md") {
-      fileContent = `# ${author} - ${bookTitle}\n\n${cleanedHighlights
+      fileContent = `# ${header}\n\n${cleanedHighlights
         .map(
           (content, index) => `## ${t("Highlight")} ${index + 1}\n\n${content}`,
         )

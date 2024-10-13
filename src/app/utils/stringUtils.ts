@@ -9,5 +9,7 @@ export const removeTrailingEmptyLine = (content: string): string => {
     lines.pop();
   }
 
-  return lines.join("\n");
+  const cleanedLines = lines.map((line) => line.replace(/^\s+|\s+$/g, ""));
+
+  return cleanedLines.join("\n");
 };

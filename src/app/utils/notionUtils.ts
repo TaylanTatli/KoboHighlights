@@ -1,4 +1,5 @@
 import { Book, Highlight } from "@/types";
+import { removeTrailingEmptyLine } from "@/utils/stringUtils";
 
 export const sendBookToNotion = async (
   highlights: Highlight[],
@@ -10,6 +11,9 @@ export const sendBookToNotion = async (
   onError: () => void,
 ) => {
   try {
+    const cleanedHighlights = highlights.map((highlight) =>
+      removeTrailingEmptyLine(highlight.content),
+    );
     const response = await fetch("/api/proxy/notion", {
       method: "POST",
       headers: {
@@ -30,23 +34,20 @@ export const sendBookToNotion = async (
               ],
             },
           },
-          children: highlights.flatMap((highlight) => {
-            const chunks = highlight.content.match(/.{1,2000}/g) || [];
-            return chunks.map((chunk) => ({
-              object: "block",
-              type: "paragraph",
-              paragraph: {
-                rich_text: [
-                  {
-                    type: "text",
-                    text: {
-                      content: chunk,
-                    },
+          children: cleanedHighlights.map((highlight) => ({
+            object: "block",
+            type: "paragraph",
+            paragraph: {
+              rich_text: [
+                {
+                  type: "text",
+                  text: {
+                    content: highlight,
                   },
-                ],
-              },
-            }));
-          }),
+                },
+              ],
+            },
+          })),
         },
         url: "/v1/pages",
       }),
