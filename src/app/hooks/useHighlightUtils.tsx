@@ -85,9 +85,7 @@ export const useHighlightUtils = (
       fileType = "text/html";
     } else if (format === "md") {
       fileContent = `# ${header}\n\n${cleanedHighlights
-        .map(
-          (content, index) => `## ${t("Highlight")} ${index + 1}\n\n${content}`,
-        )
+        .map((content) => `${content}`)
         .join("\n\n---\n\n")}`;
       fileType = "text/markdown";
     }
