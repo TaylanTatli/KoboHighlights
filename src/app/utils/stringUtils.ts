@@ -9,7 +9,14 @@ export const removeTrailingEmptyLine = (content: string): string => {
     lines.pop();
   }
 
-  const cleanedLines = lines.map((line) => line.replace(/^\s+|\s+$/g, ""));
+  const trimmedLines = lines.map((line) => line.replace(/^\s+|\s+$/g, ""));
 
-  return cleanedLines.join("\n");
+  const normalizedLines = trimmedLines.map((line) => {
+    if (line.length > 0 && line[0] === line[0].toLowerCase()) {
+      return line[0].toLocaleUpperCase() + line.slice(1);
+    }
+    return line;
+  });
+
+  return normalizedLines.join("\n");
 };
