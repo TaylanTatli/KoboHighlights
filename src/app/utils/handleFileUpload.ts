@@ -4,12 +4,12 @@ import initSqlJs, { SqlJsStatic, SqlValue } from "sql.js";
 
 export const highlightsListSQL = (contentID: string) => `
   SELECT
-    '#' || row_number() OVER (PARTITION BY B.Title ORDER BY T.ChapterProgress, T.DateModified) AS row_number,
+    '#' || row_number() OVER (PARTITION BY B.Title ORDER BY T.DateCreated) AS row_number,
     T.Text AS text
   FROM content AS B
   JOIN bookmark AS T ON B.ContentID = T.VolumeID
   WHERE T.Text != '' AND T.Hidden = 'false' AND B.ContentID = '${contentID}'
-  ORDER BY T.ChapterProgress, T.DateModified;
+  ORDER BY T.DateCreated;
 `;
 
 export const handleFileUpload = async ({
