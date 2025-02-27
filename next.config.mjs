@@ -19,6 +19,15 @@ const nextConfig = {
     return config;
   },
   output: "standalone",
+  async redirects() {
+    return [
+      {
+        source: "/stats/:match*",
+        destination: "https://stats.tatli.me/:match*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);
