@@ -1,11 +1,11 @@
 import { getLocaleFromString } from '@/utils/locales';
 import { cookies, headers } from 'next/headers';
 
-export const getCurrentLocale = () => {
-  const cookieStore = cookies();
+export const getCurrentLocale = async () => {
+  const cookieStore = await cookies();
   const cookieLocale = cookieStore.get('kobohighlights-locale');
 
-  const headersList = headers();
+  const headersList = await headers();
   const browserLocale = headersList.get('accept-language');
 
   return getLocaleFromString(cookieLocale?.value || browserLocale?.split(',')[0] || 'en-US');

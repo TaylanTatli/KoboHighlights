@@ -88,7 +88,7 @@ const HighlightListToolbar: React.FC<HighlightListToolbarProps> = ({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="text-sm">
-              <FileDown className="mr-2 h-4 w-4" />
+              <FileDown className="mr-2 size-4" />
               {t("download")}
             </Button>
           </DropdownMenuTrigger>

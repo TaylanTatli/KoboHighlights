@@ -55,7 +55,7 @@ const BookList: React.FC<BookListProps> = ({ books, onBookClick }) => {
                     <TooltipProvider delayDuration={200}>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <div className="line-clamp-1 flex w-0 flex-grow flex-col items-start">
+                          <div className="line-clamp-1 flex w-0 grow flex-col items-start">
                             <span className="line-clamp-1 inline-block max-w-full truncate">
                               {book.title}
                             </span>

@@ -50,7 +50,7 @@ export default function Home() {
   return (
     <div className="mx-auto flex h-lvh w-lvw flex-col overflow-hidden">
       <Card
-        className={`flex flex-grow flex-col overflow-auto bg-background ${
+        className={`flex grow flex-col overflow-auto bg-background ${
           isMobile ? "m-0 rounded-none" : "m-2 rounded-lg border drop-shadow-md"
         }`}
       >
@@ -66,7 +66,7 @@ export default function Home() {
             isDatabaseLoaded={!!db}
           />
         </CardHeader>
-        <CardContent className="flex-grow overflow-auto p-0">
+        <CardContent className="grow overflow-auto p-0">
           <ResizablePanelGroup direction={isMobile ? "vertical" : "horizontal"}>
             <ResizablePanel
               minSize={isMobile ? 35 : 20}

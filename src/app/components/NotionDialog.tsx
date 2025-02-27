@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Loader2, SendHorizontal } from "lucide-react";
@@ -89,7 +89,7 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="text-sm">
-          <SendHorizontal className="mr-2 h-4 w-4" />
+          <SendHorizontal className="mr-2 size-4" />
           {t("send_to_notion")}
         </Button>
       </DialogTrigger>
@@ -131,7 +131,7 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
           <Button onClick={handleSubmit} disabled={loading}>
             {loading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 size-4 animate-spin" />
                 {t("please_wait")}
               </>
             ) : (

@@ -41,7 +41,7 @@ export const useHighlightUtils = (
         toast({
           title: (
             <div className="flex items-center">
-              <CircleCheckBig className="mr-2 h-4 w-4 text-green-500" />
+              <CircleCheckBig className="mr-2 size-4 text-green-500" />
               {t("copied")}
             </div>
           ),

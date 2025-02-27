@@ -66,69 +66,69 @@ const HighlightList: React.FC<HighlightListProps> = ({
                             : "max-h-0 opacity-0"
                         } overflow-hidden`}
                       >
-                        <TooltipProvider delayDuration={200}>
+                      <TooltipProvider delayDuration={200}>
+                      <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              className="size-8"
+                              size="icon"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCopyClick(
+                                  highlight.id,
+                                  removeTrailingEmptyLine(highlight.content),
+                                );
+                              }}
+                            >
+                              {copiedHighlightId === highlight.id ? (
+                                <ClipboardCheck className="size-4 stroke-green-500" />
+                              ) : (
+                                <Clipboard className="size-4" />
+                              )}
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent sideOffset={8}>
+                            <p>{t("copy_to_clipboard")}</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        {isMobile && (
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <Button
                                 variant="outline"
-                                className="h-8 w-8"
+                                className="size-8"
                                 size="icon"
-                                onClick={(e) => {
+                                onClick={async (e) => {
                                   e.stopPropagation();
-                                  handleCopyClick(
-                                    highlight.id,
-                                    removeTrailingEmptyLine(highlight.content),
-                                  );
+                                  if (navigator.share) {
+                                    try {
+                                      await navigator.share({
+                                        title: bookTitle,
+                                        text: removeTrailingEmptyLine(
+                                          highlight.content,
+                                        ),
+                                      });
+                                    } catch (error) {
+                                      console.error("Error sharing:", error);
+                                    }
+                                  } else {
+                                    alert(
+                                      "Web Share API not supported in your browser",
+                                    );
+                                  }
                                 }}
                               >
-                                {copiedHighlightId === highlight.id ? (
-                                  <ClipboardCheck className="h-4 w-4 stroke-green-500" />
-                                ) : (
-                                  <Clipboard className="h-4 w-4" />
-                                )}
+                                <Share2 className="size-4" />
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent sideOffset={8}>
-                              <p>{t("copy_to_clipboard")}</p>
+                              <p>{t("share_the_highlight")}</p>
                             </TooltipContent>
                           </Tooltip>
-
-                          {isMobile && (
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button
-                                  variant="outline"
-                                  className="h-8 w-8"
-                                  size="icon"
-                                  onClick={async (e) => {
-                                    e.stopPropagation();
-                                    if (navigator.share) {
-                                      try {
-                                        await navigator.share({
-                                          title: bookTitle,
-                                          text: removeTrailingEmptyLine(
-                                            highlight.content,
-                                          ),
-                                        });
-                                      } catch (error) {
-                                        console.error("Error sharing:", error);
-                                      }
-                                    } else {
-                                      alert(
-                                        "Web Share API not supported in your browser",
-                                      );
-                                    }
-                                  }}
-                                >
-                                  <Share2 className="h-4 w-4" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent sideOffset={8}>
-                                <p>{t("share_the_highlight")}</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          )}
-                        </TooltipProvider>
+                        )}
+                      </TooltipProvider>
                       </div>
                     </TableCell>
                   </TableRow>
