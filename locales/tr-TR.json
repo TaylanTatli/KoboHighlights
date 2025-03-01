@@ -16,6 +16,27 @@
   "drop_here_mobile": "Dosyayı eklemek için tıklayın",
   "error": "Hata!",
   "error_message_notion": "Alıntılar Notion'a gönderilirken bir hata oluştu. Lütfen Page ID ve API Key değerlerinin doğru olduğunu kontrol edin.",
+  "help": "Yardım",
+  "help_page": {
+    "titles": {
+      "1": "1. Notion Entegrasyonu Oluşturma",
+      "2": "2. Notion Sayfanızı Entegrasyona Açın",
+      "3": "3. Notion Sayfa ID'sini Alın",
+      "4": "4. Web Uygulamasında Kullanım"
+    },
+    "steps": {
+      "1": "Entegrasyon sayfasına ulaşmak için bu <a>linke</a> tıklayın.",
+      "2": "<bold>New Integration</bold> butonuna tıklayın, bir isim verin ve kullanılacak çalışma alanını seçin.",
+      "3": "<bold>Internal Integration Token</bold> (gizli anahtar) oluşturulacak, bunu kopyalayıp saklayın.",
+      "4": "Entegre etmek istediğiniz Notion sayfasını açın.",
+      "5": "Sağ üst köşedeki <bold>...</bold> butonuna tıklayın, açılan menüden <bold>Connections</bold>'ı seçin, oluşturduğunuz entegrasyonu bulun ve ekleyin.",
+      "6": "URL’nin en sonundaki '/' sonrası kısmı kopyalayın <em>(eğer ?v=... varsa, bunu kaldırın)</em>.",
+      "7": "Integration Token ve Page ID bilgilerini web uygulamasına girin.",
+      "8": "Artık alıntıları Notion’a gönderebilirsiniz! 🎉"
+    },
+    "example": "Örnek: https://www.notion.so/yourworkspace/Page-Name-1234567890abcdef",
+    "page_id": "Sayfa ID’niz <mark>1234567890abcdef</mark> olacaktır."
+  },
   "highlight": "alıntı",
   "Highlight": "Alıntı",
   "localstorage_dialog_description": "Bu alıntılar tarayıcınızın <strong>yerel depolamasından</strong> yüklendi. Tarayıcınız tarafından herhangi bir zamanda <strong>silinebilir</strong>, bu nedenle <strong>kalıcılığına güvenmeyin</strong>. Ayrıca aşağıdaki <strong>Temizle</strong> butonuna tıklayarak <strong>manuel olarak temizleyebilirsiniz</strong>. Güncel alıntıları görmek için <strong>KoboReader.sqlite</strong> dosyanızı kullanın.",

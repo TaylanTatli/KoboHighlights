@@ -1,3 +1,4 @@
+import HelpMenu from "@/components/HelpMenu";
 import NotionDialog from "@/components/NotionDialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -117,6 +118,7 @@ const HighlightListToolbar: React.FC<HighlightListToolbarProps> = ({
           </DropdownMenuContent>
         </DropdownMenu>
         <NotionDialog onSubmit={handleNotionSubmit} />
+        <HelpMenu />
       </div>
     </div>
   );

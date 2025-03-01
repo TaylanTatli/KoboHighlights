@@ -16,6 +16,27 @@
   "drop_here_mobile": "Click to add file",
   "error": "Error!",
   "error_message_notion": "An error occurred while sending highlights to Notion. Please check your Page ID and API Key.",
+  "help": "Help",
+  "help_page": {
+    "titles": {
+      "1": "1. Create a Notion Integration",
+      "2": "2. Use Your Integration on a Page",
+      "3": "3. Get Your Notion Page ID",
+      "4": "4. Use the Integration in the Web App"
+    },
+    "steps": {
+      "1": "Follow this <a>link</a> to access integration page",
+      "2": "Click <bold>New Integration</bold>, name it, and select the workspace where it will be used.",
+      "3": "Copy the <bold>Internal Integration Token</bold> (secret key) and keep it safe.",
+      "4": "Open the Notion page you want to integrate.",
+      "5": "Click <bold>...</bold> button on top to open setting, click <bold>Connections</bold>, search for your integration, and select it",
+      "6": "Copy the last part of the URL after the last '/' <em>(remove ?v=... if it exists)</em>.",
+      "7": "Enter your Integration Token and Page ID into the web app.",
+      "8": "Now, you can send quotes to Notion! 🎉"
+    },
+    "example": "Example: https://www.notion.so/yourworkspace/Page-Name-1234567890abcdef",
+    "page_id": "Your Page ID is <mark>1234567890abcdef</mark>"
+  },
   "highlight": "highlight",
   "Highlight": "Highlight",
   "localstorage_dialog_description": "These highlights are loaded from your browser's <strong>local storage</strong>. They may be <strong>cleared</strong> by your browser at any time, so <strong>do not rely on their permanence</strong>. You can also <strong>manually clear</strong> them by clicking the <strong>Clear</strong> button below. Use your <strong>KoboReader.sqlite</strong> file to see the most current highlights.",
