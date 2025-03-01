@@ -6,6 +6,7 @@
   "cancel": "İptal",
   "clear": "Temizle",
   "confirm": "Onayla",
+  "ok": "Tamam",
   "confirm_upload_description": "Zaten bir veritabanı yüklü. Üzerine yazmak istiyor musunuz?",
   "confirm_upload_title": "Emin misiniz?",
   "copied": "Kopyalandı!",
@@ -36,6 +37,24 @@
     },
     "example": "Örnek: https://www.notion.so/yourworkspace/Page-Name-1234567890abcdef",
     "page_id": "Sayfa ID’niz <mark>1234567890abcdef</mark> olacaktır."
+  },
+  "about_page": {
+    "titles": {
+      "1": "Hakkında",
+      "2": "Özellikler",
+      "3": "Kaynak Kodu"
+    },
+    "section": {
+      "1": "KoboHighlights, KoboReader.sqlite dosyasından alıntıları çıkarmak, görüntülemek ve Notion'a göndermek için tasarlanmış bir web uygulamasıdır.",
+      "2": "KoboReader.sqlite dosyasından alıntıları çıkarır",
+      "3": "Alıntıları kullanıcı dostu bir arayüzde görüntüler",
+      "4": "Alıntıları Notion'a gönderir",
+      "5": "Alıntıları çevrimdışı erişim için yerel depolamaya kaydeder",
+      "6": "Çoklu dil desteği (İngilizce ve Türkçe)",
+      "7": "Kolay kurulum için Docker desteği",
+      "8": "Duyarlı (responsive) kullanıcı arayüzü",
+      "9": "Projenin kaynak koduna <a>GitHub</a> üzerinden erişebilirsiniz."
+    }
   },
   "highlight": "alıntı",
   "Highlight": "Alıntı",

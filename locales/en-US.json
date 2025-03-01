@@ -6,6 +6,7 @@
   "cancel": "Cancel",
   "clear": "Clear",
   "confirm": "Confirm",
+  "ok": "OK",
   "confirm_upload_description": "A database is already loaded. Do you want to overwrite it?",
   "confirm_upload_title": "Are you sure?",
   "copied": "Copied!",
@@ -36,6 +37,24 @@
     },
     "example": "Example: https://www.notion.so/yourworkspace/Page-Name-1234567890abcdef",
     "page_id": "Your Page ID is <mark>1234567890abcdef</mark>"
+  },
+  "about_page": {
+    "titles": {
+      "1": "About",
+      "2": "Features",
+      "3": "Source Code"
+    },
+    "section": {
+      "1": "KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file and send them to Notion.",
+      "2": "Extract highlights from KoboReader.sqlite file",
+      "3": "Display highlights in a user-friendly interface",
+      "4": "Send highlights to Notion",
+      "5": "Save highlights to local storage for offline access",
+      "6": "Multi-language support (English and Turkish)",
+      "7": "Docker support for easy deployment",
+      "8": "Responsive UI",
+      "9": "You can access the source code of the project on <a>GitHub</a>."
+    }
   },
   "highlight": "highlight",
   "Highlight": "Highlight",

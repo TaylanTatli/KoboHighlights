@@ -34,6 +34,9 @@ const HelpMenu: React.FC = () => {
             <TabsTrigger className="w-full" value="notion">
               Notion
             </TabsTrigger>
+            <TabsTrigger className="w-full" value="about">
+              {t("about_page.titles.1")}
+            </TabsTrigger>
           </TabsList>
 
           <ScrollArea className="max-h-96 overflow-y-auto px-2">
@@ -104,11 +107,43 @@ const HelpMenu: React.FC = () => {
                 <li>{t("help_page.steps.8")}</li>
               </ul>
             </TabsContent>
+            <TabsContent value="about">
+              <p className="mt-2 leading-7">{t("about_page.section.1")}</p>
+              <h3 className="mt-4 text-lg font-semibold tracking-tight">
+                <strong>{t("about_page.titles.2")}</strong>
+              </h3>
+              <ul className="my-2 ml-6 list-disc [&>li]:mt-2">
+                <li>{t("about_page.section.2")}</li>
+                <li>{t("about_page.section.3")}</li>
+                <li>{t("about_page.section.4")}</li>
+                <li>{t("about_page.section.5")}</li>
+                <li>{t("about_page.section.6")}</li>
+                <li>{t("about_page.section.7")}</li>
+                <li>{t("about_page.section.8")}</li>
+              </ul>
+              <h3 className="mt-4 text-lg font-semibold tracking-tight">
+                <strong>{t("about_page.titles.3")}</strong>
+              </h3>
+              <p className="mt-2 leading-7">
+                {t.rich("about_page.section.9", {
+                  a: (chunks) => (
+                    <a
+                      href="https://github.com/TaylanTatli/KoboHighlights"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="text-primary font-bold underline underline-offset-4"
+                    >
+                      {chunks}
+                    </a>
+                  ),
+                })}
+              </p>
+            </TabsContent>
           </ScrollArea>
         </Tabs>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">{t("cancel")}</Button>
+            <Button variant="outline">{t("ok")}</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
