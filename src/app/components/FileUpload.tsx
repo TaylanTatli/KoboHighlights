@@ -15,10 +15,10 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const [filesToUpload, setFilesToUpload] = useState<File[]>([]);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
-      "application/x-sqlite3": [".sqlite"],
       "application/vnd.sqlite3": [".sqlite"],
+      "application/sqlite3": [".sqlite"],
+      "application/x-sqlite3": [".sqlite"],
       "application/octet-stream": [".sqlite"],
-      "*/*": [".sqlite"],
     },
     onDrop: (acceptedFiles) => {
       if (isDatabaseLoaded) {
