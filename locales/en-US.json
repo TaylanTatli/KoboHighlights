@@ -18,6 +18,25 @@
   "error": "Error!",
   "error_message_notion": "An error occurred while sending highlights to Notion. Please check your Page ID and API Key.",
   "help": "Help",
+  "help_hardcover": {
+    "titles": {
+      "1": "1. Get Your Hardcover API Key",
+      "2": "2. Search and Select the Book",
+      "3": "3. Upload Quotes",
+      "4": "4. Security",
+      "5": "5. Avoiding Duplicates"
+    },
+    "steps": {
+      "1": "Open your API settings on <a>Hardcover</a> and copy your API key.",
+      "2": "Paste your key into the dialog (with or without ‘Bearer’ works).",
+      "3": "Enter the book title and author, then click Search. Pick the correct result (cover, author, title, slug).",
+      "4": "Click Submit to upload the current book’s highlights or enable ‘Send all books’ to upload everything.",
+      "5": "If search or upload fails due to network rules, the app automatically retries via a secure proxy.",
+      "6": "To minimize duplicates on Hardcover, consider uploading after you finish a book so each highlight is sent once."
+    },
+    "security": "Your API key is saved only in your browser’s local storage and used from the client. It is never logged, and the app strips an optional ‘Bearer’ prefix automatically.",
+    "dupe_note": "Tip: Upload after finishing a book to avoid duplicates. The app prevents re-sending from this browser, but Hardcover may still contain older entries."
+  },
   "help_page": {
     "titles": {
       "1": "1. Create a Notion Integration",
