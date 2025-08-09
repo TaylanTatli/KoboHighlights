@@ -17,6 +17,17 @@
   "drop_here_mobile": "Dosyayı eklemek için tıklayın",
   "error": "Hata!",
   "error_message_notion": "Alıntılar Notion'a gönderilirken bir hata oluştu. Lütfen Page ID ve API Key değerlerinin doğru olduğunu kontrol edin.",
+  "hardcover": {
+    "missing_api_key": "Hardcover API anahtarı eksik",
+    "uploaded_all_books": "Tüm kitaplar Hardcover'a yüklendi",
+    "uploaded_highlights": "Alıntılar Hardcover'a yüklendi",
+    "select_book": "Lütfen önce bir kitap sonucu seçin",
+    "title": "Alıntıları Hardcover'a Gönder",
+    "description": "Hardcovere API anahtarınızı ekleyin, doğru kitabı arayın ve alıntıları yükleyin.",
+    "get_api_key": "Yok mu? Şuradan alın",
+    "send_all_books": "Tüm kitapları gönder",
+    "tip": "İpucu: Hardcover'da çift kayıtları önlemek için kitabı bitirdikten sonra yüklemeyi düşünün. Bu uygulama bu tarayıcıdan tekrar göndermeyi engeller ancak Hardcover'daki mevcut kayıtları kaldıramaz."
+  },
   "help": "Yardım",
   "help_hardcover": {
     "titles": {
@@ -80,8 +91,11 @@
   "localstorage_dialog_description": "Bu alıntılar tarayıcınızın <strong>yerel depolamasından</strong> yüklendi. Tarayıcınız tarafından herhangi bir zamanda <strong>silinebilir</strong>, bu nedenle <strong>kalıcılığına güvenmeyin</strong>. Ayrıca aşağıdaki <strong>Temizle</strong> butonuna tıklayarak <strong>manuel olarak temizleyebilirsiniz</strong>. Güncel alıntıları görmek için <strong>KoboReader.sqlite</strong> dosyanızı kullanın.",
   "localstorage_dialog_title": "Yerel Depolamadan Yüklendi!",
   "not_uploaded_or_not_selected": "KoboReader.sqlite dosyasını yüklemediniz veya bir kitap başlığı seçmediniz. Alıntılar yüklendikten sonra, eylem düğmesini görmek için alıntılara tıklayabilirsiniz.",
+  "no_results": "Sonuç yok",
   "please_wait": "Lütfen bekleyin...",
+  "search": "Ara",
   "search_books": "Kitapları ara...",
+  "send_to_hardcover": "Hardcover'a Gönder",
   "send_all_to_notion": "Tüm Kitapların Alıntılarını Gönder?",
   "send_to_notion": "Notion'a Gönder",
   "send_to_notion_dialog_description": "Lütfen Notion Page ID ve API Key bilgilerini girin.",

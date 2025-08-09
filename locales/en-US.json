@@ -17,6 +17,17 @@
   "drop_here_mobile": "Click to add file",
   "error": "Error!",
   "error_message_notion": "An error occurred while sending highlights to Notion. Please check your Page ID and API Key.",
+  "hardcover": {
+    "missing_api_key": "Missing Hardcover API key",
+    "uploaded_all_books": "Uploaded all books to Hardcover",
+    "uploaded_highlights": "Uploaded highlights to Hardcover",
+    "select_book": "Please select a book result first",
+    "title": "Send highlights to Hardcover",
+    "description": "Add your Hardcover API key, search for the correct book, and upload quotes.",
+    "get_api_key": "Don’t have one? Get it from",
+    "send_all_books": "Send all books",
+    "tip": "Tip: To avoid duplicates on Hardcover, consider uploading after you finish a book. This app prevents re-sending from this browser but can’t remove existing entries in Hardcover."
+  },
   "help": "Help",
   "help_hardcover": {
     "titles": {
@@ -80,8 +91,11 @@
   "localstorage_dialog_description": "These highlights are loaded from your browser's <strong>local storage</strong>. They may be <strong>cleared</strong> by your browser at any time, so <strong>do not rely on their permanence</strong>. You can also <strong>manually clear</strong> them by clicking the <strong>Clear</strong> button below. Use your <strong>KoboReader.sqlite</strong> file to see the most current highlights.",
   "localstorage_dialog_title": "Loaded from Local Storage!",
   "not_uploaded_or_not_selected": "You haven't uploaded the KoboReader.sqlite file or chosen a book title. Once the highlights are loaded, you can click them to see the action button.",
+  "no_results": "No results",
   "please_wait": "Please wait...",
+  "search": "Search",
   "search_books": "Search books...",
+  "send_to_hardcover": "Upload to Hardcover",
   "send_all_to_notion": "Send Highlights of All Books?",
   "send_to_notion": "Send to Notion",
   "send_to_notion_dialog_description": "Please enter your Notion Page ID and API Key.",
