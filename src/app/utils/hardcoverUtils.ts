@@ -10,30 +10,8 @@ export type HardcoverBookChoice = {
   coverUrl?: string;
 };
 
-const stripBearer = (raw: string): string => raw.trim().replace(/^Bearer\s+/i, "");
-
-const hardcoverRequest = async (
-  token: string,
-  query: string,
-  variables?: Record<string, unknown>,
-) => {
-  const apiKey = stripBearer(token);
-  const resp = await fetch("https://api.hardcover.app/v1/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({ query, variables }),
-  });
-  const json = await resp.json().catch(() => ({}));
-  if (!resp.ok || json?.errors) {
-    const message =
-      json?.errors?.[0]?.message || json?.message || resp.statusText || "Request failed";
-    throw new Error(message);
-  }
-  return json as { data?: unknown };
-};
+const stripBearer = (raw: string): string =>
+  raw.trim().replace(/^Bearer\s+/i, "");
 
 const hardcoverProxy = async (
   token: string,
@@ -49,7 +27,10 @@ const hardcoverProxy = async (
   const json = await resp.json().catch(() => ({}));
   if (!resp.ok || json?.errors) {
     const message =
-      json?.errors?.[0]?.message || json?.message || resp.statusText || "Request failed";
+      json?.errors?.[0]?.message ||
+      json?.message ||
+      resp.statusText ||
+      "Request failed";
     throw new Error(message);
   }
   return json as { data?: unknown };
@@ -59,7 +40,6 @@ export const searchHardcoverBooks = async (
   title: string,
   author: string,
   token: string,
-  useProxy = false,
 ): Promise<HardcoverBookChoice[]> => {
   // Prefer search endpoint for better ranking
   const query = `
@@ -69,8 +49,7 @@ export const searchHardcoverBooks = async (
       }
     }
   `;
-  const requester = useProxy ? hardcoverProxy : hardcoverRequest;
-  const { data } = await requester(token, query, {
+  const { data } = await hardcoverProxy(token, query, {
     q: `${title} ${author}`.trim(),
     per: 10,
     page: 1,
@@ -89,18 +68,19 @@ export const searchHardcoverBooks = async (
             return Array.isArray(parsed)
               ? (parsed as unknown[])
               : Array.isArray((parsed as Record<string, unknown>)?.hits)
-                ? (((parsed as Record<string, unknown>).hits as unknown[]) || [])
+                ? ((parsed as Record<string, unknown>).hits as unknown[]) || []
                 : Array.isArray((parsed as Record<string, unknown>)?.items)
-                  ? (((parsed as Record<string, unknown>).items as unknown[]) || [])
+                  ? ((parsed as Record<string, unknown>).items as unknown[]) ||
+                    []
                   : [];
           } catch {
             return [];
           }
         })()
       : Array.isArray((rawResults as Record<string, unknown>)?.hits)
-        ? ((((rawResults as Record<string, unknown>).hits as unknown[]) || []))
+        ? ((rawResults as Record<string, unknown>).hits as unknown[]) || []
         : Array.isArray((rawResults as Record<string, unknown>)?.items)
-          ? ((((rawResults as Record<string, unknown>).items as unknown[]) || []))
+          ? ((rawResults as Record<string, unknown>).items as unknown[]) || []
           : [];
   // results is a blob of objects; extract the key fields if present
   const mapped: HardcoverBookChoice[] = results
@@ -111,14 +91,19 @@ export const searchHardcoverBooks = async (
         typeof v === "string" ? v : undefined;
 
       const obj = asRecord(r);
-      const doc = (obj.document ? asRecord(obj.document) : obj) as Record<string, unknown>;
+      const doc = (obj.document ? asRecord(obj.document) : obj) as Record<
+        string,
+        unknown
+      >;
 
       const image = asRecord(doc.image);
       const cover = asRecord(doc.cover);
       const coverUrl = getStr(image.url) || getStr(cover.url);
 
       const authorName =
-        getStr(doc.author_name) || getStr(doc.primary_author) || getStr(asRecord(doc.author).name);
+        getStr(doc.author_name) ||
+        getStr(doc.primary_author) ||
+        getStr(asRecord(doc.author).name);
 
       const idRaw = doc.book_id ?? doc.id;
       const id = typeof idRaw === "number" ? idRaw : Number(idRaw);
@@ -165,18 +150,25 @@ export const searchHardcoverBooks = async (
     }
   `;
   const fbVars = { title: `%${title}%`, author: `%${author}%` };
-  const fb = await requester(token, fallback, fbVars);
-  const books = ((fb?.data as Record<string, unknown>)?.books || []) as unknown[];
+  const fb = await hardcoverProxy(token, fallback, fbVars);
+  const books = ((fb?.data as Record<string, unknown>)?.books ||
+    []) as unknown[];
   return books.map((raw) => {
     const asRecord = (v: unknown): Record<string, unknown> =>
       v && typeof v === "object" ? (v as Record<string, unknown>) : {};
-    const getStr = (v: unknown): string | undefined => (typeof v === "string" ? v : undefined);
+    const getStr = (v: unknown): string | undefined =>
+      typeof v === "string" ? v : undefined;
 
     const b = asRecord(raw);
     const phys = asRecord(b.default_physical_edition);
     const digi = asRecord(b.default_digital_edition);
     const edIdRaw = phys.id ?? digi.id;
-    const edId = typeof edIdRaw === "number" ? edIdRaw : edIdRaw != null ? Number(edIdRaw) : undefined;
+    const edId =
+      typeof edIdRaw === "number"
+        ? edIdRaw
+        : edIdRaw != null
+          ? Number(edIdRaw)
+          : undefined;
 
     const contributors = Array.isArray(b.cached_contributors)
       ? (b.cached_contributors as unknown[])
@@ -219,7 +211,6 @@ const normalizeQuote = (text: string): string => {
   return cleaned.join("\n");
 };
 
-
 const getLocalUploadedSet = (bookId: number): Set<string> => {
   try {
     const raw = localStorage.getItem(`hardcoverUploaded:${bookId}`);
@@ -233,7 +224,10 @@ const getLocalUploadedSet = (bookId: number): Set<string> => {
 
 const saveLocalUploadedSet = (bookId: number, ids: Set<string>) => {
   try {
-    localStorage.setItem(`hardcoverUploaded:${bookId}`, JSON.stringify(Array.from(ids)));
+    localStorage.setItem(
+      `hardcoverUploaded:${bookId}`,
+      JSON.stringify(Array.from(ids)),
+    );
   } catch {
     // ignore
   }
@@ -244,7 +238,6 @@ export const postQuotesToHardcover = async (
   hardcoverBookId: number,
   highlights: Highlight[],
   privacySettingId: number = 1,
-  useProxy = false,
 ) => {
   // Local-only dedupe: skip highlights already uploaded from this browser
   const localIds = getLocalUploadedSet(hardcoverBookId);
@@ -267,8 +260,7 @@ export const postQuotesToHardcover = async (
         ) { errors }
       }
     `;
-    const requester = useProxy ? hardcoverProxy : hardcoverRequest;
-    await requester(token, mutation, {
+    await hardcoverProxy(token, mutation, {
       book_id: hardcoverBookId,
       entry,
       privacy: privacySettingId,
@@ -277,4 +269,3 @@ export const postQuotesToHardcover = async (
   }
   saveLocalUploadedSet(hardcoverBookId, localIds);
 };
-
