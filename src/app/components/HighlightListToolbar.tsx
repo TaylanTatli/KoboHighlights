@@ -1,5 +1,6 @@
 import HelpMenu from "@/components/HelpMenu";
 import NotionDialog from "@/components/NotionDialog";
+import HardcoverDialog from "@/components/HardcoverDialog";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -84,8 +85,8 @@ const HighlightListToolbar: React.FC<HighlightListToolbarProps> = ({
   };
 
   return (
-    <div className="sticky top-0 z-10 flex flex-row justify-end gap-x-2 bg-gray-600/5 p-2 dark:bg-gray-50/5">
-      <div className="flex gap-2">
+    <div className="sticky top-0 z-10 flex flex-row flex-wrap justify-end gap-2 bg-gray-600/5 p-2 dark:bg-gray-50/5">
+      <div className="flex w-full flex-row flex-wrap justify-end gap-2 md:w-auto md:flex-nowrap">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="text-sm">
@@ -118,6 +119,19 @@ const HighlightListToolbar: React.FC<HighlightListToolbarProps> = ({
           </DropdownMenuContent>
         </DropdownMenu>
         <NotionDialog onSubmit={handleNotionSubmit} />
+        <HardcoverDialog
+          selectedBook={
+            selectedBookId
+              ? (() => {
+                  const b = bookListData.find((x) => x.id === selectedBookId);
+                  return b
+                    ? { title: b.title, author: b.author, highlights: b.highlights }
+                    : null;
+                })()
+              : null
+          }
+          allBooks={bookListData}
+        />
         <HelpMenu />
       </div>
     </div>

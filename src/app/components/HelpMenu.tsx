@@ -34,6 +34,9 @@ const HelpMenu: React.FC = () => {
             <TabsTrigger className="w-full" value="notion">
               Notion
             </TabsTrigger>
+            <TabsTrigger className="w-full" value="hardcover">
+              Hardcover
+            </TabsTrigger>
             <TabsTrigger className="w-full" value="about">
               {t("about_page.titles.1")}
             </TabsTrigger>
@@ -106,6 +109,49 @@ const HelpMenu: React.FC = () => {
                 <li>{t("help_page.steps.7")}</li>
                 <li>{t("help_page.steps.8")}</li>
               </ul>
+            </TabsContent>
+            <TabsContent value="hardcover">
+              <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                <strong>{t("help_hardcover.titles.1")}</strong>
+              </h3>
+              <ol className="my-2 ml-6 list-disc [&>li]:mt-2">
+                <li>
+                  {t.rich("help_hardcover.steps.1", {
+                    a: (chunks) => (
+                      <a
+                        className="text-primary font-medium underline underline-offset-4"
+                        href="https://hardcover.app/account/api"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        {chunks}
+                      </a>
+                    ),
+                  })}
+                </li>
+                <li>{t("help_hardcover.steps.2")}</li>
+              </ol>
+              <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                <strong>{t("help_hardcover.titles.2")}</strong>
+              </h3>
+              <ol className="my-2 ml-6 list-disc [&>li]:mt-2">
+                <li>{t("help_hardcover.steps.3")}</li>
+              </ol>
+              <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                <strong>{t("help_hardcover.titles.3")}</strong>
+              </h3>
+              <ol className="my-2 ml-6 list-disc [&>li]:mt-2">
+                <li>{t("help_hardcover.steps.4")}</li>
+                <li>{t("help_hardcover.steps.5")}</li>
+              </ol>
+              <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                <strong>{t("help_hardcover.titles.4")}</strong>
+              </h3>
+              <p className="my-2 ml-6 text-sm text-muted-foreground">{t("help_hardcover.security")}</p>
+              <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                <strong>{t("help_hardcover.titles.5")}</strong>
+              </h3>
+              <p className="my-2 ml-6 text-sm text-muted-foreground">{t("help_hardcover.dupe_note")}</p>
             </TabsContent>
             <TabsContent value="about">
               <p className="mt-2 leading-7">{t("about_page.section.1")}</p>

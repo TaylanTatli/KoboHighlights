@@ -18,6 +18,25 @@
   "error": "Hata!",
   "error_message_notion": "Alıntılar Notion'a gönderilirken bir hata oluştu. Lütfen Page ID ve API Key değerlerinin doğru olduğunu kontrol edin.",
   "help": "Yardım",
+  "help_hardcover": {
+    "titles": {
+      "1": "1. Hardcover API Anahtarını Alın",
+      "2": "2. Kitabı Arayın ve Seçin",
+      "3": "3. Alıntıları Yükleyin",
+      "4": "4. Güvenlik",
+      "5": "5. Çift Kayıtları Önleme"
+    },
+    "steps": {
+      "1": "API ayarlarını <a>Hardcover</a> üzerinde açın ve anahtarınızı kopyalayın.",
+      "2": "Anahtarı diyaloga yapıştırın (‘Bearer’ ile veya olmadan çalışır).",
+      "3": "Kitap başlığı ve yazarı girip Ara’ya tıklayın. Doğru sonucu (kapak, yazar, başlık, slug) seçin.",
+      "4": "Geçerli kitabın alıntılarını yüklemek için Gönder’e tıklayın ya da ‘Tüm kitapları gönder’ seçeneğini açın.",
+      "5": "Arama veya yükleme ağ kuralları nedeniyle başarısız olursa uygulama otomatik olarak güvenli proxy ile tekrar dener.",
+      "6": "Hardcover’da çift kayıtları en aza indirmek için, her alıntıyı bir kez göndermek adına kitabı bitirdikten sonra yüklemeyi düşünün."
+    },
+    "security": "API anahtarınız yalnızca tarayıcınızın yerel depolamasında saklanır ve istemciden kullanılır. Kaydedilmez ve günlüklenmez, ‘Bearer’ öneki otomatik olarak temizlenir.",
+    "dupe_note": "İpucu: Çift kayıtları önlemek için kitabı bitirdikten sonra yükleyin. Uygulama bu tarayıcıdan tekrar göndermeyi engeller, ancak Hardcover’da eski kayıtlar bulunabilir."
+  },
   "help_page": {
     "titles": {
       "1": "1. Notion Entegrasyonu Oluşturma",

@@ -1,0 +1,229 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useToast } from "@/hooks/use-toast";
+import { HardcoverBookChoice, postQuotesToHardcover, searchHardcoverBooks } from "@/utils/hardcoverUtils";
+import { Highlight, Book } from "@/types";
+import { BookOpenCheck, Loader2, SendToBack } from "lucide-react";
+import { useTranslations } from "next-intl";
+import React, { useEffect, useState } from "react";
+
+interface HardcoverDialogProps {
+  selectedBook: { title: string; author: string; highlights: Highlight[] } | null;
+  allBooks: Book[];
+}
+
+const HardcoverDialog: React.FC<HardcoverDialogProps> = ({ selectedBook, allBooks }) => {
+  const t = useTranslations();
+  const { toast } = useToast();
+
+  const [apiKey, setApiKey] = useState("");
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [queryTitle, setQueryTitle] = useState("");
+  const [queryAuthor, setQueryAuthor] = useState("");
+  const [results, setResults] = useState<HardcoverBookChoice[]>([]);
+  const [selected, setSelected] = useState<HardcoverBookChoice | null>(null);
+  const [sendAll, setSendAll] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("hardcoverApiKey");
+    if (stored) setApiKey(stored);
+  }, []);
+
+  useEffect(() => {
+    // Prefill from currently selected book
+    if (selectedBook) {
+      setQueryTitle(selectedBook.title);
+      setQueryAuthor(selectedBook.author);
+    }
+  }, [selectedBook]);
+
+  const performSearch = async () => {
+    if (!apiKey) {
+      toast({ title: t("error"), description: "Missing Hardcover API key" });
+      return;
+    }
+    setLoading(true);
+    try {
+      let found: HardcoverBookChoice[] = [];
+      try {
+        found = await searchHardcoverBooks(queryTitle, queryAuthor, apiKey);
+      } catch {
+        // direct failed: try proxy
+        found = await searchHardcoverBooks(queryTitle, queryAuthor, apiKey, true);
+      }
+      setResults(found);
+      setSelected(found[0] || null);
+      localStorage.setItem("hardcoverApiKey", apiKey);
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Search failed";
+      toast({ title: t("error"), description: message });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!apiKey || (!sendAll && !selected)) return;
+    localStorage.setItem("hardcoverApiKey", apiKey);
+
+    setLoading(true);
+    try {
+      if (sendAll) {
+        for (const b of allBooks) {
+          const matches = await searchHardcoverBooks(b.title, b.author, apiKey);
+          const choice = matches[0];
+          if (choice) {
+            try {
+              await postQuotesToHardcover(apiKey, choice.bookId, b.highlights);
+            } catch {
+              await postQuotesToHardcover(apiKey, choice.bookId, b.highlights, 1, true);
+            }
+          }
+        }
+        toast({ title: t("success"), description: "Uploaded all books to Hardcover" });
+      } else if (selectedBook) {
+        const chosen = selected;
+        if (!chosen) {
+          toast({ title: t("error"), description: "Please select a book result first" });
+          setLoading(false);
+          return;
+        }
+        try {
+          await postQuotesToHardcover(apiKey, chosen.bookId, selectedBook.highlights);
+        } catch {
+          await postQuotesToHardcover(apiKey, chosen.bookId, selectedBook.highlights, 1, true);
+        }
+        toast({ title: t("success"), description: "Uploaded highlights to Hardcover" });
+      }
+      setOpen(false);
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Upload failed";
+      toast({ title: t("error"), description: message });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline" className="text-sm">
+          <SendToBack className="mr-2 size-4" />
+          Upload to Hardcover
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-xl">
+        <DialogHeader>
+          <DialogTitle>Send highlights to Hardcover</DialogTitle>
+          <DialogDescription>
+            Add your Hardcover API key, search for the correct book, and upload quotes.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-3">
+          <div className="space-y-1">
+            <Input
+              placeholder="Hardcover API Key"
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+              className="h-10 text-base"
+            />
+            <div className="text-xs text-muted-foreground">
+              Don’t have one? Get it from
+              {' '}
+              <a
+                href="https://hardcover.app/account/api"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-primary underline underline-offset-4"
+              >
+                hardcover.app/account/api
+              </a>
+              .
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <Input
+              placeholder="Book title"
+              value={queryTitle}
+              onChange={(e) => setQueryTitle(e.target.value)}
+              className="h-10 text-base"
+            />
+            <Input
+              placeholder="Author"
+              value={queryAuthor}
+              onChange={(e) => setQueryAuthor(e.target.value)}
+              className="h-10 text-base"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" onClick={performSearch} disabled={loading}>
+              {loading ? <Loader2 className="mr-2 size-4 animate-spin" /> : null}
+              Search
+            </Button>
+            <label className="ml-auto inline-flex items-center gap-2 text-sm">
+              <input type="checkbox" checked={sendAll} onChange={(e) => setSendAll(e.target.checked)} />
+              Send all books
+            </label>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Tip: To avoid duplicates on Hardcover, consider uploading after you finish a book. This app prevents re-sending from this browser but can’t remove existing entries in Hardcover.
+          </p>
+          <ScrollArea className="max-h-64 border">
+            <div className="divide-y">
+              {results.map((r) => (
+                <button
+                  key={`${r.bookId}`}
+                  className={`flex w-full items-center gap-3 p-2 text-left hover:bg-muted ${selected?.bookId === r.bookId ? "bg-muted" : ""}`}
+                  onClick={() => setSelected(r)}
+                >
+                  {r.coverUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={r.coverUrl} alt="cover" className="h-12 w-8 object-cover" />
+                  ) : (
+                    <div className="h-12 w-8 bg-muted" />
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate font-medium">{r.title}</div>
+                    <div className="truncate text-sm text-muted-foreground">{r.author || ""}</div>
+                    {r.slug ? (
+                      <div className="truncate text-xs text-muted-foreground">{r.slug}</div>
+                    ) : null}
+                  </div>
+                </button>
+              ))}
+              {results.length === 0 && (
+                <div className="p-3 text-sm text-muted-foreground">No results</div>
+              )}
+            </div>
+          </ScrollArea>
+        </div>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button onClick={handleSubmit} disabled={loading || !apiKey || (!sendAll && !selected)}>
+            {loading ? <Loader2 className="mr-2 size-4 animate-spin" /> : <BookOpenCheck className="mr-2 size-4" />}
+            Submit
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default HardcoverDialog;
+
