@@ -42,7 +42,7 @@ const HelpMenu: React.FC = () => {
             </TabsTrigger>
           </TabsList>
 
-          <ScrollArea className="max-h-96 overflow-y-auto px-2">
+          <ScrollArea className="max-h-96 overflow-y-auto px-2 break-words">
             <TabsContent value="notion">
               <h3 className="mt-2 text-lg font-semibold tracking-tight">
                 <strong>{t("help_page.titles.1")}</strong>
@@ -147,11 +147,15 @@ const HelpMenu: React.FC = () => {
               <h3 className="mt-2 text-lg font-semibold tracking-tight">
                 <strong>{t("help_hardcover.titles.4")}</strong>
               </h3>
-              <p className="my-2 ml-6 text-sm text-muted-foreground">{t("help_hardcover.security")}</p>
+              <p className="text-muted-foreground my-2 ml-6 text-sm">
+                {t("help_hardcover.security")}
+              </p>
               <h3 className="mt-2 text-lg font-semibold tracking-tight">
                 <strong>{t("help_hardcover.titles.5")}</strong>
               </h3>
-              <p className="my-2 ml-6 text-sm text-muted-foreground">{t("help_hardcover.dupe_note")}</p>
+              <p className="text-muted-foreground my-2 ml-6 text-sm">
+                {t("help_hardcover.dupe_note")}
+              </p>
             </TabsContent>
             <TabsContent value="about">
               <p className="mt-2 leading-7">{t("about_page.section.1")}</p>

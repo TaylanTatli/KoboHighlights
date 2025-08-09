@@ -1,6 +1,6 @@
+import HardcoverDialog from "@/components/HardcoverDialog";
 import HelpMenu from "@/components/HelpMenu";
 import NotionDialog from "@/components/NotionDialog";
-import HardcoverDialog from "@/components/HardcoverDialog";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,7 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useHighlightUtils } from "@/hooks/useHighlightUtils";
 import { HighlightListToolbarProps } from "@/types";
 import { sendAllBooksToNotion, sendBookToNotion } from "@/utils/notionUtils";
-import { FileDown } from "lucide-react";
+import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
+import { FileDown, SendHorizontal } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
@@ -118,20 +119,43 @@ const HighlightListToolbar: React.FC<HighlightListToolbarProps> = ({
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <NotionDialog onSubmit={handleNotionSubmit} />
-        <HardcoverDialog
-          selectedBook={
-            selectedBookId
-              ? (() => {
-                  const b = bookListData.find((x) => x.id === selectedBookId);
-                  return b
-                    ? { title: b.title, author: b.author, highlights: b.highlights }
-                    : null;
-                })()
-              : null
-          }
-          allBooks={bookListData}
-        />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="text-sm">
+              <SendHorizontal className="mr-2 size-4" />
+              {t("send")}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="center">
+            <DropdownMenuGroup className="bg-popover flex flex-col gap-2 p-1">
+              <DropdownMenuItem asChild>
+                <NotionDialog onSubmit={handleNotionSubmit} />
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <HardcoverDialog
+                  selectedBook={
+                    selectedBookId
+                      ? (() => {
+                          const b = bookListData.find(
+                            (x) => x.id === selectedBookId,
+                          );
+                          return b
+                            ? {
+                                title: b.title,
+                                author: b.author,
+                                highlights: b.highlights,
+                              }
+                            : null;
+                        })()
+                      : null
+                  }
+                  allBooks={bookListData}
+                />
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         <HelpMenu />
       </div>
     </div>

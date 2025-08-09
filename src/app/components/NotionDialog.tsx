@@ -1,17 +1,18 @@
+import { NotionIcon } from "@/components/CustomIcons";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Loader2, SendHorizontal } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 
@@ -88,8 +89,8 @@ const NotionDialog: React.FC<NotionDialogProps> = ({ onSubmit }) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="text-sm">
-          <SendHorizontal className="mr-2 size-4" />
+        <Button variant="outline" className="bg-popover text-sm">
+          <NotionIcon className="mr-2 size-4" />
           {t("send_to_notion")}
         </Button>
       </DialogTrigger>

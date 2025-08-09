@@ -20,9 +20,10 @@ import {
   postQuotesToHardcover,
   searchHardcoverBooks,
 } from "@/utils/hardcoverUtils";
-import { BookOpenCheck, Loader2, SendToBack } from "lucide-react";
+import { BookOpenCheck, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
+import { HardcoverIcon } from "./CustomIcons";
 
 interface HardcoverDialogProps {
   selectedBook: {
@@ -64,7 +65,7 @@ const HardcoverDialog: React.FC<HardcoverDialogProps> = ({
 
   const performSearch = async () => {
     if (!apiKey) {
-      toast({ title: t("error"), description: t("Hardcover.missing_api_key") });
+      toast({ title: t("error"), description: t("hardcover.missing_api_key") });
       return;
     }
     setLoading(true);
@@ -104,7 +105,7 @@ const HardcoverDialog: React.FC<HardcoverDialogProps> = ({
         if (!chosen) {
           toast({
             title: t("error"),
-            description: t("harcover.select_book"),
+            description: t("hardcover.select_book"),
           });
           setLoading(false);
           return;
@@ -131,8 +132,8 @@ const HardcoverDialog: React.FC<HardcoverDialogProps> = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="text-sm">
-          <SendToBack className="mr-2 size-4" />
+        <Button variant="outline" className="bg-popover text-sm">
+          <HardcoverIcon className="mr-2 size-4" />
           {t("send_to_hardcover")}
         </Button>
       </DialogTrigger>
