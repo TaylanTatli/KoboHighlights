@@ -8,7 +8,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "KoboHighlights",
   description:
-    "KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file.",
+    "KoboHighlights is a web application designed to extract and display highlights/annotations from the KoboReader.sqlite file.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.ico",
@@ -37,7 +37,11 @@ export default async function RootLayout({
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
-        <Script defer src='/stats/script.js' data-website-id='ddd8d923-df01-4324-a3de-448de7658876'></Script>
+        <Script
+          defer
+          src="/stats/script.js"
+          data-website-id="ddd8d923-df01-4324-a3de-448de7658876"
+        ></Script>
       </body>
     </html>
   );
