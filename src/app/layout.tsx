@@ -8,7 +8,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "KoboHighlights",
   description:
-    "KoboHighlights is a web application designed to extract and display highlights/annotations from the KoboReader.sqlite file.",
+    "KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.ico",
