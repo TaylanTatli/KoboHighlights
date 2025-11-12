@@ -17,7 +17,7 @@ import { getBookListDataFromLocalStorage } from "@/utils/localStorageUtils";
 import { useMediaQuery } from "@/utils/useMediaQuery";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { Database } from "sql.js";
+import type { Database } from "sql.js";
 
 export default function Home() {
   const [bookListData, setBookListData] = useState<Book[]>([]);

@@ -3,7 +3,7 @@
 import { Book, handleFileUploadParams } from "@/types";
 import { saveBookListDataToLocalStorage } from "@/utils/localStorageUtils";
 import { parseClippingsFile } from "@/utils/parseClippings";
-import initSqlJs, { Database, SqlJsStatic, SqlValue } from "sql.js";
+import type { Database, SqlJsStatic, SqlValue } from "sql.js";
 
 export const highlightsListSQL = (contentID: string) => `
   SELECT
@@ -19,6 +19,8 @@ const parseSqliteFile = async (
   arrayBuffer: ArrayBuffer,
   setDb: (db: Database | null) => void,
 ): Promise<Book[]> => {
+  // Dynamic import to avoid loading sql.js during SSR
+  const initSqlJs = (await import("sql.js")).default;
   const SQL: SqlJsStatic = await initSqlJs({
     locateFile: () => "/sql-wasm.wasm",
   });
