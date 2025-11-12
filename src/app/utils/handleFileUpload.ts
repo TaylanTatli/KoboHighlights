@@ -1,7 +1,7 @@
-import { handleFileUploadParams } from "@/types";
+import { Book, handleFileUploadParams } from "@/types";
 import { saveBookListDataToLocalStorage } from "@/utils/localStorageUtils";
 import { parseClippingsFile } from "@/utils/parseClippings";
-import initSqlJs, { SqlJsStatic, SqlValue } from "sql.js";
+import initSqlJs, { Database, SqlJsStatic, SqlValue } from "sql.js";
 
 export const highlightsListSQL = (contentID: string) => `
   SELECT
@@ -15,8 +15,8 @@ export const highlightsListSQL = (contentID: string) => `
 
 const parseSqliteFile = async (
   arrayBuffer: ArrayBuffer,
-  setDb: (db: any) => void,
-): Promise<any[]> => {
+  setDb: (db: Database | null) => void,
+): Promise<Book[]> => {
   const SQL: SqlJsStatic = await initSqlJs({
     locateFile: () => "/sql-wasm.wasm",
   });

@@ -22,7 +22,7 @@ import { Database } from "sql.js";
 export default function Home() {
   const [bookListData, setBookListData] = useState<Book[]>([]);
   const [highlights, setHighlights] = useState<Highlight[]>([]);
-  const [db, setDb] = useState<Database | null>(null);
+  const [_db, setDb] = useState<Database | null>(null);
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [isLocalStorageData, setIsLocalStorageData] = useState(false);
