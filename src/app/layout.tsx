@@ -37,7 +37,11 @@ export default async function RootLayout({
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
-        <Script defer src='/stats/script.js' data-website-id='ddd8d923-df01-4324-a3de-448de7658876'></Script>
+        <Script
+          defer
+          src="/stats/script.js"
+          data-website-id="ddd8d923-df01-4324-a3de-448de7658876"
+        ></Script>
       </body>
     </html>
   );
