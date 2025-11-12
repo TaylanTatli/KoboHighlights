@@ -63,7 +63,7 @@ export default function Home() {
                 setBookListData,
               })
             }
-            isDatabaseLoaded={!!db}
+            isDatabaseLoaded={bookListData.length > 0}
           />
         </CardHeader>
         <CardContent className="grow overflow-auto p-0">
