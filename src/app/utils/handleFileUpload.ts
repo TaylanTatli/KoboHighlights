@@ -1,3 +1,5 @@
+"use client";
+
 import { Book, handleFileUploadParams } from "@/types";
 import { saveBookListDataToLocalStorage } from "@/utils/localStorageUtils";
 import { parseClippingsFile } from "@/utils/parseClippings";
