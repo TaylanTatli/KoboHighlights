@@ -1,6 +1,9 @@
-import { handleFileUploadParams } from "@/types";
+"use client";
+
+import { Book, handleFileUploadParams } from "@/types";
 import { saveBookListDataToLocalStorage } from "@/utils/localStorageUtils";
-import initSqlJs, { SqlJsStatic, SqlValue } from "sql.js";
+import { parseClippingsFile } from "@/utils/parseClippings";
+import type { Database, SqlJsStatic, SqlValue } from "sql.js";
 
 export const highlightsListSQL = (contentID: string) => `
   SELECT
@@ -12,27 +15,19 @@ export const highlightsListSQL = (contentID: string) => `
   ORDER BY T.DateCreated;
 `;
 
-export const handleFileUpload = async ({
-  files,
-  setDb,
-  setBookListData,
-}: handleFileUploadParams) => {
-  if (files && files.length > 0) {
-    const file = files[0];
-    const fileReader = new FileReader();
+const parseSqliteFile = async (
+  arrayBuffer: ArrayBuffer,
+  setDb: (db: Database | null) => void,
+): Promise<Book[]> => {
+  // Dynamic import to avoid loading sql.js during SSR
+  const initSqlJs = (await import("sql.js")).default;
+  const SQL: SqlJsStatic = await initSqlJs({
+    locateFile: () => "/sql-wasm.wasm",
+  });
+  const dbInstance = new SQL.Database(new Uint8Array(arrayBuffer));
+  setDb(dbInstance);
 
-    fileReader.onload = async (event) => {
-      const arrayBuffer = event.target?.result;
-      if (arrayBuffer) {
-        const SQL: SqlJsStatic = await initSqlJs({
-          locateFile: () => "/sql-wasm.wasm",
-        });
-        const dbInstance = new SQL.Database(
-          new Uint8Array(arrayBuffer as ArrayBuffer),
-        );
-        setDb(dbInstance);
-
-        const bookListSQL = `
+  const bookListSQL = `
             SELECT
               IFNULL(ContentID,'') as 'id',
               IFNULL(Title,'') as 'title',
@@ -62,44 +57,78 @@ export const handleFileUpload = async ({
             )
             ORDER BY Source desc, Title`;
 
-        const booksRes = dbInstance.exec(bookListSQL);
-        const books =
-          (await Promise.all(
-            booksRes[0]?.values.map(async (row: SqlValue[]) => {
-              const contentID = row[0] as string;
-              const highlightsRes = dbInstance.exec(
-                highlightsListSQL(contentID),
-              );
-              const highlights =
-                highlightsRes[0]?.values.map((highlightRow: SqlValue[]) => ({
-                  id: highlightRow[0] as string,
-                  content: highlightRow[1] as string,
-                })) || [];
-              return {
-                id: contentID,
-                title: row[1] as string,
-                author: row[2] as string,
-                publisher: row[3] as string,
-                isbn: row[4] as number,
-                releaseDate: row[5] as string,
-                series: row[6] as string,
-                seriesNumber: row[7] as number,
-                rating: row[8] as number,
-                readPercent: row[9] as number,
-                lastRead: row[10] as string,
-                fileSize: row[11] as number,
-                source: row[12] as string,
-                highlights: highlights,
-              };
-            }),
-          )) || [];
-        const sortedBooks = books.sort((a, b) =>
-          a.title.localeCompare(b.title, "tr", { sensitivity: "base" }),
-        );
-        setBookListData(sortedBooks);
-        saveBookListDataToLocalStorage(sortedBooks);
-      }
-    };
-    fileReader.readAsArrayBuffer(file);
+  const booksRes = dbInstance.exec(bookListSQL);
+  const books =
+    (await Promise.all(
+      booksRes[0]?.values.map(async (row: SqlValue[]) => {
+        const contentID = row[0] as string;
+        const highlightsRes = dbInstance.exec(highlightsListSQL(contentID));
+        const highlights =
+          highlightsRes[0]?.values.map((highlightRow: SqlValue[]) => ({
+            id: highlightRow[0] as string,
+            content: highlightRow[1] as string,
+          })) || [];
+        return {
+          id: contentID,
+          title: row[1] as string,
+          author: row[2] as string,
+          publisher: row[3] as string,
+          isbn: row[4] as number,
+          releaseDate: row[5] as string,
+          series: row[6] as string,
+          seriesNumber: row[7] as number,
+          rating: row[8] as number,
+          readPercent: row[9] as number,
+          lastRead: row[10] as string,
+          fileSize: row[11] as number,
+          source: row[12] as string,
+          highlights: highlights,
+        };
+      }),
+    )) || [];
+  return books.sort((a, b) =>
+    a.title.localeCompare(b.title, "tr", { sensitivity: "base" }),
+  );
+};
+
+export const handleFileUpload = async ({
+  files,
+  setDb,
+  setBookListData,
+}: handleFileUploadParams) => {
+  if (files && files.length > 0) {
+    const file = files[0];
+    const isTextFile = file.name.toLowerCase().endsWith(".txt");
+
+    if (isTextFile) {
+      // Parse clippings file
+      const fileReader = new FileReader();
+      fileReader.onload = (event) => {
+        const text = event.target?.result as string;
+        if (text) {
+          const books = parseClippingsFile(text);
+          setBookListData(books);
+          saveBookListDataToLocalStorage(books);
+          // For text files, we don't set a database
+          setDb(null);
+        }
+      };
+      fileReader.readAsText(file);
+    } else {
+      // Parse SQLite file
+      const fileReader = new FileReader();
+      fileReader.onload = async (event) => {
+        const arrayBuffer = event.target?.result;
+        if (arrayBuffer) {
+          const books = await parseSqliteFile(
+            arrayBuffer as ArrayBuffer,
+            setDb,
+          );
+          setBookListData(books);
+          saveBookListDataToLocalStorage(books);
+        }
+      };
+      fileReader.readAsArrayBuffer(file);
+    }
   }
 };

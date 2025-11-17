@@ -19,6 +19,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
       "application/sqlite3": [".sqlite"],
       "application/x-sqlite3": [".sqlite"],
       "application/octet-stream": [".sqlite"],
+      "text/plain": [".txt"],
     },
     onDrop: (acceptedFiles) => {
       if (isDatabaseLoaded) {
