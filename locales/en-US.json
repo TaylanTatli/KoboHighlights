@@ -76,14 +76,15 @@
     },
     "section": {
       "1": "Hylit (previously KoboHighlights) is a web application designed to extract and display highlights from the Kobo (KoboReader.sqlite) and Kindle/KoReader (My Clippings.txt) and send them to Notion or Hardcover.",
-      "2": "Extract highlights from KoboReader.sqlite file",
-      "3": "Display highlights in a user-friendly interface",
-      "4": "Send highlights to Notion",
-      "5": "Save highlights to local storage for offline access",
-      "6": "Multi-language support (English and Turkish)",
-      "7": "Docker support for easy deployment",
-      "8": "Responsive UI",
-      "9": "You can access the source code of the project on <a>GitHub</a>."
+      "2": "Extract highlights from KoboReader.sqlite file (Kobo)",
+      "3": "Extract highlights from My Clippings.txt file (Kindle/KoReader)",
+      "4": "Display highlights in a user-friendly interface",
+      "5": "Send highlights to Notion and Hardcover",
+      "6": "Save highlights to local storage for offline access",
+      "7": "Multi-language support (English and Turkish)",
+      "8": "Docker support for easy deployment",
+      "9": "Responsive UI",
+      "10": "You can access the source code of the project on <a>GitHub</a>."
     }
   },
   "highlight": "highlight",

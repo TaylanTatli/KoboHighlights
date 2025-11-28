@@ -170,12 +170,13 @@ const HelpMenu: React.FC = () => {
                 <li>{t("about_page.section.6")}</li>
                 <li>{t("about_page.section.7")}</li>
                 <li>{t("about_page.section.8")}</li>
+                <li>{t("about_page.section.9")}</li>
               </ul>
               <h3 className="mt-4 text-lg font-semibold tracking-tight">
                 <strong>{t("about_page.titles.3")}</strong>
               </h3>
               <p className="mt-2 leading-7">
-                {t.rich("about_page.section.9", {
+                {t.rich("about_page.section.10", {
                   a: (chunks) => (
                     <a
                       href="https://github.com/TaylanTatli/Hylit"

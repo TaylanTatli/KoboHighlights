@@ -76,14 +76,15 @@
     },
     "section": {
       "1": "Hylit (önceki adı KoboHighlights), Kobo (KoboReader.sqlite) ve Kindle/KoReader (My Clippings.txt) dosyalarından alıntıları çıkarmak, görüntülemek ve Notion veya Hardcover'a göndermek için tasarlanmış bir web uygulamasıdır.",
-      "2": "KoboReader.sqlite dosyasından alıntıları çıkarır",
-      "3": "Alıntıları kullanıcı dostu bir arayüzde görüntüler",
-      "4": "Alıntıları Notion'a gönderir",
-      "5": "Alıntıları çevrimdışı erişim için yerel depolamaya kaydeder",
-      "6": "Çoklu dil desteği (İngilizce ve Türkçe)",
-      "7": "Kolay kurulum için Docker desteği",
-      "8": "Duyarlı (responsive) kullanıcı arayüzü",
-      "9": "Projenin kaynak koduna <a>GitHub</a> üzerinden erişebilirsiniz."
+      "2": "KoboReader.sqlite dosyasından alıntıları çıkarır (Kobo)",
+      "3" : "My Clippings.txt dosyasından alıntıları çıkarır (Kindle/KoReader)",
+      "4": "Alıntıları kullanıcı dostu bir arayüzde görüntüler",
+      "5": "Alıntıları Notion ve Hardcover'a gönderir",
+      "6": "Alıntıları çevrimdışı erişim için yerel depolamaya kaydeder",
+      "7": "Çoklu dil desteği (İngilizce ve Türkçe)",
+      "8": "Kolay kurulum için Docker desteği",
+      "9": "Duyarlı (responsive) kullanıcı arayüzü",
+      "10": "Projenin kaynak koduna <a>GitHub</a> üzerinden erişebilirsiniz."
     }
   },
   "highlight": "alıntı",
