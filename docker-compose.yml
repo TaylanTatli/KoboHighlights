@@ -5,7 +5,5 @@ services:
     build: .
     ports:
       - "3000:3000"
-    volumes:
-      - ./kobohighlights:/app
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production

@@ -6,9 +6,9 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "KoboHighlights",
+  title: "Hylit",
   description:
-    "KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file.",
+    "Hylit (previously KoboHighlights) is a web application designed to extract and display highlights from the Kobo (KoboReader.sqlite) and Kindle/KoReader (My Clippings.txt).",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.ico",

@@ -1,8 +1,8 @@
-# ![KoboHighlights Logo](./.github/assets/logo.svg#gh-light-mode-only) ![KoboHighlights Logo](./.github/assets/logo-dark.svg#gh-dark-mode-only)
+# ![Hylit Logo](./.github/assets/logo.svg#gh-light-mode-only) ![Hylit Logo](./.github/assets/logo-dark.svg#gh-dark-mode-only)
 
-KoboHighlights is a web application designed to extract and display highlights from the KoboReader.sqlite file and send them to Notion or Hardcover.
+Hylit (previously KoboHighlights) is a web application designed to extract and display highlights from the **Kobo (KoboReader.sqlite)** and **Kindle/KoReader (My Clippings.txt)** and send them to **Notion** or **Hardcover**.
 
-![KoboHighlights Preview](./.github/assets/preview.png)
+![Hylit Preview](./.github/assets/preview.png)
 
 ## :books: Table of Contents
 
@@ -11,22 +11,23 @@ KoboHighlights is a web application designed to extract and display highlights f
 - [:sparkles: Features](#sparkles-features)
 - [:gear: Installation](#gear-installation)
   - [:clipboard: Requirements](#clipboard-requirements)
-  - [:hammer_and_wrench: Steps](#hammer_and_wrench-steps)
+  - [:hammer\_and\_wrench: Steps](#hammer_and_wrench-steps)
 - [:rocket: Usage](#rocket-usage)
 - [:whale: Docker Usage](#whale-docker-usage)
 - [:cloud: Deploy on Vercel / Netlify](#cloud-deploy-on-vercel--netlify)
-- [:crystal_ball: Future Plans](#crystal_ball-future-plans)
+- [:crystal\_ball: Future Plans](#crystal_ball-future-plans)
 - [:handshake: Contributing](#handshake-contributing)
 - [:coffee: Supporting The Project](#coffee-supporting-the-project)
 - [:scroll: License](#scroll-license)
 
 ## :book: Description
 
-This project enables users to upload their KoboReader.sqlite file and view a list of books with highlights and the highlights themselves. Users can also send these highlights to Notion or Hardcover.
+This project enables users to upload their KoboReader.sqlite or My Clippings.txt file and view a list of books with highlights and the highlights themselves. Users can also send these highlights to Notion or Hardcover.
 
 ## :sparkles: Features
 
-- Extract highlights from KoboReader.sqlite file
+- Extract highlights from KoboReader.sqlite file (Kobo)
+- Extract highlights from My Clippings.txt file (Kindle/KoReader)
 - Display highlights in a user-friendly interface
 - Send highlights to Notion and Hardcover
 - Save highlights to local storage for offline access
@@ -49,8 +50,8 @@ To run the project locally, follow these steps:
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/TaylanTatli/kobohighlights.git
-   cd kobohighlights
+   git clone https://github.com/TaylanTatli/hylit.git
+   cd hylit
    ```
 
 2. Install dependencies:
@@ -77,7 +78,7 @@ To run the project locally, follow these steps:
 ## :rocket: Usage
 
 1. Open your browser and navigate to `http://localhost:3000`.
-2. Upload your `KoboReader.sqlite` file.
+2. Upload your `KoboReader.sqlite` or `My Clippings.txt` file.
 3. View the list of books and their highlights.
 4. Optionally, send highlights to Notion or Hardcover by entering your API credentials, or download them to your PC.
 
@@ -88,13 +89,13 @@ To run the project using Docker, follow these steps:
 1. Build the Docker image:
 
    ```sh
-   docker build -t kobohighlights .
+   docker build -t hylit .
    ```
 
 2. Start the Docker container:
 
    ```sh
-   docker run -p 3000:3000 kobohighlights
+   docker run -p 3000:3000 hylit
    ```
 
 3. Open your browser and navigate to `http://localhost:3000`.
@@ -103,8 +104,8 @@ To run the project using Docker, follow these steps:
 
 You can deploy this project to Vercel or Netlify by clicking the buttons below:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/TaylanTatli/KoboHighlights)
-[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/TaylanTatli/KoboHighlights)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/TaylanTatli/Hylit)
+[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/TaylanTatli/Hylit)
 
 ## :crystal_ball: Future Plans
 
@@ -121,4 +122,8 @@ If you like the project and want to support me, You can <a href="https://www.buy
 
 ## :scroll: License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+**Copyright (C) 2025 Taylan Tatli**
+
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPLv3)**.
+
+You are free to use, modify, and distribute this software under the terms of the AGPLv3. See the [LICENSE](LICENSE) file for the full text.

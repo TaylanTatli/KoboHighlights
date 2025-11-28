@@ -75,7 +75,7 @@
       "3": "Kaynak Kodu"
     },
     "section": {
-      "1": "KoboHighlights, KoboReader.sqlite dosyasından alıntıları çıkarmak, görüntülemek ve Notion'a göndermek için tasarlanmış bir web uygulamasıdır.",
+      "1": "Hylit (önceki adı KoboHighlights), Kobo (KoboReader.sqlite) ve Kindle/KoReader (My Clippings.txt) dosyalarından alıntıları çıkarmak, görüntülemek ve Notion veya Hardcover'a göndermek için tasarlanmış bir web uygulamasıdır.",
       "2": "KoboReader.sqlite dosyasından alıntıları çıkarır",
       "3": "Alıntıları kullanıcı dostu bir arayüzde görüntüler",
       "4": "Alıntıları Notion'a gönderir",

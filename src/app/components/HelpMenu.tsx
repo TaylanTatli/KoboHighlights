@@ -178,7 +178,7 @@ const HelpMenu: React.FC = () => {
                 {t.rich("about_page.section.9", {
                   a: (chunks) => (
                     <a
-                      href="https://github.com/TaylanTatli/KoboHighlights"
+                      href="https://github.com/TaylanTatli/Hylit"
                       target="_blank"
                       rel="noreferrer noopener"
                       className="text-primary font-bold underline underline-offset-4"
