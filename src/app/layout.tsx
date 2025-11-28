@@ -6,7 +6,7 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hylit | Kobo, Kindle & KoReader Highlight Viewer and Manager",
+  title: "Hylit | Kobo, Kindle & KoReader Highlight Viewer and Exporter",
   description:
     "Hylit (previously KoboHighlights) is a web application designed to extract and display highlights from the Kobo (KoboReader.sqlite) and Kindle/KoReader (My Clippings.txt).",
   manifest: '/manifest.json',
