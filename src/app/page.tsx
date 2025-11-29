@@ -89,9 +89,9 @@ export default function Home() {
                     bookTitle={selectedBook?.title || ""}
                   />
                 ) : (
-                  <p className="p-3 text-muted-foreground">
+                  <h2 className="p-3 text-muted-foreground">
                     {t("not_uploaded_or_not_selected")}
-                  </p>
+                  </h2>
                 )}
               </div>
             </ResizablePanel>

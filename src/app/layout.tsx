@@ -8,11 +8,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL('https://hylit.app'),
   title: {
-    default: "Hylit | Kobo, Kindle & KoReader Highlight Viewer and Exporter",
+    default: "Hylit | View & Export Kobo, Kindle, KoReader Highlights",
     template: "%s | Hylit",
   },
-  description:
-    "Hylit (previously KoboHighlights) is a web application designed to extract and display highlights from the Kobo (KoboReader.sqlite) and Kindle/KoReader (My Clippings.txt).",
+  description: "Hylit is a free tool designed to extract, view and export highlights from the Kobo (KoboReader.sqlite) and Kindle/KoReader (My Clippings.txt).",
   applicationName: "Hylit",
   authors: [{ name: "Taylan Tatlı" }],
   keywords: [
@@ -49,9 +48,8 @@ export const metadata: Metadata = {
     alternateLocale: ['tr_TR'],
     url: 'https://hylit.app',
     siteName: 'Hylit',
-    title: "Hylit | Kobo, Kindle & KoReader Highlight Viewer and Exporter",
-    description:
-      "Extract and export your highlights from Kobo, Kindle, and KoReader. View, organize, and export to Notion or Hardcover.",
+    title: "Hylit | View & Export Kobo, Kindle, KoReader Highlights",
+    description: "Hylit is a free tool designed to extract, view and export highlights from the Kobo (KoboReader.sqlite) and Kindle/KoReader (My Clippings.txt).",
     images: [
       {
         url: '/og-image.png',
@@ -63,9 +61,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Hylit | Kobo, Kindle & KoReader Highlight Viewer and Exporter",
-    description:
-      "Extract and export your highlights from Kobo, Kindle, and KoReader. View, organize, and export to Notion or Hardcover.",
+    title: "Hylit | View & Export Kobo, Kindle, KoReader Highlights",
+    description: "Hylit is a free tool designed to extract, view and export highlights from the Kobo (KoboReader.sqlite) and Kindle/KoReader (My Clippings.txt).",
     creator: '@tatlitaylan',
     images: ['/og-image.png'],
   },
@@ -111,6 +108,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <h1 className="sr-only">Hylit: View & Export Kobo, Kindle, KoReader Highlights</h1>
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
