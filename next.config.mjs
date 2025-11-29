@@ -19,6 +19,8 @@ const nextConfig = {
     return config;
   },
   output: "standalone",
+  // Disable streaming metadata for all user agents so metadata is rendered in <head>
+  htmlLimitedBots: /.*/,
   async redirects() {
     return [
       {
